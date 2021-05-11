@@ -8,13 +8,13 @@ ElevatedButton button(String text, Function onTap) {
     style: ElevatedButton.styleFrom(
       primary: kPrimaryColor,
       padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.safeBlockHorizontal * 5,
+        horizontal: SizeConfig.safeBlockHorizontal * 15,
         vertical: SizeConfig.safeBlockHorizontal * 2,
       ),
       elevation: SizeConfig.safeBlockHorizontal,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
-          SizeConfig.safeBlockVertical * 2,
+          SizeConfig.safeBlockVertical * 2.125,
         ),
       ),
     ),
@@ -24,7 +24,7 @@ ElevatedButton button(String text, Function onTap) {
       style: TextStyle(
         color: kTextColourWhite,
         fontFamily: kSfpro,
-        fontSize: SizeConfig.safeBlockVertical * 2,
+        fontSize: SizeConfig.safeBlockVertical * 2.125,
         fontWeight: FontWeight.w700,
       ),
     ),

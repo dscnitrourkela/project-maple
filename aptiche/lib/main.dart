@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return GetMaterialApp(
       title: "APTI-CHE",
       debugShowCheckedModeBanner: false,
