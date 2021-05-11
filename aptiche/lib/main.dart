@@ -1,5 +1,6 @@
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       popGesture: Get.isPopGestureEnable,
       //initialRoute:
       //routes:
+      home: LoginScreen(),
     );
   }
 }
