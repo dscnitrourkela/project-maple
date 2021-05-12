@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 
 Widget textField(
   TextEditingController editingController,
-  String Function(String) validator,
+  var validator,
   String label,
   String hint,
+  TextInputType type,
   IconData icon,
-  Function onSave,
 ) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockVertical),
     child: TextFormField(
       textInputAction: TextInputAction.next,
+      keyboardType: type,
       textCapitalization: TextCapitalization.words,
       controller: editingController,
       validator: (value) => validator(value),
@@ -41,7 +42,6 @@ Widget textField(
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey),
       ),
-      onSaved: onSave,
     ),
   );
 }
