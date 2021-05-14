@@ -2,20 +2,19 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/utils/validator.dart';
-import 'package:aptiche/views/data%20entry/dataentry.dart';
-import 'package:aptiche/views/login/logincontroller.dart';
+import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
+import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LoginView extends StatelessWidget {
-  final authService = Get.put(LoginController());
+class DataEntryScreen extends StatelessWidget {
+  const DataEntryScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Color(0xfff6f6f6),
       body: SafeArea(
@@ -26,7 +25,7 @@ class LoginView extends StatelessWidget {
               bottom: SizeConfig.screenHeight * 0.6,
               left: SizeConfig.screenWidth * 0.175,
               child: SvgPicture.asset(
-                loginScreenSVG,
+                dataEntryScreen,
                 alignment: Alignment.center,
                 height: SizeConfig.screenHeight * 0.32,
               ),
@@ -58,7 +57,7 @@ class LoginView extends StatelessWidget {
                       ),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Hey, Welcome!',
+                        'Fill in the Information',
                         textAlign: TextAlign.left,
                         style: Theme.of(context).primaryTextTheme.headline1,
                       ),
@@ -71,14 +70,34 @@ class LoginView extends StatelessWidget {
                         child: Column(
                           children: [
                             textField(
-                              LoginController().phoneEditController,
-                              Validator.validatePhoneNo(
-                                LoginController().phoneEditController.text,
+                              DataEntryController().nameController,
+                              Validator.validateName(
+                                DataEntryController().nameController.text,
                               ),
-                              "Enter Mobile Number",
-                              "+9193481xxx60",
-                              TextInputType.phone,
-                              Icons.call,
+                              "Enter Name",
+                              "John Doe",
+                              TextInputType.name,
+                              Icons.person,
+                            ),
+                            textField(
+                              DataEntryController().rollNoController,
+                              Validator.validateRoll(
+                                DataEntryController().rollNoController.text,
+                              ),
+                              "Enter Roll Number",
+                              "118CH001",
+                              TextInputType.text,
+                              Icons.school_rounded,
+                            ),
+                            textField(
+                              DataEntryController().emailController,
+                              Validator.validateEmail(
+                                DataEntryController().emailController.text,
+                              ),
+                              "Enter Roll Number",
+                              "118CH001",
+                              TextInputType.text,
+                              Icons.person,
                             ),
                           ],
                         ),
@@ -89,9 +108,8 @@ class LoginView extends StatelessWidget {
                           top: SizeConfig.safeBlockVertical * 4),
                       width: SizeConfig.screenWidth,
                       alignment: Alignment.center,
-                      child: button("LOGIN", () {
-                        print(LoginController().phoneEditController.text);
-                        Get.to(() => DataEntryScreen());
+                      child: button("PROCEED", () {
+                        Get.to(() => LoginView());
                       }),
                     ),
                   ],

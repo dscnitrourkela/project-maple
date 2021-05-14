@@ -10,15 +10,15 @@ Widget textField(
   TextInputType type,
   IconData icon,
 ) {
-  return Padding(
+  //return Obx(() {
+  return Container(
+    width: SizeConfig.screenWidth * 0.85,
     padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockVertical),
     child: TextFormField(
-      textInputAction: TextInputAction.next,
       keyboardType: type,
       textCapitalization: TextCapitalization.words,
       controller: editingController,
       validator: (value) => validator(value),
-      textAlign: TextAlign.left,
       style: const TextStyle(color: kTextColourBlack),
       enableSuggestions: true,
       decoration: InputDecoration(
@@ -42,6 +42,10 @@ Widget textField(
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey),
       ),
+      onChanged: (value) {
+        editingController.text = value;
+      },
     ),
   );
+  // });
 }

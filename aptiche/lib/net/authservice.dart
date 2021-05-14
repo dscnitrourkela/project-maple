@@ -1,3 +1,4 @@
+import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class AuthService extends GetxController {
           if (snapshot.hasData) {
             //TODO - get to Home Screen
           } else {
-            //TODO - LoginScreen();
+            Get.to(() => LoginView());
           }
         });
   }
