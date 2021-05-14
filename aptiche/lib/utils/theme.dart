@@ -31,7 +31,7 @@ ThemeData appTheme() {
     primaryTextTheme: TextTheme(
       //Heading in Login-SignUp Screens, Quiz Heading in instruction page, Result diplay
       headline1: TextStyle(
-        fontSize: 35,
+        fontSize: 42,
         fontFamily: kSfpro,
         fontWeight: FontWeight.w700,
         color: kTextColourBlue,

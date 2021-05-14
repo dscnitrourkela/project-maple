@@ -1,5 +1,5 @@
-import 'package:aptiche/ui/views/Login/login_view.dart';
 import 'package:aptiche/utils/theme.dart';
+import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +18,6 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.rightToLeftWithFade,
       popGesture: Get.isPopGestureEnable,
       home: LoginView(),
-      //initialRoute:
-      //routes:
     );
   }
 }
