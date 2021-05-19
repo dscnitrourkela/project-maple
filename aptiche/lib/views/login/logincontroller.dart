@@ -6,15 +6,18 @@ import 'package:get/get.dart';
 class LoginController {
   final formkey = new GlobalKey<FormState>();
   final phoneEditController = new TextEditingController();
+  final AuthService _authService = Get.put(AuthService());
+
+  final sent = false.obs;
 
   var phoneNo = ''.obs;
-  var verificationId = ''.obs;
+  var verificationId = '';
   var smsCode = ''.obs;
   var codeSent = false.obs;
   var loading = false.obs;
 
   createUser() async {
-    await AuthService().signInwithOTPSeller(
+    await _authService.signInwithOTPSeller(
       this.smsCode.toString(),
       this.verificationId.toString(),
     );
@@ -30,14 +33,15 @@ class LoginController {
       debugPrint('${authException.message}');
     };
 
-    final PhoneCodeSent smsSent = (String verId, [int forceResend]) async {
+    final PhoneCodeSent smsSent = (String verId, [int? forceResend]) async {
       this.codeSent = true.obs;
       this.loading = false.obs;
       debugPrint("code sent to " + phoneNo.toString());
-      this.verificationId = verId.obs;
+
+      this.verificationId = verId;
     };
     final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {
-      this.verificationId = verId.obs;
+      this.verificationId = verId;
     };
 
     await FirebaseAuth.instance.verifyPhoneNumber(
