@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class DataEntryScreen extends StatelessWidget {
-  const DataEntryScreen({Key key}) : super(key: key);
+  const DataEntryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +22,29 @@ class DataEntryScreen extends StatelessWidget {
           fit: StackFit.loose,
           children: [
             Positioned(
-              bottom: SizeConfig.screenHeight * 0.6,
-              left: SizeConfig.screenWidth * 0.175,
+              bottom: SizeConfig.screenHeight! * 0.6,
+              left: SizeConfig.screenWidth! * 0.175,
               child: SvgPicture.asset(
                 dataEntryScreen,
                 alignment: Alignment.center,
-                height: SizeConfig.screenHeight * 0.32,
+                height: SizeConfig.screenHeight! * 0.32,
               ),
             ),
             Positioned(
-              top: SizeConfig.screenHeight * 0.4,
+              top: SizeConfig.screenHeight! * 0.4,
               child: Container(
-                height: SizeConfig.screenHeight * 0.6,
+                height: SizeConfig.screenHeight! * 0.6,
                 padding: EdgeInsets.only(
-                  top: SizeConfig.safeBlockVertical * 4,
+                  top: SizeConfig.safeBlockVertical! * 4,
                 ),
                 decoration: BoxDecoration(
                   color: kBgColour,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      SizeConfig.safeBlockHorizontal * 10,
+                      SizeConfig.safeBlockHorizontal! * 10,
                     ),
                     topRight: Radius.circular(
-                      SizeConfig.safeBlockHorizontal * 10,
+                      SizeConfig.safeBlockHorizontal! * 10,
                     ),
                   ),
                 ),
@@ -53,7 +53,7 @@ class DataEntryScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(
-                        left: SizeConfig.safeBlockHorizontal * 6,
+                        left: SizeConfig.safeBlockHorizontal! * 6,
                       ),
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -65,39 +65,48 @@ class DataEntryScreen extends StatelessWidget {
                     Form(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: SizeConfig.safeBlockHorizontal * 6,
-                            vertical: SizeConfig.safeBlockHorizontal * 2),
+                            horizontal: SizeConfig.safeBlockHorizontal! * 6,
+                            vertical: SizeConfig.safeBlockHorizontal! * 2),
                         child: Column(
                           children: [
-                            textField(
-                              DataEntryController().nameController,
-                              Validator.validateName(
-                                DataEntryController().nameController.text,
-                              ),
-                              "Enter Name",
-                              "John Doe",
-                              TextInputType.name,
-                              Icons.person,
+                            CustomTextField(
+                              editingController:
+                                  DataEntryController().nameController,
+                              validator: (value) {
+                                return Validator.validateName(
+                                  DataEntryController().nameController.text,
+                                );
+                              },
+                              label: "Enter Name",
+                              hint: "John Doe",
+                              type: TextInputType.name,
+                              icon: Icons.person,
                             ),
-                            textField(
-                              DataEntryController().rollNoController,
-                              Validator.validateRoll(
-                                DataEntryController().rollNoController.text,
-                              ),
-                              "Enter Roll Number",
-                              "118CH001",
-                              TextInputType.text,
-                              Icons.school_rounded,
+                            CustomTextField(
+                              editingController:
+                                  DataEntryController().rollNoController,
+                              validator: (value) {
+                                return Validator.validateRoll(
+                                  DataEntryController().rollNoController.text,
+                                );
+                              },
+                              label: "Enter Roll Number",
+                              hint: "118CH001",
+                              type: TextInputType.text,
+                              icon: Icons.school_rounded,
                             ),
-                            textField(
-                              DataEntryController().emailController,
-                              Validator.validateEmail(
-                                DataEntryController().emailController.text,
-                              ),
-                              "Enter Roll Number",
-                              "118CH001",
-                              TextInputType.text,
-                              Icons.person,
+                            CustomTextField(
+                              editingController:
+                                  DataEntryController().emailController,
+                              validator: (value) {
+                                return Validator.validateEmail(
+                                  DataEntryController().emailController.text,
+                                );
+                              },
+                              label: "Enter Roll Number",
+                              hint: "118CH001",
+                              type: TextInputType.text,
+                              icon: Icons.person,
                             ),
                           ],
                         ),
@@ -105,12 +114,14 @@ class DataEntryScreen extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.only(
-                          top: SizeConfig.safeBlockVertical * 4),
+                          top: SizeConfig.safeBlockVertical! * 4),
                       width: SizeConfig.screenWidth,
                       alignment: Alignment.center,
-                      child: button("PROCEED", () {
-                        Get.to(() => LoginView());
-                      }),
+                      child: CustomButton(
+                          text: "PROCEED",
+                          onTap: () {
+                            Get.to(() => LoginView());
+                          }),
                     ),
                   ],
                 ),

@@ -13,6 +13,7 @@ class AuthService extends GetxController {
           } else {
             Get.to(() => LoginView());
           }
+          return CircularProgressIndicator();
         });
   }
 
