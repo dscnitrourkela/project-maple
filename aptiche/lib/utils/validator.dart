@@ -1,5 +1,5 @@
 class Validator {
-  static String validateName(String value) {
+  static String? validateName(String value) {
     const String pattern = r'(?=.*?[A-Za-z]).+';
     final RegExp regex = RegExp(
       pattern,
@@ -14,7 +14,7 @@ class Validator {
     return null;
   }
 
-  static String validateEmail(String value) {
+  static String? validateEmail(String value) {
     RegExp regExp = new RegExp(
       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
       multiLine: false,
@@ -26,7 +26,7 @@ class Validator {
     return null;
   }
 
-  static String validateRoll(String value) {
+  static String? validateRoll(String value) {
     RegExp regExp = new RegExp(
       r'([0-9])+[a-zA-Z]+[0-9]',
       multiLine: false,
@@ -37,9 +37,9 @@ class Validator {
     return null;
   }
 
-  static String validatePhoneNo(String value) {
+  static String? validatePhoneNo(String value) {
     RegExp regExp = new RegExp(
-      r'/^(\+\d{1,3}[- ]?)?\d{10}$/',
+      r'^\+[1-9]{1}[0-9]{3,14}$',
       multiLine: false,
     );
     if (!regExp.hasMatch(value)) {
