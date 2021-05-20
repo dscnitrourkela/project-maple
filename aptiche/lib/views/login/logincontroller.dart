@@ -9,6 +9,7 @@ class LoginController {
   final AuthService _authService = Get.put(AuthService());
 
   final sent = false.obs;
+  RxString status = ''.obs;
 
   var phoneNo = ''.obs;
   var verificationId = '';
@@ -17,7 +18,7 @@ class LoginController {
   var loading = false.obs;
 
   createUser() async {
-    await _authService.signInwithOTPSeller(
+    await _authService.signInwithOTP(
       this.smsCode.toString(),
       this.verificationId.toString(),
     );
@@ -25,12 +26,13 @@ class LoginController {
 
   Future<void> verifyPhone() async {
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
-      AuthService().signInSeller(authResult);
+      _authService.signIn(authResult);
     };
 
     final PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
       debugPrint('${authException.message}');
+      status.value = 'Something has gone wrong, please try later';
     };
 
     final PhoneCodeSent smsSent = (String verId, [int? forceResend]) async {

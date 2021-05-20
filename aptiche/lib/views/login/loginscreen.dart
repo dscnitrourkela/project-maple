@@ -8,6 +8,7 @@ import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class LoginView extends StatelessWidget {
                           left: SizeConfig.safeBlockHorizontal! * 6,
                         ),
                         alignment: Alignment.centerLeft,
-                        child: !loginController.codeSent.value
+                        child: !loginController.sent.value
                             ? Text(
                                 'Hey, Welcome!',
                                 textAlign: TextAlign.left,
@@ -89,7 +90,7 @@ class LoginView extends StatelessWidget {
                               CustomTextField(
                                 editingController:
                                     loginController.phoneEditController,
-                                validator: !loginController.codeSent.value
+                                validator: !loginController.sent.value
                                     ? (value) {
                                         return Validator.validatePhoneNo(
                                           loginController
@@ -100,11 +101,11 @@ class LoginView extends StatelessWidget {
                                 label: !loginController.sent.value
                                     ? "Enter Mobile Number"
                                     : "Enter OTP",
-                                hint: !loginController.codeSent.value
+                                hint: !loginController.sent.value
                                     ? "+9193481xxx60"
                                     : "6 digit OTP",
                                 type: TextInputType.phone,
-                                icon: !loginController.codeSent.value
+                                icon: !loginController.sent.value
                                     ? Icons.call
                                     : Icons.sms,
                               ),
@@ -119,30 +120,71 @@ class LoginView extends StatelessWidget {
                         width: SizeConfig.screenWidth!,
                         alignment: Alignment.center,
                         child: CustomButton(
-                            text: !loginController.codeSent.value
-                                ? "LOGIN"
-                                : "Verify",
-                            onTap: !loginController.codeSent.value
-                                ? () {
-                                    if (loginController.formkey.currentState!
-                                        .validate()) {
-                                      loginController.phoneNo.value =
-                                          loginController
-                                              .phoneEditController.text;
-                                      loginController.verifyPhone();
-                                      // loginController.codeSent.toggle();
-                                    }
-                                    loginController.phoneEditController.clear();
+                          text:
+                              !loginController.sent.value ? "LOGIN" : "Verify",
+                          onTap: !loginController.sent.value
+                              ? () {
+                                  if (loginController.formkey.currentState!
+                                      .validate()) {
+                                    loginController.phoneNo.value =
+                                        loginController
+                                            .phoneEditController.text;
+                                    loginController.verifyPhone();
+                                    loginController.sent.toggle();
                                   }
-                                : () {
-                                    //TODO: Handle error when the user enters a wrong otp
-                                    _authService.signInwithOTPSeller(
-                                      loginController.phoneEditController.text,
-                                      loginController.verificationId,
+                                  loginController.phoneEditController.clear();
+                                }
+                              : () {
+                                  _authService.signInwithOTP(
+                                    loginController.phoneEditController.text,
+                                    loginController.verificationId,
+                                  );
+                                  debugPrint(
+                                      'status: ${loginController.status.value}');
+                                  if (loginController.status.value ==
+                                      'Something has gone wrong, please try later') {
+                                    Get.snackbar(
+                                      '',
+                                      loginController.status.value,
                                     );
+                                  } else {
                                     Get.to(() => DataEntryScreen());
-                                  }),
+                                  }
+                                },
+                        ),
                       ),
+                      loginController.sent.value
+                          ? Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    SizeConfig.safeBlockHorizontal! * 12,
+                                vertical: SizeConfig.safeBlockVertical! * 12,
+                              ),
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: 'Wrong Phone no?',
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .bodyText1,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: ' Use a different phone number',
+                                        style: Theme.of(context)
+                                            .primaryTextTheme
+                                            .bodyText1!
+                                            .copyWith(color: Colors.blue),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            loginController.sent.toggle();
+                                            loginController.phoneEditController
+                                                .clear();
+                                          }),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
