@@ -1,9 +1,13 @@
+import 'package:aptiche/views/data%20entry/dataentry.dart';
+import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
+  LoginController loginController = Get.find();
+
   handleAuth() {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -22,16 +26,24 @@ class AuthService extends GetxController {
     //TODO - return to Login Screen
   }
 
-  signInSeller(
+  signIn(
     AuthCredential authCredential,
   ) async {
     FirebaseAuth.instance.signInWithCredential(authCredential).then((value) {
       //TODO - send JWT Tokens and FCM Token to Mongo
-      //TODO - get to data entry screen
+
+      if (value.user != null) {
+        loginController.status.value = 'Authentication successful';
+      } else {
+        loginController.status.value = 'Invalid code/invalid authentication';
+      }
+    }).catchError((error) {
+      loginController.status.value =
+          'Something has gone wrong, please try later';
     });
   }
 
-  signInwithOTPSeller(
+  signInwithOTP(
     String smsCode,
     String verId,
   ) {
@@ -39,7 +51,7 @@ class AuthService extends GetxController {
       verificationId: verId,
       smsCode: smsCode,
     );
-    signInSeller(
+    signIn(
       authCredential,
     );
   }
