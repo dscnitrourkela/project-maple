@@ -3,19 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController {
+class LoginController extends GetxController {
+  final AuthService _authService = Get.find();
   final formkey = new GlobalKey<FormState>();
   final phoneEditController = new TextEditingController();
-  final AuthService _authService = Get.put(AuthService());
-
   final sent = false.obs;
-  RxString status = ''.obs;
-
-  var phoneNo = ''.obs;
-  var verificationId = '';
-  var smsCode = ''.obs;
-  var codeSent = false.obs;
-  var loading = false.obs;
+  RxBool status = false.obs;
+  RxString phoneNo = ''.obs;
+  String verificationId = '';
+  RxString smsCode = ''.obs;
+  RxBool codeSent = false.obs;
+  RxBool loading = false.obs;
 
   createUser() async {
     await _authService.signInwithOTP(
@@ -32,14 +30,13 @@ class LoginController {
     final PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
       debugPrint('${authException.message}');
-      status.value = 'Something has gone wrong, please try later';
+      status.value = false;
     };
 
     final PhoneCodeSent smsSent = (String verId, [int? forceResend]) async {
-      this.codeSent = true.obs;
-      this.loading = false.obs;
+      this.codeSent.value = true;
+      this.loading.value = false;
       debugPrint("code sent to " + phoneNo.toString());
-
       this.verificationId = verId;
     };
     final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {

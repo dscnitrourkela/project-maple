@@ -1,27 +1,25 @@
-import 'package:aptiche/views/data%20entry/dataentry.dart';
-import 'package:aptiche/views/login/logincontroller.dart';
+import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
-  LoginController loginController = Get.find();
+  bool status = false;
 
-  handleAuth() {
+  Widget handleAuth() {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //TODO - get to Home Screen
+            return HomeScreen();
           } else {
-            Get.to(() => LoginView());
+            return LoginView();
           }
-          return CircularProgressIndicator();
         });
   }
 
-  signOut() {
+  void signOut() {
     FirebaseAuth.instance.signOut();
     //TODO - return to Login Screen
   }
@@ -33,13 +31,12 @@ class AuthService extends GetxController {
       //TODO - send JWT Tokens and FCM Token to Mongo
 
       if (value.user != null) {
-        loginController.status.value = 'Authentication successful';
+        status = true;
       } else {
-        loginController.status.value = 'Invalid code/invalid authentication';
+        status = false;
       }
     }).catchError((error) {
-      loginController.status.value =
-          'Something has gone wrong, please try later';
+      status = false;
     });
   }
 
