@@ -1,4 +1,3 @@
-import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
@@ -7,16 +6,12 @@ import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class LoginView extends StatelessWidget {
-  final LoginController loginController = Get.put(LoginController());
-  final AuthService _authService = Get.put(AuthService());
-
+class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -63,7 +58,7 @@ class LoginView extends StatelessWidget {
                           left: SizeConfig.safeBlockHorizontal! * 6,
                         ),
                         alignment: Alignment.centerLeft,
-                        child: !loginController.sent.value
+                        child: !controller.sent.value
                             ? Text(
                                 'Hey, Welcome!',
                                 textAlign: TextAlign.left,
@@ -80,7 +75,7 @@ class LoginView extends StatelessWidget {
                               ),
                       ),
                       Form(
-                        key: loginController.formkey,
+                        key: controller.formkey,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: SizeConfig.safeBlockHorizontal! * 6,
@@ -89,23 +84,22 @@ class LoginView extends StatelessWidget {
                             children: [
                               CustomTextField(
                                 editingController:
-                                    loginController.phoneEditController,
-                                validator: !loginController.sent.value
+                                    controller.phoneEditController,
+                                validator: !controller.sent.value
                                     ? (value) {
                                         return Validator.validatePhoneNo(
-                                          loginController
-                                              .phoneEditController.text,
+                                          controller.phoneEditController.text,
                                         );
                                       }
                                     : null,
-                                label: !loginController.sent.value
+                                label: !controller.sent.value
                                     ? "Enter Mobile Number"
                                     : "Enter OTP",
-                                hint: !loginController.sent.value
+                                hint: !controller.sent.value
                                     ? "+9193481xxx60"
                                     : "6 digit OTP",
                                 type: TextInputType.phone,
-                                icon: !loginController.sent.value
+                                icon: !controller.sent.value
                                     ? Icons.call
                                     : Icons.sms,
                               ),
@@ -120,32 +114,28 @@ class LoginView extends StatelessWidget {
                         width: SizeConfig.screenWidth!,
                         alignment: Alignment.center,
                         child: CustomButton(
-                          text:
-                              !loginController.sent.value ? "LOGIN" : "Verify",
-                          onTap: !loginController.sent.value
+                          text: !controller.sent.value ? "LOGIN" : "Verify",
+                          onTap: !controller.sent.value
                               ? () {
-                                  if (loginController.formkey.currentState!
+                                  if (controller.formkey.currentState!
                                       .validate()) {
-                                    loginController.phoneNo.value =
-                                        loginController
-                                            .phoneEditController.text;
-                                    loginController.verifyPhone();
-                                    loginController.sent.toggle();
+                                    controller.phoneNo.value =
+                                        controller.phoneEditController.text;
+                                    controller.verifyPhone();
+                                    controller.sent.toggle();
                                   }
-                                  loginController.phoneEditController.clear();
+                                  controller.phoneEditController.clear();
+                                  debugPrint(
+                                      'status1: ${controller.status.value}');
                                 }
                               : () {
-                                  _authService.signInwithOTP(
-                                    loginController.phoneEditController.text,
-                                    loginController.verificationId,
-                                  );
-                                  debugPrint(
-                                      'status: ${loginController.status.value}');
-                                  if (loginController.status.value ==
-                                      'Something has gone wrong, please try later') {
+                                  controller.smsCode.value =
+                                      controller.phoneEditController.text;
+                                  controller.createUser();
+                                  if (!controller.status.value) {
                                     Get.snackbar(
                                       '',
-                                      loginController.status.value,
+                                      'Something went wrong. Please try again',
                                     );
                                   } else {
                                     Get.to(() => DataEntryScreen());
@@ -153,7 +143,7 @@ class LoginView extends StatelessWidget {
                                 },
                         ),
                       ),
-                      loginController.sent.value
+                      controller.sent.value
                           ? Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal:
@@ -176,8 +166,8 @@ class LoginView extends StatelessWidget {
                                             .copyWith(color: Colors.blue),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            loginController.sent.toggle();
-                                            loginController.phoneEditController
+                                            controller.sent.toggle();
+                                            controller.phoneEditController
                                                 .clear();
                                           }),
                                   ],
