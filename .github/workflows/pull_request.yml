@@ -1,13 +1,17 @@
-name: pull-request
+name: pull-build-test
+
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   flutter-build:
-    name: Run flutter analyse, test and build
+    name: Run flutter build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aptiche
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
@@ -16,13 +20,9 @@ jobs:
       - uses: subsito/flutter-action@v1
         with:
           channel: "stable"
-      - working-directory: ./aptiche
-        run: flutter pub get
-      - working-directory: ./aptiche
-        run: flutter analyse
-      - working-directory: ./aptiche
-        run: flutter test
-      - working-directory: ./aptiche
-        run: flutter build apk --release      
-
-
+      - name: Decode Google Services JSON
+        run: echo ${{secrets.ANDROID_FIREBASE_JSON}} | base64 --decode > android/app/google-services.json
+      - name: Flutter Build
+        run: flutter clean
+      - run: flutter pub get
+      - run: flutter build apk
