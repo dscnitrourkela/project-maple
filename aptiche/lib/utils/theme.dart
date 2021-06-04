@@ -1,26 +1,26 @@
 //colour used for buttons and other widgets
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = const Color(0xff3385be);
-const kSecondaryColor = const Color(0xff036197);
-const kTertiaryColor = const Color(0xff0078bd);
+const Color kPrimaryColor = Color(0xff3385be);
+const Color kSecondaryColor = Color(0xff036197);
+const Color kTertiaryColor = Color(0xff0078bd);
 
 //colour used for text
-const kTextColourBlue = const Color(0xff005180);
-const kTextColourBlack = const Color(0xff000000);
-const kTextColourWhite = const Color(0xffffffff);
+const Color kTextColourBlue = Color(0xff005180);
+const Color kTextColourBlack = Color(0xff000000);
+const Color kTextColourWhite = Color(0xffffffff);
 
 //colour used for background
-const kBgColour = const Color(0xffffffff);
+const Color kBgColour = Color(0xffffffff);
 
 //font families
-const String kPoppins = "Poppins";
-const String kSfpro = "SFPro";
+const String kPoppins = 'Poppins';
+const String kSfpro = 'SFPro';
 
 ThemeData appTheme() {
   return ThemeData(
     backgroundColor: kBgColour,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       color: kBgColour,
       centerTitle: true,
     ),
@@ -28,7 +28,7 @@ ThemeData appTheme() {
     primaryColor: kPrimaryColor,
     accentColor: kSecondaryColor,
     scaffoldBackgroundColor: kBgColour,
-    primaryTextTheme: TextTheme(
+    primaryTextTheme: const TextTheme(
       //Heading in Login-SignUp Screens, Quiz Heading in instruction page, Result diplay
       headline1: TextStyle(
         fontSize: 42,

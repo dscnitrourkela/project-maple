@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           ElevatedButton(
               onPressed: () {
                 Get.to<dynamic>(() => const LoginView());
