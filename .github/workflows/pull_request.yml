@@ -11,7 +11,7 @@ env:
 jobs:
   flutter-build:
     name: Run flutter build
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: aptiche
@@ -23,9 +23,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-      - name: Decode Google Services JSON
-        run: echo $ANDROID_FIREBASE_JSON | base64 --decode > ./android/app/google-services.json
       - name: Flutter Build
         run: flutter clean
       - run: flutter pub get
-      - run: flutter build apk
+      - run: |
+        mkdir $HOME/private
+        gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_FIREBASE_JSON" \
+        --output $HOME/private/services.tar services.tar.gpg
+        tar xvf $HOME/private/services.tar
+        flutter build apk
