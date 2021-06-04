@@ -20,7 +20,7 @@ class DataEntryScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           fit: StackFit.loose,
-          children: [
+          children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.6,
               left: SizeConfig.screenWidth! * 0.175,
@@ -50,7 +50,7 @@ class DataEntryScreen extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(
                         left: SizeConfig.safeBlockHorizontal! * 6,
@@ -68,7 +68,7 @@ class DataEntryScreen extends StatelessWidget {
                             horizontal: SizeConfig.safeBlockHorizontal! * 6,
                             vertical: SizeConfig.safeBlockHorizontal! * 2),
                         child: Column(
-                          children: [
+                          children: <Widget>[
                             CustomTextField(
                               editingController:
                                   DataEntryController().nameController,
@@ -120,7 +120,7 @@ class DataEntryScreen extends StatelessWidget {
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
-                            Get.to<dynamic>(() => LoginView());
+                            Get.to<dynamic>(() => const LoginView());
                           }),
                     ),
                   ],

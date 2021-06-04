@@ -22,7 +22,7 @@ class LoginView extends GetView<LoginController> {
       body: SafeArea(
         child: Stack(
           fit: StackFit.loose,
-          children: [
+          children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.6,
               left: SizeConfig.screenWidth! * 0.175,
@@ -53,7 +53,7 @@ class LoginView extends GetView<LoginController> {
                 child: Obx(
                   () => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Container(
                         padding: EdgeInsets.only(
                           left: SizeConfig.safeBlockHorizontal! * 6,
@@ -82,7 +82,7 @@ class LoginView extends GetView<LoginController> {
                               horizontal: SizeConfig.safeBlockHorizontal! * 6,
                               vertical: SizeConfig.safeBlockHorizontal! * 2),
                           child: Column(
-                            children: [
+                            children: <Widget>[
                               CustomTextField(
                                 editingController:
                                     controller.phoneEditController,
@@ -112,7 +112,7 @@ class LoginView extends GetView<LoginController> {
                         padding: EdgeInsets.only(
                           top: SizeConfig.safeBlockVertical! * 4,
                         ),
-                        width: SizeConfig.screenWidth!,
+                        width: SizeConfig.screenWidth,
                         alignment: Alignment.center,
                         child: CustomButton(
                           text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
