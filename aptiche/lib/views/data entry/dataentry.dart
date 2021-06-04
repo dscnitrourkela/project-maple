@@ -16,7 +16,7 @@ class DataEntryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff6f6f6),
+      backgroundColor: const Color(0xfff6f6f6),
       body: SafeArea(
         child: Stack(
           fit: StackFit.loose,
@@ -72,39 +72,39 @@ class DataEntryScreen extends StatelessWidget {
                             CustomTextField(
                               editingController:
                                   DataEntryController().nameController,
-                              validator: (value) {
+                              validator: (dynamic value) {
                                 return Validator.validateName(
                                   DataEntryController().nameController.text,
                                 );
                               },
-                              label: "Enter Name",
-                              hint: "John Doe",
+                              label: 'Enter Name',
+                              hint: 'John Doe',
                               type: TextInputType.name,
                               icon: Icons.person,
                             ),
                             CustomTextField(
                               editingController:
                                   DataEntryController().rollNoController,
-                              validator: (value) {
+                              validator: (dynamic value) {
                                 return Validator.validateRoll(
                                   DataEntryController().rollNoController.text,
                                 );
                               },
-                              label: "Enter Roll Number",
-                              hint: "118CH001",
+                              label: 'Enter Roll Number',
+                              hint: '118CH001',
                               type: TextInputType.text,
                               icon: Icons.school_rounded,
                             ),
                             CustomTextField(
                               editingController:
                                   DataEntryController().emailController,
-                              validator: (value) {
+                              validator: (dynamic value) {
                                 return Validator.validateEmail(
                                   DataEntryController().emailController.text,
                                 );
                               },
-                              label: "Enter Roll Number",
-                              hint: "118CH001",
+                              label: 'Enter Roll Number',
+                              hint: '118CH001',
                               type: TextInputType.text,
                               icon: Icons.person,
                             ),
@@ -118,9 +118,9 @@ class DataEntryScreen extends StatelessWidget {
                       width: SizeConfig.screenWidth,
                       alignment: Alignment.center,
                       child: CustomButton(
-                          text: "PROCEED",
+                          text: 'PROCEED',
                           onTap: () {
-                            Get.to(() => LoginView());
+                            Get.to<dynamic>(() => LoginView());
                           }),
                     ),
                   ],

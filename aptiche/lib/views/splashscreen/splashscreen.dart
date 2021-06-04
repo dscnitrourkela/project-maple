@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -16,12 +17,12 @@ class SplashScreen extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () {
-                Get.to(LoginView());
+                Get.to<dynamic>(() => const LoginView());
               },
-              child: Text("Go Ahead")),
+              child: const Text('Go Ahead')),
           SizedBox(
             child: Center(
-              child: Text("APTICHE",
+              child: Text('APTICHE',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).primaryTextTheme.headline1),
             ),

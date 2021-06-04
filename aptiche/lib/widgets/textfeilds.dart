@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? editingController;
-  final validator;
+  final String? Function(String?)? validator;
   final String? label;
   final String? hint;
   final TextInputType? type;
   final IconData? icon;
 
-  const CustomTextField(
-      {Key? key,
-      this.editingController,
-      this.validator,
-      this.label,
-      this.hint,
-      this.type,
-      this.icon})
-      : super(key: key);
+  const CustomTextField({
+    this.editingController,
+    this.validator,
+    this.label,
+    this.hint,
+    this.type,
+    this.icon,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

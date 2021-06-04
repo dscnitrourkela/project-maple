@@ -12,12 +12,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class LoginView extends GetView<LoginController> {
+  const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff6f6f6),
+      backgroundColor: const Color(0xfff6f6f6),
       body: SafeArea(
         child: Stack(
           fit: StackFit.loose,
@@ -86,18 +87,18 @@ class LoginView extends GetView<LoginController> {
                                 editingController:
                                     controller.phoneEditController,
                                 validator: !controller.sent.value
-                                    ? (value) {
+                                    ? (dynamic value) {
                                         return Validator.validatePhoneNo(
                                           controller.phoneEditController.text,
                                         );
                                       }
                                     : null,
                                 label: !controller.sent.value
-                                    ? "Enter Mobile Number"
-                                    : "Enter OTP",
+                                    ? 'Enter Mobile Number'
+                                    : 'Enter OTP',
                                 hint: !controller.sent.value
-                                    ? "+9193481xxx60"
-                                    : "6 digit OTP",
+                                    ? '+9193481xxx60'
+                                    : '6 digit OTP',
                                 type: TextInputType.phone,
                                 icon: !controller.sent.value
                                     ? Icons.call
@@ -114,7 +115,7 @@ class LoginView extends GetView<LoginController> {
                         width: SizeConfig.screenWidth!,
                         alignment: Alignment.center,
                         child: CustomButton(
-                          text: !controller.sent.value ? "LOGIN" : "Verify",
+                          text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
                           onTap: !controller.sent.value
                               ? () {
                                   if (controller.formkey.currentState!
@@ -133,48 +134,47 @@ class LoginView extends GetView<LoginController> {
                                       controller.phoneEditController.text;
                                   controller.createUser();
                                   if (!controller.status.value) {
-                                    Get.snackbar(
+                                    Get.snackbar<dynamic>(
                                       '',
                                       'Something went wrong. Please try again',
                                     );
                                   } else {
-                                    Get.to(() => DataEntryScreen());
+                                    Get.to<dynamic>(
+                                        () => const DataEntryScreen());
                                   }
                                 },
                         ),
                       ),
-                      controller.sent.value
-                          ? Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    SizeConfig.safeBlockHorizontal! * 12,
-                                vertical: SizeConfig.safeBlockVertical! * 12,
-                              ),
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: 'Wrong Phone no?',
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyText1,
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: ' Use a different phone number',
-                                        style: Theme.of(context)
-                                            .primaryTextTheme
-                                            .bodyText1!
-                                            .copyWith(color: Colors.blue),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            controller.sent.toggle();
-                                            controller.phoneEditController
-                                                .clear();
-                                          }),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : Container(),
+                      if (controller.sent.value)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.safeBlockHorizontal! * 12,
+                            vertical: SizeConfig.safeBlockVertical! * 12,
+                          ),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: 'Wrong Phone no?',
+                              style:
+                                  Theme.of(context).primaryTextTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: ' Use a different phone number',
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .bodyText1!
+                                        .copyWith(color: Colors.blue),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        controller.sent.toggle();
+                                        controller.phoneEditController.clear();
+                                      }),
+                              ],
+                            ),
+                          ),
+                        )
+                      else
+                        Container(),
                     ],
                   ),
                 ),
