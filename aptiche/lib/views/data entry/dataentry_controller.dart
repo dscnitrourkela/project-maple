@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class DataEntryController {
-  var nameController = new TextEditingController();
-  var rollNoController = new TextEditingController();
-  var emailController = new TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController rollNoController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 }

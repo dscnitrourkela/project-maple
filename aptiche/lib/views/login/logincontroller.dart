@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = Get.find();
-  final formkey = new GlobalKey<FormState>();
-  final phoneEditController = new TextEditingController();
-  final sent = false.obs;
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final TextEditingController phoneEditController = TextEditingController();
+  final RxBool sent = false.obs;
   RxBool status = false.obs;
   RxString phoneNo = ''.obs;
   String verificationId = '';
@@ -15,10 +15,10 @@ class LoginController extends GetxController {
   RxBool codeSent = false.obs;
   RxBool loading = false.obs;
 
-  createUser() async {
-    await _authService.signInwithOTP(
-      this.smsCode.toString(),
-      this.verificationId.toString(),
+  void createUser() {
+    _authService.signInwithOTP(
+      smsCode.toString(),
+      verificationId.toString(),
     );
   }
 
@@ -29,18 +29,18 @@ class LoginController extends GetxController {
 
     final PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
-      debugPrint('${authException.message}');
+      debugPrint(authException.message);
       status.value = false;
     };
 
     final PhoneCodeSent smsSent = (String verId, [int? forceResend]) async {
-      this.codeSent.value = true;
-      this.loading.value = false;
-      debugPrint("code sent to " + phoneNo.toString());
-      this.verificationId = verId;
+      codeSent.value = true;
+      loading.value = false;
+      debugPrint('code sent to $phoneNo');
+      verificationId = verId;
     };
     final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {
-      this.verificationId = verId;
+      verificationId = verId;
     };
 
     await FirebaseAuth.instance.verifyPhoneNumber(

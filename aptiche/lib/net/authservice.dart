@@ -7,10 +7,13 @@ import 'package:get/get.dart';
 class AuthService extends GetxController {
   bool status = false;
 
-  Widget handleAuth() {
-    return StreamBuilder(
+  StreamBuilder<User?> handleAuth() {
+    return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<User?> snapshot,
+        ) {
           if (snapshot.hasData) {
             return HomeScreen();
           } else {
@@ -24,27 +27,27 @@ class AuthService extends GetxController {
     //TODO - return to Login Screen
   }
 
-  signIn(
+  void signIn(
     AuthCredential authCredential,
   ) async {
-    FirebaseAuth.instance.signInWithCredential(authCredential).then((value) {
-      //TODO - send JWT Tokens and FCM Token to Mongo
-
+    FirebaseAuth.instance.signInWithCredential(authCredential).then((
+      UserCredential value,
+    ) {
       if (value.user != null) {
         status = true;
       } else {
         status = false;
       }
-    }).catchError((error) {
+    }).catchError((dynamic error) {
       status = false;
     });
   }
 
-  signInwithOTP(
+  void signInwithOTP(
     String smsCode,
     String verId,
   ) {
-    AuthCredential authCredential = PhoneAuthProvider.credential(
+    final AuthCredential authCredential = PhoneAuthProvider.credential(
       verificationId: verId,
       smsCode: smsCode,
     );
