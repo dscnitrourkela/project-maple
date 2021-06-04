@@ -21,7 +21,9 @@ jobs:
         with:
           channel: "stable"
       - name: Decode Google Services JSON
-        run: echo ${{secrets.ANDROID_FIREBASE_JSON}} > ./android/app/google-services.json
+        env:
+          ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
+        run: echo $ANDROID_FIREBASE_JSON > ./android/app/google-services.json
       - name: Flutter Build
         run: flutter clean
       - run: flutter pub get
