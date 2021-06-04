@@ -1,7 +1,6 @@
 import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/bindings.dart';
 import 'package:aptiche/utils/theme.dart';
-import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
