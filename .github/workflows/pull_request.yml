@@ -5,10 +5,13 @@ on:
     branches:
       - main
 
+env:
+  ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
+
 jobs:
   flutter-build:
     name: Run flutter build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: aptiche
@@ -21,9 +24,7 @@ jobs:
         with:
           channel: "stable"
       - name: Decode Google Services JSON
-        env:
-          ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
-        run: echo $ANDROID_FIREBASE_JSON > ./android/app/google-services.json
+        run: echo $ANDROID_FIREBASE_JSON | base64 --decode > ./android/app/google-services.json
       - name: Flutter Build
         run: flutter clean
       - run: flutter pub get
