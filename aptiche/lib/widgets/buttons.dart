@@ -3,11 +3,10 @@ import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final String? text;
-  final VoidCallback? onTap;
-
   const CustomButton({Key? key, this.text, @required this.onTap})
       : super(key: key);
+  final String? text;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -18,7 +17,7 @@ class CustomButton extends StatelessWidget {
           horizontal: SizeConfig.safeBlockHorizontal! * 15,
           vertical: SizeConfig.safeBlockHorizontal! * 2,
         ),
-        elevation: SizeConfig.safeBlockHorizontal!,
+        elevation: SizeConfig.safeBlockHorizontal,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             SizeConfig.safeBlockVertical! * 2.125,

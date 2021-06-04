@@ -12,20 +12,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final AuthService _authService = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<FirebaseApp>(
         future: _initialization,
-        builder: (context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot) {
           if (snapshot.hasError) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return GetMaterialApp(
-              title: "APTI-CHE",
+              title: 'APTI-CHE',
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
               enableLog: true,

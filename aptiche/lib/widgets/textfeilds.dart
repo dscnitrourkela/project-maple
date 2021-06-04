@@ -3,13 +3,6 @@ import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController? editingController;
-  final String? Function(String?)? validator;
-  final String? label;
-  final String? hint;
-  final TextInputType? type;
-  final IconData? icon;
-
   const CustomTextField({
     this.editingController,
     this.validator,
@@ -19,6 +12,13 @@ class CustomTextField extends StatelessWidget {
     this.icon,
     Key? key,
   }) : super(key: key);
+
+  final TextEditingController? editingController;
+  final String? Function(String?)? validator;
+  final String? label;
+  final String? hint;
+  final TextInputType? type;
+  final IconData? icon;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +32,7 @@ class CustomTextField extends StatelessWidget {
         style: const TextStyle(color: kTextColourBlack),
         enableSuggestions: true,
         decoration: InputDecoration(
-          border: new OutlineInputBorder(
+          border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(SizeConfig.safeBlockHorizontal! * 7.5),
             ),

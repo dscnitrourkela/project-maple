@@ -15,16 +15,16 @@ class AuthService extends GetxController {
           AsyncSnapshot<User?> snapshot,
         ) {
           if (snapshot.hasData) {
-            return HomeScreen();
+            return const HomeScreen();
           } else {
-            return LoginView();
+            return const LoginView();
           }
         });
   }
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    //TODO - return to Login Screen
+    //TODO(nayakastha): return to Login Screen
   }
 
   void signIn(
