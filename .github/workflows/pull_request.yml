@@ -1,12 +1,12 @@
 name: pull-build-test
 
 on:
-  pull_request:
+  push:
     branches:
       - main
       
 env:
-  ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
+  ANDROID_FIREBASE_JSON: ${{ secrets.ANDROID_FIREBASE_JSON }}
 
 jobs:
   flutter-build:
