@@ -1,3 +1,4 @@
+[![pr-build-test](https://github.com/dscnitrourkela/project-maple/actions/workflows/pull_request.yml/badge.svg)](https://github.com/dscnitrourkela/project-maple/actions/workflows/pull_request.yml)
 [![Starware](https://img.shields.io/badge/Starware-⭐-black?labelColor=f9b00d)](https://github.com/zepfietje/starware)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
