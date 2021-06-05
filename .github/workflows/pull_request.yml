@@ -1,8 +1,7 @@
 name: pull-build-test
 
 on:
-  pull_request_target:
-    types: [opened]
+  pull_request_target
       
 env:
   ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
