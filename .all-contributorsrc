@@ -14,6 +14,18 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "abhibhaw",
+      "name": "Abhibhaw Asthana",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39991296?v=4",
+      "profile": "https://abhibhaw.co",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "projectManagement"
+      ]
     }
   ],
   "contributorsPerLine": 7,
