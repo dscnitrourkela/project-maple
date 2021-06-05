@@ -32,7 +32,6 @@
 /build/
 /android/google-services.json
 /android/app/google-services.json
-/services.tar
 
 # Web related
 lib/generated_plugin_registrant.dart
