@@ -28,6 +28,6 @@ jobs:
       - run: flutter pub get
       - name: Flutter Build
         run: mkdir $HOME/private
-      - run: gpg --quiet --batch --yes --decrypt --passphrase=$ANDROID_FIREBASE_JSON --output $HOME/private/services.tar services.tar.gpg
+      - run: gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_FIREBASE_JSON" --output $HOME/private/services.tar services.tar.gpg
       - run: tar xvf $HOME/private/services.tar
       - run: flutter build apk
