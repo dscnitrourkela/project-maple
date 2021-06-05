@@ -1,6 +1,6 @@
 [![Starware](https://img.shields.io/badge/Starware-⭐-black?labelColor=f9b00d)](https://github.com/zepfietje/starware)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ### DSC NIT Rourkela
 Project developed and maintained by [DSC NIT Rourkela](https://dscnitrourkela.org/)
@@ -40,6 +40,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/nayakastha"><img src="https://avatars.githubusercontent.com/u/58568514?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Astha Nayak</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-maple/commits?author=nayakastha" title="Code">💻</a> <a href="#maintenance-nayakastha" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://abhibhaw.co"><img src="https://avatars.githubusercontent.com/u/39991296?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhibhaw Asthana</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-maple/commits?author=abhibhaw" title="Code">💻</a> <a href="https://github.com/dscnitrourkela/project-maple/commits?author=abhibhaw" title="Documentation">📖</a> <a href="#ideas-abhibhaw" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-abhibhaw" title="Project Management">📆</a></td>
   </tr>
 </table>
 
