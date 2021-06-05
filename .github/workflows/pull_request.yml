@@ -1,17 +1,17 @@
 name: pull-build-test
 
 on:
-  pull_request:
-    branches:
-      - main
+  pull_request_target:
+    types: [labeled]
       
 env:
-  ANDROID_FIREBASE_JSON: ${{ secrets.ANDROID_FIREBASE_JSON }}
+  ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
 
 jobs:
   flutter-build:
     name: Run flutter build
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe-for-build')
     defaults:
       run:
         working-directory: aptiche
