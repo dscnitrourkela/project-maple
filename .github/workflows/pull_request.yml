@@ -8,7 +8,6 @@ env:
 
 jobs:
   flutter-build:
-    if: ${{ github.event.label.name == 'safe-for-build' }}
     name: Run flutter build
     runs-on: ubuntu-latest
     defaults:
