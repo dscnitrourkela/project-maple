@@ -2,14 +2,14 @@ name: pull-build-test
 
 on:
   pull_request_target:
-    branches:
-      - main
+    types: [labeled]
       
 env:
   ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
 
 jobs:
   flutter-build:
+    if: ${{ github.event.label.name == 'safe-for-build' }}
     name: Run flutter build
     runs-on: ubuntu-latest
     defaults:
