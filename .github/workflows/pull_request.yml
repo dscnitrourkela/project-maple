@@ -11,7 +11,7 @@ jobs:
   flutter-build:
     name: Run flutter build
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'safe-for-build')
+    if: contains(github.event.pull_request.labels.*.name, 'bug')
     defaults:
       run:
         working-directory: aptiche
