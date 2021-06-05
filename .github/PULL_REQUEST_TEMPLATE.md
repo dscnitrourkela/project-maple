@@ -15,3 +15,7 @@ Please describe your pull request.
 ### Post merge checklist
 - [ ] Follow steps from the [guidelines for contributing](../CONTRIBUTING.md) to this repository.
 - [ ] If you are a new contributor, ping in the thread and one of the maintainers will add you to all-contributors list.
+
+<!-- Please don't delete the build status badge. -->
+### Build Status
+[![pr-build-test](https://github.com/dscnitrourkela/project-maple/actions/workflows/pull_request.yml/badge.svg)](https://github.com/dscnitrourkela/project-maple/actions/workflows/pull_request.yml)
