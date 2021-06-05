@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "nayakastha",
+      "name": "Astha Nayak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58568514?v=4",
+      "profile": "https://github.com/nayakastha",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "project-maple",
+  "projectOwner": "dscnitrourkela",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
