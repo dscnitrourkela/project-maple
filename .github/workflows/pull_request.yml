@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+      
+env:
+  ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
 
 jobs:
   flutter-build:
@@ -20,15 +23,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-      - name: Flutter Get Depedencies
+      - name: Decode Google Services JSON
+        run: |
+          touch android/app/google-services.json
+          echo $ANDROID_FIREBASE_JSON >> android/app/google-services.json
+          cat android/app/google-services.json
+      - name: Flutter Build
         run: flutter clean
       - run: flutter pub get
-      - name: Flutter Build
-        run: |
-          mkdir $HOME/private
-          gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_FIREBASE_JSON" \
-          --output $HOME/private/services.tar services.tar.gpg
-          tar xvf $HOME/private/services.tar
-          flutter build apk
-        env:
-          ANDROID_FIREBASE_JSON: ${{ secrets.ANDROID_FIREBASE_JSONANDROID_FIREBASE_JSON }}
+      - run: flutter build apk
