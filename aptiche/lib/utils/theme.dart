@@ -31,7 +31,7 @@ ThemeData appTheme() {
     primaryTextTheme: const TextTheme(
       //Heading in Login-SignUp Screens, Quiz Heading in instruction page, Result diplay
       headline1: TextStyle(
-        fontSize: 42,
+        fontSize: 32,
         fontFamily: kSfpro,
         fontWeight: FontWeight.w700,
         color: kTextColourBlue,
@@ -55,7 +55,7 @@ ThemeData appTheme() {
 
       //textbox label texts, drawer screen texts, sub-headings in quiz and instruction pages
       bodyText1: TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: kSfpro,
         fontWeight: FontWeight.w500,
         color: kTextColourBlack,
@@ -63,7 +63,7 @@ ThemeData appTheme() {
 
       //general text
       bodyText2: TextStyle(
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: kPoppins,
         fontWeight: FontWeight.normal,
         color: kTextColourBlack,

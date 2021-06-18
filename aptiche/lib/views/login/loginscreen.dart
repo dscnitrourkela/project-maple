@@ -24,16 +24,21 @@ class LoginView extends GetView<LoginController> {
           fit: StackFit.loose,
           children: <Widget>[
             Positioned(
-              bottom: SizeConfig.screenHeight! * 0.6,
+              bottom: SizeConfig.screenHeight! * 0.5,
               left: SizeConfig.screenWidth! * 0.175,
+              right: SizeConfig.screenWidth! * 0.175,
               child: SvgPicture.asset(
                 loginScreenSVG,
                 alignment: Alignment.center,
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator()),
                 height: SizeConfig.screenHeight! * 0.32,
               ),
             ),
             Positioned(
-              top: SizeConfig.screenHeight! * 0.4,
+              top: SizeConfig.screenHeight! * 0.6,
               child: Container(
                 height: SizeConfig.screenHeight! * 0.6,
                 padding: EdgeInsets.only(
@@ -68,7 +73,7 @@ class LoginView extends GetView<LoginController> {
                                     .headline1,
                               )
                             : Text(
-                                'Enter your OTP',
+                                'Enter the OTP sent to your mobile',
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context)
                                     .primaryTextTheme
@@ -114,67 +119,75 @@ class LoginView extends GetView<LoginController> {
                         ),
                         width: SizeConfig.screenWidth,
                         alignment: Alignment.center,
-                        child: CustomButton(
-                          text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
-                          onTap: !controller.sent.value
-                              ? () {
-                                  if (controller.formkey.currentState!
-                                      .validate()) {
-                                    controller.phoneNo.value =
-                                        controller.phoneEditController.text;
-                                    controller.verifyPhone();
-                                    controller.sent.toggle();
-                                  }
-                                  controller.phoneEditController.clear();
-                                  debugPrint(
-                                      'status1: ${controller.status.value}');
-                                }
-                              : () {
-                                  controller.smsCode.value =
-                                      controller.phoneEditController.text;
-                                  controller.createUser();
-                                  if (!controller.status.value) {
-                                    Get.snackbar<dynamic>(
-                                      '',
-                                      'Something went wrong. Please try again',
-                                    );
-                                  } else {
-                                    Get.to<dynamic>(
-                                        () => const DataEntryScreen());
-                                  }
-                                },
-                        ),
-                      ),
-                      if (controller.sent.value)
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: SizeConfig.safeBlockHorizontal! * 12,
-                            vertical: SizeConfig.safeBlockVertical! * 12,
-                          ),
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: 'Wrong Phone no?',
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodyText1,
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: ' Use a different phone number',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomButton(
+                              text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
+                              onTap: !controller.sent.value
+                                  ? () {
+                                      if (controller.formkey.currentState!
+                                          .validate()) {
+                                        controller.phoneNo.value =
+                                            controller.phoneEditController.text;
+                                        controller.verifyPhone();
+                                        controller.sent.toggle();
+                                      }
+                                      controller.phoneEditController.clear();
+                                      debugPrint(
+                                          'status1: ${controller.status.value}');
+                                    }
+                                  : () {
+                                      controller.smsCode.value =
+                                          controller.phoneEditController.text;
+                                      controller.createUser();
+                                      if (!controller.status.value) {
+                                        Get.snackbar<dynamic>(
+                                          '',
+                                          'Something went wrong. Please try again',
+                                        );
+                                      } else {
+                                        Get.to<dynamic>(
+                                            () => const DataEntryScreen());
+                                      }
+                                    },
+                            ),
+                            if (controller.sent.value)
+                              Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      SizeConfig.safeBlockHorizontal! * 12,
+                                  vertical: SizeConfig.safeBlockVertical! * 1,
+                                ),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: 'wrong mobile number?',
                                     style: Theme.of(context)
                                         .primaryTextTheme
-                                        .bodyText1!
-                                        .copyWith(color: Colors.blue),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        controller.sent.toggle();
-                                        controller.phoneEditController.clear();
-                                      }),
-                              ],
-                            ),
-                          ),
-                        )
-                      else
-                        Container(),
+                                        .bodyText1,
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: ' CHANGE',
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .bodyText2!
+                                              .copyWith(color: Colors.blue),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              controller.sent.toggle();
+                                              controller.phoneEditController
+                                                  .clear();
+                                            }),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            else
+                              Container(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
