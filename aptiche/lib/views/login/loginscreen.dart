@@ -17,30 +17,16 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff6f6f6),
       body: SafeArea(
         child: Stack(
-          fit: StackFit.loose,
           children: <Widget>[
             Positioned(
-              bottom: SizeConfig.screenHeight! * 0.5,
-              left: SizeConfig.screenWidth! * 0.175,
-              right: SizeConfig.screenWidth! * 0.175,
-              child: SvgPicture.asset(
-                loginScreenSVG,
-                alignment: Alignment.center,
-                placeholderBuilder: (BuildContext context) => Container(
-                    padding: const EdgeInsets.all(30.0),
-                    alignment: Alignment.center,
-                    child: const CircularProgressIndicator()),
-                height: SizeConfig.screenHeight! * 0.32,
-              ),
-            ),
-            Positioned(
-              top: SizeConfig.screenHeight! * 0.6,
+              bottom: SizeConfig.screenHeight! * 0.0000001,
+              height: SizeConfig.screenHeight! * 0.3,
               child: Container(
-                height: SizeConfig.screenHeight! * 0.6,
+                height: SizeConfig.screenHeight! * 0.4,
                 padding: EdgeInsets.only(
                   top: SizeConfig.safeBlockVertical! * 4,
                 ),
@@ -114,14 +100,14 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
+                        /*  padding: EdgeInsets.only(
                           top: SizeConfig.safeBlockVertical! * 4,
-                        ),
+                        ), */
                         width: SizeConfig.screenWidth,
                         alignment: Alignment.center,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
+                          children: <Widget>[
                             CustomButton(
                               text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
                               onTap: !controller.sent.value
@@ -192,7 +178,21 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
               ),
-            )
+            ),
+            Positioned(
+              bottom: SizeConfig.screenHeight! * 0.375,
+              left: SizeConfig.screenWidth! * 0.175,
+              right: SizeConfig.screenWidth! * 0.175,
+              child: SvgPicture.asset(
+                loginScreenSVG,
+                alignment: Alignment.center,
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator()),
+                height: SizeConfig.screenHeight! * 0.32,
+              ),
+            ),
           ],
         ),
       ),
