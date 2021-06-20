@@ -1,8 +1,8 @@
+import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/utils/validator.dart';
-import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
@@ -134,10 +134,8 @@ class LoginView extends GetView<LoginController> {
                                         Get.snackbar<dynamic>(
                                           '',
                                           'Something went wrong. Please try again',
-                                        );                                        
-                                      } else {
-                                        Get.to<dynamic>(
-                                            () => const DataEntryScreen());
+                                        );
+                                        AuthService().signOut();
                                       }
                                     },
                             ),
