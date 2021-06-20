@@ -114,24 +114,27 @@ class LoginView extends GetView<LoginController> {
                                   ? () {
                                       if (controller.formkey.currentState!
                                           .validate()) {
-                                        controller.phoneNo.value =
-                                            controller.phoneEditController.text;
+                                        controller.phoneNo.value = controller
+                                            .phoneEditController.text
+                                            .trim();
+                                        debugPrint(
+                                          'status1: ${controller.status.value}',
+                                        );
                                         controller.verifyPhone();
                                         controller.sent.toggle();
                                       }
                                       controller.phoneEditController.clear();
-                                      debugPrint(
-                                          'status1: ${controller.status.value}');
                                     }
                                   : () {
-                                      controller.smsCode.value =
-                                          controller.phoneEditController.text;
+                                      controller.smsCode.value = controller
+                                          .phoneEditController.text
+                                          .trim();
                                       controller.createUser();
                                       if (!controller.status.value) {
                                         Get.snackbar<dynamic>(
                                           '',
                                           'Something went wrong. Please try again',
-                                        );
+                                        );                                        
                                       } else {
                                         Get.to<dynamic>(
                                             () => const DataEntryScreen());
