@@ -1,3 +1,4 @@
+import 'package:aptiche/main.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
@@ -24,7 +25,7 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    Get.to<dynamic>(() => const LoginView());
+    Get.offAll<dynamic>(() => const LoginView());
   }
 
   void signIn(AuthCredential authCredential, bool stat) async {
@@ -33,7 +34,7 @@ class AuthService extends GetxController {
     ) {
       if (value.user != null) {
         stat = true;
-        Get.to<dynamic>(() => const DataEntryScreen());
+        Get.offAll<dynamic>(() => const DataEntryScreen());
       } else {
         stat = false;
       }

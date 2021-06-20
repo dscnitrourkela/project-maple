@@ -3,14 +3,14 @@ import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/utils/validator.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
-import 'package:aptiche/views/login/loginscreen.dart';
+import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class DataEntryScreen extends StatelessWidget {
+class DataEntryScreen extends GetView<DataEntryController> {
   const DataEntryScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +23,8 @@ class DataEntryScreen extends StatelessWidget {
           children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.6,
-              left: SizeConfig.screenWidth! * 0.175,
+              left: SizeConfig.screenWidth! * 0.075,
+              right: SizeConfig.screenWidth! * 0.075,
               child: SvgPicture.asset(
                 dataEntryScreen,
                 alignment: Alignment.center,
@@ -31,9 +32,9 @@ class DataEntryScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: SizeConfig.screenHeight! * 0.4,
+              bottom: SizeConfig.screenHeight! * 0.0001,
               child: Container(
-                height: SizeConfig.screenHeight! * 0.6,
+                height: SizeConfig.screenHeight! * 0.51,
                 padding: EdgeInsets.only(
                   top: SizeConfig.safeBlockVertical! * 4,
                 ),
@@ -53,20 +54,21 @@ class DataEntryScreen extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(
-                        left: SizeConfig.safeBlockHorizontal! * 6,
+                        left: SizeConfig.safeBlockHorizontal! * 8,
                       ),
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Fill in the Information',
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).primaryTextTheme.headline1,
+                        style: Theme.of(context).primaryTextTheme.headline2,
                       ),
                     ),
                     Form(
+                      key: controller.formKey,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: SizeConfig.safeBlockHorizontal! * 6,
-                            vertical: SizeConfig.safeBlockHorizontal! * 2),
+                            vertical: SizeConfig.safeBlockHorizontal! * 4),
                         child: Column(
                           children: <Widget>[
                             CustomTextField(
@@ -103,24 +105,24 @@ class DataEntryScreen extends StatelessWidget {
                                   DataEntryController().emailController.text,
                                 );
                               },
-                              label: 'Enter Roll Number',
-                              hint: '118CH001',
-                              type: TextInputType.text,
-                              icon: Icons.person,
+                              label: 'Enter Email Address',
+                              hint: 'foo@bar.in',
+                              type: TextInputType.emailAddress,
+                              icon: Icons.email_rounded,
                             ),
                           ],
                         ),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(
-                          top: SizeConfig.safeBlockVertical! * 4),
                       width: SizeConfig.screenWidth,
                       alignment: Alignment.center,
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
-                            Get.to<dynamic>(() => const LoginView());
+                            if (controller.formKey.currentState!.validate()) {
+                              Get.offAll<dynamic>(const HomeScreen());
+                            }
                           }),
                     ),
                   ],
