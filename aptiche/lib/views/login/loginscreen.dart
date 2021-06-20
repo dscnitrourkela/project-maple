@@ -100,9 +100,6 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       Container(
-                        /*  padding: EdgeInsets.only(
-                          top: SizeConfig.safeBlockVertical! * 4,
-                        ), */
                         width: SizeConfig.screenWidth,
                         alignment: Alignment.center,
                         child: Column(
