@@ -6,6 +6,7 @@ on:
       
 env:
   ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
+  SERVER_ADDRESS: ${{secrets.SERVER_ADDRESS}}
   GMAIL_USERNAME: ${{secrets.GMAIL_USERNAME}}
   GMAIL_PASSWORD: ${{secrets.GMAIL_PASSWORD}}
 
@@ -37,13 +38,12 @@ jobs:
       - name: Send Mail
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
+          server_address: $SERVER_ADDRESS
           server_port: 465
           username: $GMAIL_USERNAME
           password: $GMAIL_PASSWORD
           subject: APTICHE App PR Build
           to: aptiche@googlegroups.com
-          from: DSC GITHUB
-          secure: true
+          from: $GMAIL_USERNAME
           body: PR Build success on ${{github.repository}}
           attachments: build/app/outputs/flutter-apk/app-release.apk
