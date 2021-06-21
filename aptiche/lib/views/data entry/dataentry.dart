@@ -34,7 +34,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.0001,
               child: Container(
-                height: SizeConfig.screenHeight! * 0.51,
+                height: SizeConfig.screenHeight! * 0.525,
                 padding: EdgeInsets.only(
                   top: SizeConfig.safeBlockVertical! * 4,
                 ),
@@ -120,8 +120,10 @@ class DataEntryScreen extends GetView<DataEntryController> {
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
+                            controller.formKey.currentState!.save();
                             if (controller.formKey.currentState!.validate()) {
-                              Get.offAll<dynamic>(const HomeScreen());
+                              Get.offAll<dynamic>(HomeScreen(
+                                  name: controller.nameController.text));
                             }
                           }),
                     ),
