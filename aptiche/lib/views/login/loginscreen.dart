@@ -1,4 +1,3 @@
-import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
@@ -127,13 +126,6 @@ class LoginView extends GetView<LoginController> {
                                           .phoneEditController.text
                                           .trim();
                                       controller.createUser();
-                                      if (!controller.status.value) {
-                                        Get.snackbar<dynamic>(
-                                          '',
-                                          'Something went wrong. Please try again',
-                                        );
-                                        AuthService().signOut();
-                                      }
                                     },
                             ),
                             if (controller.sent.value)

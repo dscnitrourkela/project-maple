@@ -1,4 +1,3 @@
-import 'package:aptiche/main.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
@@ -16,7 +15,9 @@ class AuthService extends GetxController {
           AsyncSnapshot<User?> snapshot,
         ) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return const HomeScreen(
+              name: 'logged in',
+            );
           } else {
             return const LoginView();
           }
@@ -34,12 +35,16 @@ class AuthService extends GetxController {
     ) {
       if (value.user != null) {
         stat = true;
-        Get.offAll<dynamic>(() => const DataEntryScreen());
       } else {
         stat = false;
       }
+      Get.to<dynamic>(() => const DataEntryScreen());
     }).catchError((Error error) {
       debugPrint(error.toString());
+      Get.snackbar<dynamic>(
+        '',
+        'Something went wrong. Please try again',
+      );
       stat = false;
     });
   }
