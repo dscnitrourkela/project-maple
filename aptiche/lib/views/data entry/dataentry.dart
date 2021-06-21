@@ -1,7 +1,6 @@
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/utils/validator.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
@@ -34,7 +33,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.0001,
               child: Container(
-                height: SizeConfig.screenHeight! * 0.525,
+                height: SizeConfig.screenHeight! * 0.6,
                 padding: EdgeInsets.only(
                   top: SizeConfig.safeBlockVertical! * 4,
                 ),
@@ -74,10 +73,11 @@ class DataEntryScreen extends GetView<DataEntryController> {
                             CustomTextField(
                               editingController:
                                   DataEntryController().nameController,
-                              validator: (dynamic value) {
-                                return Validator.validateName(
-                                  DataEntryController().nameController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null || value.isEmpty) {
+                                  return 'Please enter a valid name';
+                                }
+                                return null;
                               },
                               label: 'Enter Name',
                               hint: 'John Doe',
@@ -87,10 +87,14 @@ class DataEntryScreen extends GetView<DataEntryController> {
                             CustomTextField(
                               editingController:
                                   DataEntryController().rollNoController,
-                              validator: (dynamic value) {
-                                return Validator.validateRoll(
-                                  DataEntryController().rollNoController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null ||
+                                    value.isEmpty ||
+                                    !value[3].isAlphabetOnly ||
+                                    !value[4].isAlphabetOnly) {
+                                  return 'Please enter a valid NIT Rourkela Roll Number';
+                                }
+                                return null;
                               },
                               label: 'Enter Roll Number',
                               hint: '118CH001',
@@ -100,10 +104,11 @@ class DataEntryScreen extends GetView<DataEntryController> {
                             CustomTextField(
                               editingController:
                                   DataEntryController().emailController,
-                              validator: (dynamic value) {
-                                return Validator.validateEmail(
-                                  DataEntryController().emailController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null || value.isEmail) {
+                                  return 'Please enter a valid e-mail address';
+                                }
+                                return null;
                               },
                               label: 'Enter Email Address',
                               hint: 'foo@bar.in',

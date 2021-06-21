@@ -54,6 +54,15 @@ class AuthService extends GetxController {
       verificationId: verId,
       smsCode: smsCode,
     );
+    /* if (authCredential.token == null) {
+      Get.snackbar<dynamic>(
+        '',
+        'Something went wrong. Please try again',
+      );
+    } else { */
+    print(authCredential.token.toString());
     signIn(authCredential, stat);
+
+    //}
   }
 }
