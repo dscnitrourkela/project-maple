@@ -6,9 +6,6 @@ on:
       
 env:
   ANDROID_FIREBASE_JSON: ${{secrets.ANDROID_FIREBASE_JSON}}
-  SERVER_ADDRESS: ${{secrets.SERVER_ADDRESS}}
-  GMAIL_USERNAME: ${{secrets.GMAIL_USERNAME}}
-  GMAIL_PASSWORD: ${{secrets.GMAIL_PASSWORD}}
 
 jobs:
   flutter-build:
@@ -35,15 +32,14 @@ jobs:
         run: flutter clean
       - run: flutter pub get
       - run: flutter build apk
-      - name: Send Mail
-        uses: dawidd6/action-send-mail@v3
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
         with:
-          server_address: $SERVER_ADDRESS
-          server_port: 465
-          username: $GMAIL_USERNAME
-          password: $GMAIL_PASSWORD
-          subject: APTICHE App PR Build
-          to: aptiche@googlegroups.com
-          from: $GMAIL_USERNAME
-          body: PR Build success on ${{github.repository}}
-          attachments: build/app/outputs/flutter-apk/app-release.apk
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Download APK
+        uses: actions/download-artifact@v2
+        with:
+          name: release-apk
+      - name: Display structure of downloaded files
+        run: ls -R
