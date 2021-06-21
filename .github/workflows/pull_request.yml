@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: aptiche/build/app/outputs/flutter-apk/app-release.apk
       - name: Download APK
         uses: actions/download-artifact@v2
         with:
