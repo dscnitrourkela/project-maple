@@ -19,13 +19,12 @@ class LoginController extends GetxController {
     _authService.signInwithOTP(
       smsCode.toString(),
       verificationId.toString(),
-      status.value
     );
   }
 
   Future<void> verifyPhone() async {
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
-      _authService.signIn(authResult, status.value);
+      _authService.signIn(authResult);
     };
 
     final PhoneVerificationFailed verificationFailed =
