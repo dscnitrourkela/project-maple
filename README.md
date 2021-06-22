@@ -34,21 +34,6 @@ Your appreciation makes us grow and glow up. ⭐
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-   <tr>
-    <td align="center"><a href="https://github.com/nayakastha"><img src="https://avatars.githubusercontent.com/u/58568514?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Astha Nayak</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-maple/commits?author=nayakastha" title="Code">💻</a> <a href="#maintenance-nayakastha" title="Maintenance">🚧</a> <a href="https://github.com/dscnitrourkela/project-maple/commits?author=nayakastha" title="Documentation">📖</a> <a href="#ideas-nayakastha" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/patibanda-sriram-237a0b193/"><img src="https://avatars.githubusercontent.com/u/56649197?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SriramPatibanda</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-maple/commits?author=SriramPatibanda" title="Code">💻</a> <a href="https://github.com/dscnitrourkela/project-maple/commits?author=SriramPatibanda" title="Documentation">📖</a> <a href="#ideas-SriramPatibanda" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-SriramPatibanda" title="Project Management">📆</a> <a href="#maintenance-SriramPatibanda" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://abhibhaw.co"><img src="https://avatars.githubusercontent.com/u/39991296?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhibhaw Asthana</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-maple/commits?author=abhibhaw" title="Code">💻</a> <a href="https://github.com/dscnitrourkela/project-maple/commits?author=abhibhaw" title="Documentation">📖</a> <a href="#ideas-abhibhaw" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-abhibhaw" title="Project Management">📆</a></td>
 
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
