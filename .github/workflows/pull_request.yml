@@ -17,6 +17,8 @@ jobs:
         working-directory: aptiche
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
@@ -32,3 +34,14 @@ jobs:
         run: flutter clean
       - run: flutter pub get
       - run: flutter build apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: aptiche/build/app/outputs/flutter-apk/app-release.apk
+      - name: Download APK
+        uses: actions/download-artifact@v2
+        with:
+          name: release-apk
+      - name: Display structure of downloaded files
+        run: ls -R

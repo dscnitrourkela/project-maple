@@ -1,12 +1,14 @@
+import 'package:aptiche/main.dart';
+import 'package:aptiche/utils/theme.dart';
+import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
-  bool status = false;
-
   StreamBuilder<User?> handleAuth() {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -24,35 +26,23 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    //TODO(nayakastha): return to Login Screen
+    Get.offAll<dynamic>(MyApp());
   }
 
-  void signIn(
-    AuthCredential authCredential,
-  ) async {
-    FirebaseAuth.instance.signInWithCredential(authCredential).then((
-      UserCredential value,
-    ) {
-      if (value.user != null) {
-        status = true;
-      } else {
-        status = false;
-      }
-    }).catchError((dynamic error) {
-      status = false;
-    });
-  }
+  void signInwithOTP(String smsCode, String verId) async {
+    try {
+      final AuthCredential authCredential = PhoneAuthProvider.credential(
+        verificationId: verId,
+        smsCode: smsCode,
+      );
+      await FirebaseAuth.instance.signInWithCredential(authCredential);
 
-  void signInwithOTP(
-    String smsCode,
-    String verId,
-  ) {
-    final AuthCredential authCredential = PhoneAuthProvider.credential(
-      verificationId: verId,
-      smsCode: smsCode,
-    );
-    signIn(
-      authCredential,
-    );
+      Get.to<dynamic>(() => const DataEntryScreen());
+    } catch (error) {
+      customSnackBar(
+        'Authentication Error - WRONG OTP',
+        'Please enter the correct OTP sent to your mobile number',
+      );
+    }
   }
 }

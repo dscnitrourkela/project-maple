@@ -1,4 +1,6 @@
 import 'package:aptiche/net/authservice.dart';
+import 'package:aptiche/utils/theme.dart';
+import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,13 +25,16 @@ class LoginController extends GetxController {
   }
 
   Future<void> verifyPhone() async {
-    final PhoneVerificationCompleted verified = (AuthCredential authResult) {
-      _authService.signIn(authResult);
+    final PhoneVerificationCompleted verified =
+        (AuthCredential authResult) async {
+      await FirebaseAuth.instance.signInWithCredential(authResult);
+      Get.to<dynamic>(() => const DataEntryScreen());
     };
 
     final PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
-      debugPrint(authException.message);
+      customSnackBar('Authentication Error - WRONG MOBILE NUMBER',
+          authException.message.toString());
       status.value = false;
     };
 

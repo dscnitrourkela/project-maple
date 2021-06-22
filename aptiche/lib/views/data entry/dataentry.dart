@@ -1,16 +1,15 @@
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/utils/validator.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
-import 'package:aptiche/views/login/loginscreen.dart';
+import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class DataEntryScreen extends StatelessWidget {
+class DataEntryScreen extends GetView<DataEntryController> {
   const DataEntryScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,15 +22,20 @@ class DataEntryScreen extends StatelessWidget {
           children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.6,
-              left: SizeConfig.screenWidth! * 0.175,
+              left: SizeConfig.screenWidth! * 0.075,
+              right: SizeConfig.screenWidth! * 0.075,
               child: SvgPicture.asset(
                 dataEntryScreen,
                 alignment: Alignment.center,
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator()),
                 height: SizeConfig.screenHeight! * 0.32,
               ),
             ),
             Positioned(
-              top: SizeConfig.screenHeight! * 0.4,
+              bottom: SizeConfig.screenHeight! * 0.0001,
               child: Container(
                 height: SizeConfig.screenHeight! * 0.6,
                 padding: EdgeInsets.only(
@@ -53,29 +57,31 @@ class DataEntryScreen extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(
-                        left: SizeConfig.safeBlockHorizontal! * 6,
+                        left: SizeConfig.safeBlockHorizontal! * 8,
                       ),
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Fill in the Information',
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).primaryTextTheme.headline1,
+                        style: Theme.of(context).primaryTextTheme.headline2,
                       ),
                     ),
                     Form(
+                      key: controller.formKey,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: SizeConfig.safeBlockHorizontal! * 6,
-                            vertical: SizeConfig.safeBlockHorizontal! * 2),
+                            vertical: SizeConfig.safeBlockHorizontal! * 4),
                         child: Column(
                           children: <Widget>[
                             CustomTextField(
                               editingController:
                                   DataEntryController().nameController,
-                              validator: (dynamic value) {
-                                return Validator.validateName(
-                                  DataEntryController().nameController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null || value.isEmpty) {
+                                  return 'Please enter a valid name';
+                                }
+                                return null;
                               },
                               label: 'Enter Name',
                               hint: 'John Doe',
@@ -85,10 +91,14 @@ class DataEntryScreen extends StatelessWidget {
                             CustomTextField(
                               editingController:
                                   DataEntryController().rollNoController,
-                              validator: (dynamic value) {
-                                return Validator.validateRoll(
-                                  DataEntryController().rollNoController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null ||
+                                    value.isEmpty ||
+                                    !value[3].isAlphabetOnly ||
+                                    !value[4].isAlphabetOnly) {
+                                  return 'Please enter a valid NIT Rourkela Roll Number';
+                                }
+                                return null;
                               },
                               label: 'Enter Roll Number',
                               hint: '118CH001',
@@ -98,29 +108,33 @@ class DataEntryScreen extends StatelessWidget {
                             CustomTextField(
                               editingController:
                                   DataEntryController().emailController,
-                              validator: (dynamic value) {
-                                return Validator.validateEmail(
-                                  DataEntryController().emailController.text,
-                                );
+                              validator: (String? value) {
+                                if (value!.trim() == null || !value.isEmail) {
+                                  return 'Please enter a valid e-mail address';
+                                }
+                                return null;
                               },
-                              label: 'Enter Roll Number',
-                              hint: '118CH001',
-                              type: TextInputType.text,
-                              icon: Icons.person,
+                              label: 'Enter Email Address',
+                              hint: 'foo@bar.in',
+                              type: TextInputType.emailAddress,
+                              icon: Icons.email_rounded,
                             ),
                           ],
                         ),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(
-                          top: SizeConfig.safeBlockVertical! * 4),
                       width: SizeConfig.screenWidth,
                       alignment: Alignment.center,
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
-                            Get.to<dynamic>(() => const LoginView());
+                            if (controller.formKey.currentState!.validate()) {
+                              controller.formKey.currentState!.save();
+                              Get.back<dynamic>();
+                              Get.back<dynamic>();
+                              Get.to<dynamic>(HomeScreen());
+                            }
                           }),
                     ),
                   ],

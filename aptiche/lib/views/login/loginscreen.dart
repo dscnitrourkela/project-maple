@@ -1,8 +1,6 @@
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/utils/validator.dart';
-import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/textfeilds.dart';
@@ -24,7 +22,7 @@ class LoginView extends GetView<LoginController> {
           children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.0000001,
-              height: SizeConfig.screenHeight! * 0.3,
+              height: SizeConfig.screenHeight! * 0.35,
               child: Container(
                 height: SizeConfig.screenHeight! * 0.4,
                 padding: EdgeInsets.only(
@@ -59,11 +57,11 @@ class LoginView extends GetView<LoginController> {
                                     .headline1,
                               )
                             : Text(
-                                'Enter the OTP sent to your mobile',
+                                'Verification',
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context)
                                     .primaryTextTheme
-                                    .headline2,
+                                    .headline1,
                               ),
                       ),
                       Form(
@@ -78,12 +76,20 @@ class LoginView extends GetView<LoginController> {
                                 editingController:
                                     controller.phoneEditController,
                                 validator: !controller.sent.value
-                                    ? (dynamic value) {
-                                        return Validator.validatePhoneNo(
-                                          controller.phoneEditController.text,
-                                        );
+                                    ? (String? value) {
+                                        if ((value!.length == 13 ||
+                                                value.length == 14) &&
+                                            value[0] == '+') {
+                                          return null;
+                                        } else
+                                          return 'Enter a valid mobile number';
                                       }
-                                    : null,
+                                    : (String? value) {
+                                        if (value!.length != 6) {
+                                          return 'Enter the 6-digit OTP sent';
+                                        } else
+                                          return null;
+                                      },
                                 label: !controller.sent.value
                                     ? 'Enter Mobile Number'
                                     : 'Enter OTP',
@@ -100,9 +106,6 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       Container(
-                        /*  padding: EdgeInsets.only(
-                          top: SizeConfig.safeBlockVertical! * 4,
-                        ), */
                         width: SizeConfig.screenWidth,
                         alignment: Alignment.center,
                         child: Column(
@@ -114,27 +117,24 @@ class LoginView extends GetView<LoginController> {
                                   ? () {
                                       if (controller.formkey.currentState!
                                           .validate()) {
-                                        controller.phoneNo.value =
-                                            controller.phoneEditController.text;
+                                        controller.phoneNo.value = controller
+                                            .phoneEditController.text
+                                            .trim();
+                                        debugPrint(
+                                          'status1: ${controller.status.value}',
+                                        );
                                         controller.verifyPhone();
                                         controller.sent.toggle();
                                       }
                                       controller.phoneEditController.clear();
-                                      debugPrint(
-                                          'status1: ${controller.status.value}');
                                     }
                                   : () {
-                                      controller.smsCode.value =
-                                          controller.phoneEditController.text;
-                                      controller.createUser();
-                                      if (!controller.status.value) {
-                                        Get.snackbar<dynamic>(
-                                          '',
-                                          'Something went wrong. Please try again',
-                                        );
-                                      } else {
-                                        Get.to<dynamic>(
-                                            () => const DataEntryScreen());
+                                      if (controller.formkey.currentState!
+                                          .validate()) {
+                                        controller.smsCode.value = controller
+                                            .phoneEditController.text
+                                            .trim();
+                                        controller.createUser();
                                       }
                                     },
                             ),

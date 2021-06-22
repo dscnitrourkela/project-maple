@@ -1,5 +1,7 @@
 //colour used for buttons and other widgets
+import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const Color kPrimaryColor = Color(0xff3385be);
 const Color kSecondaryColor = Color(0xff036197);
@@ -12,6 +14,9 @@ const Color kTextColourWhite = Color(0xffffffff);
 
 //colour used for background
 const Color kBgColour = Color(0xffffffff);
+
+//colour for snackbarBackground
+const Color kSnackColour = Color(0xffade8f4);
 
 //font families
 const String kPoppins = 'Poppins';
@@ -70,4 +75,11 @@ ThemeData appTheme() {
       ),
     ),
   );
+}
+
+void customSnackBar(String title, String subject) {
+  Get.snackbar<dynamic>(title, subject,
+      backgroundColor: kSnackColour.withOpacity(0.5),
+      snackStyle: SnackStyle.FLOATING,
+      colorText: Colors.black87);
 }
