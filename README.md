@@ -1,7 +1,5 @@
 [![Starware](https://img.shields.io/badge/Starware-⭐-black?labelColor=f9b00d)](https://github.com/zepfietje/starware)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ### DSC NIT Rourkela
 Project developed and maintained by [DSC NIT Rourkela](https://dscnitrourkela.org/)
 ![DSC NIT Rourkela Cover Image](./RepoCover.png)
@@ -30,10 +28,3 @@ NOTE 2: Please abide by the [Code of Conduct](./CODE_OF_CONDUCT.md).
 This is Starware.  
 This means you're free to use the project, as long as you star its GitHub repository.  
 Your appreciation makes us grow and glow up. ⭐
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
