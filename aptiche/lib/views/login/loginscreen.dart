@@ -57,11 +57,11 @@ class LoginView extends GetView<LoginController> {
                                     .headline1,
                               )
                             : Text(
-                                'Enter the OTP sent to your mobile',
+                                'Verification',
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context)
                                     .primaryTextTheme
-                                    .headline2,
+                                    .headline1,
                               ),
                       ),
                       Form(
