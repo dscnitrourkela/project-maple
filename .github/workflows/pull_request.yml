@@ -17,6 +17,8 @@ jobs:
         working-directory: aptiche
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
