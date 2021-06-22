@@ -77,11 +77,12 @@ class LoginView extends GetView<LoginController> {
                                     controller.phoneEditController,
                                 validator: !controller.sent.value
                                     ? (String? value) {
-                                        if (value!.length != 13 &&
-                                            value[0] != '+') {
-                                          return 'Enter a valid mobile number';
-                                        } else
+                                        if ((value!.length == 13 ||
+                                                value.length == 14) &&
+                                            value[0] == '+') {
                                           return null;
+                                        } else
+                                          return 'Enter a valid mobile number';
                                       }
                                     : (String? value) {
                                         if (value!.length != 6) {

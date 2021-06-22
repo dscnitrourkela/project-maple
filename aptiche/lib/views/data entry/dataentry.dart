@@ -133,8 +133,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                               controller.formKey.currentState!.save();
                               Get.back<dynamic>();
                               Get.back<dynamic>();
-                              Get.to<dynamic>(HomeScreen(
-                                  name: controller.nameController.text));
+                              Get.to<dynamic>(HomeScreen());
                             }
                           }),
                     ),
