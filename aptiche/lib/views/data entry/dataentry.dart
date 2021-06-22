@@ -27,6 +27,10 @@ class DataEntryScreen extends GetView<DataEntryController> {
               child: SvgPicture.asset(
                 dataEntryScreen,
                 alignment: Alignment.center,
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator()),
                 height: SizeConfig.screenHeight! * 0.32,
               ),
             ),
@@ -127,7 +131,9 @@ class DataEntryScreen extends GetView<DataEntryController> {
                           onTap: () {
                             controller.formKey.currentState!.save();
                             if (controller.formKey.currentState!.validate()) {
-                              Get.offAll<dynamic>(HomeScreen(
+                              Get.back<dynamic>();
+                              Get.back<dynamic>();
+                              Get.to<dynamic>(HomeScreen(
                                   name: controller.nameController.text));
                             }
                           }),

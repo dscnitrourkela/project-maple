@@ -4,6 +4,7 @@ import 'package:aptiche/views/login/loginscreen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
@@ -29,40 +30,44 @@ class AuthService extends GetxController {
     Get.offAll<dynamic>(() => const LoginView());
   }
 
-  void signIn(AuthCredential authCredential, bool stat) async {
-    FirebaseAuth.instance.signInWithCredential(authCredential).then((
-      UserCredential value,
-    ) {
-      if (value.user != null) {
-        stat = true;
+  void signIn(AuthCredential authCredential) async {
+    try {
+      print('a1');
+      final dynamic userCredential =
+          (await FirebaseAuth.instance.signInWithCredential(authCredential))
+              .user;
+      print('a2');
+      // Get.to<dynamic>(() => const DataEntryScreen());
+      /*  if (FirebaseAuth.instance.currentUser == null) {
+        Get.snackbar<dynamic>(
+          '',
+          'Something went wrong. Please try again',
+        );
       } else {
-        stat = false;
-      }
-      Get.to<dynamic>(() => const DataEntryScreen());
-    }).catchError((Error error) {
-      debugPrint(error.toString());
+        Get.to<dynamic>(() => const DataEntryScreen());
+      } */
+    } on PlatformException catch (e) {
+      print(e.toString());
+      print('a3');
       Get.snackbar<dynamic>(
         '',
         'Something went wrong. Please try again',
       );
-      stat = false;
-    });
+    }
   }
 
-  void signInwithOTP(String smsCode, String verId, bool stat) {
-    final AuthCredential authCredential = PhoneAuthProvider.credential(
-      verificationId: verId,
-      smsCode: smsCode,
-    );
-    /* if (authCredential.token == null) {
-      Get.snackbar<dynamic>(
-        '',
-        'Something went wrong. Please try again',
+  void signInwithOTP(String smsCode, String verId) {
+    try {
+      print('b1');
+      final AuthCredential authCredential = PhoneAuthProvider.credential(
+        verificationId: verId,
+        smsCode: smsCode,
       );
-    } else { */
-    print(authCredential.token.toString());
-    signIn(authCredential, stat);
-
-    //}
+      signIn(authCredential);
+      print('b2');
+    } catch (e) {
+      print('b3');
+      print(e);
+    }
   }
 }
