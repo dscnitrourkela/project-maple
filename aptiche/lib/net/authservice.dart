@@ -1,3 +1,4 @@
+import 'package:aptiche/main.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
@@ -16,9 +17,7 @@ class AuthService extends GetxController {
           AsyncSnapshot<User?> snapshot,
         ) {
           if (snapshot.hasData) {
-            return const HomeScreen(
-              name: 'logged in',
-            );
+            return const HomeScreen();
           } else {
             return const LoginView();
           }
@@ -27,6 +26,7 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
+    Get.offAll<dynamic>(MyApp());
   }
 
   void signInwithOTP(String smsCode, String verId) async {
@@ -39,12 +39,10 @@ class AuthService extends GetxController {
 
       Get.to<dynamic>(() => const DataEntryScreen());
     } catch (error) {
-      Get.snackbar<dynamic>('Authentication Error - WRONG OTP',
-          'Please enter the correct OTP sent to your mobile number',
-          backgroundColor: kSecondaryColor,
-          colorText: Colors.white,
-          isDismissible: true,
-          snackStyle: SnackStyle.GROUNDED);
+      customSnackBar(
+        'Authentication Error - WRONG OTP',
+        'Please enter the correct OTP sent to your mobile number',
+      );
     }
   }
 }
