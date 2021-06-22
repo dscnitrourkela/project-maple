@@ -109,7 +109,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                               editingController:
                                   DataEntryController().emailController,
                               validator: (String? value) {
-                                if (value!.trim() == null || value.isEmail) {
+                                if (value!.trim() == null || !value.isEmail) {
                                   return 'Please enter a valid e-mail address';
                                 }
                                 return null;
@@ -129,8 +129,8 @@ class DataEntryScreen extends GetView<DataEntryController> {
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
-                            controller.formKey.currentState!.save();
                             if (controller.formKey.currentState!.validate()) {
+                              controller.formKey.currentState!.save();
                               Get.back<dynamic>();
                               Get.back<dynamic>();
                               Get.to<dynamic>(HomeScreen(
