@@ -1,5 +1,4 @@
 //colour used for buttons and other widgets
-import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
