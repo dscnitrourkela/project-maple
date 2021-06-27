@@ -25,7 +25,8 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    Get.offAll<dynamic>(() => const LoginView());
+    Get.to<dynamic>(const LoginView());
+    // Get.to<dynamic>(() => const LoginView());
   }
 
   void signInwithOTP(String smsCode, String verId) async {

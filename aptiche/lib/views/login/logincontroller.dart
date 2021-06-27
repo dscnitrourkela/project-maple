@@ -22,6 +22,7 @@ class LoginController extends GetxController {
       smsCode.toString(),
       verificationId.toString(),
     );
+    sent.toggle();
   }
 
   Future<void> verifyPhone() async {

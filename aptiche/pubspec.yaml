@@ -17,6 +17,8 @@ dependencies:
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
   dio: ^4.0.0
+  lottie: ^1.0.1
+  
 
 dev_dependencies:
   mockito: ^5.0.7
@@ -30,6 +32,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/svgs/
+    - assets/animation/
 
 
   
