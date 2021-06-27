@@ -1,4 +1,3 @@
-import 'package:aptiche/main.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
@@ -26,7 +25,7 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    Get.offAll<dynamic>(MyApp());
+    Get.offAll<dynamic>(() => const LoginView());
   }
 
   void signInwithOTP(String smsCode, String verId) async {
