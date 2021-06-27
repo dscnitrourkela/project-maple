@@ -1,7 +1,7 @@
-//colour used for buttons and other widgets
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//colour used for buttons and other widgets
 const Color kPrimaryColor = Color(0xff3385be);
 const Color kSecondaryColor = Color(0xff036197);
 const Color kTertiaryColor = Color(0xff0078bd);
@@ -13,6 +13,7 @@ const Color kTextColourWhite = Color(0xffffffff);
 
 //colour used for background
 const Color kBgColour = Color(0xffffffff);
+const Color kGreyBgColor = Color(0xfff6f6f6);
 
 //colour for snackbarBackground
 const Color kSnackColour = Color(0xffade8f4);
