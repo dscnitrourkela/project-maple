@@ -1,5 +1,7 @@
 import 'package:aptiche/utils/bindings.dart';
 import 'package:aptiche/utils/theme.dart';
+import 'package:aptiche/views/home/homescreen.dart';
+import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,13 @@ class MyApp extends StatelessWidget {
               title: 'APTI-CHE',
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
+              routes: <String, WidgetBuilder>{
+                '/home': (BuildContext context) => const HomeScreen(),
+                '/splash': (BuildContext context) => const SplashScreen(),
+                '/login' : (BuildContext context) => const LoginView(),
+              
+                
+              },
               enableLog: true,
               defaultTransition: Transition.rightToLeftWithFade,
               popGesture: Get.isPopGestureEnable,

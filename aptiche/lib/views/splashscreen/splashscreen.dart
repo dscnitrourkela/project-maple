@@ -1,7 +1,6 @@
 import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,12 +14,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-   final AuthService _authService = Get.find();    
+    with TickerProviderStateMixin {
+  final AuthService _authService = Get.find();
   @override
   Widget build(BuildContext context) {
     final AnimationController animationController =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: kBgColour,
@@ -33,10 +32,10 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              final StreamBuilder<User?> route = _authService.handleAuth();
+              final String? route = _authService.handleAuth();
 
               if (status == AnimationStatus.completed) {
-                Get.to<dynamic>(route);
+                Get.offAndToNamed<dynamic>(route.toString());
               }
             });
             animationController

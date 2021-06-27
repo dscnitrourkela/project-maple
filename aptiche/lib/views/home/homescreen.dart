@@ -1,5 +1,5 @@
-import 'package:aptiche/views/splashscreen/splashscreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aptiche/net/authservice.dart';
+import 'package:aptiche/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,12 +8,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _authService = Get.find();
     return Scaffold(
       body: Center(
         child: ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: kPrimaryColor),
             onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Get.off<dynamic>(const SplashScreen());
+              _authService.signOut();
             },
             child: const Text('Log out')),
       ),

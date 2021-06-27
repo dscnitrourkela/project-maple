@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = Get.find();
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final TextEditingController phoneEditController = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  TextEditingController phoneEditController = TextEditingController();
   final RxBool sent = false.obs;
   RxBool status = false.obs;
   RxString phoneNo = ''.obs;
