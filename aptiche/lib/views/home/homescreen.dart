@@ -3,6 +3,7 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/home/home_controller.dart';
+import 'package:aptiche/widgets/homeScreenGrid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -47,101 +48,131 @@ class HomeScreen extends GetView<HomeController> {
                 height: SizeConfig.screenHeight! * 0.32,
               ),
             ),
-            Positioned(
-              bottom: SizeConfig.screenHeight! * 0.0000001,
-              height: SizeConfig.screenHeight! * 0.45,
-              width: SizeConfig.screenWidth,
-              child: Container(
-                height: SizeConfig.screenHeight! * 0.4,
-                padding: EdgeInsets.only(
-                  top: SizeConfig.safeBlockVertical! * 4,
-                ),
-                decoration: BoxDecoration(
-                  color: kBgColour,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      SizeConfig.safeBlockHorizontal! * 10,
-                    ),
-                    topRight: Radius.circular(
-                      SizeConfig.safeBlockHorizontal! * 10,
-                    ),
-                  ),
-                ),
-                child: Obx(
-                  () => Container(
-                    padding: EdgeInsets.only(
-                      left: SizeConfig.screenWidth! * 0.1,
-                    ),
-                    alignment: Alignment.topCenter,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: SizeConfig.screenWidth! * 0.4,
-                          height: SizeConfig.screenHeight! * 0.06,
-                          decoration: BoxDecoration(
-                            color: controller.upcomingQuizzes.value
-                                ? Theme.of(context).primaryColor
-                                : kGreyBgColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(30.0),
-                              bottomLeft: Radius.circular(30.0),
-                            ),
+            DraggableScrollableSheet(
+              builder: (context, scrollController) {
+                return Container(
+                  height: SizeConfig.screenHeight! * 0.45,
+                  width: SizeConfig.screenWidth,
+                  child: Obx(
+                    () => Container(
+                      height: SizeConfig.screenHeight! * 0.4,
+                      padding: EdgeInsets.only(
+                        top: SizeConfig.safeBlockVertical! * 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: kBgColour,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                            SizeConfig.safeBlockHorizontal! * 10,
                           ),
-                          child: Center(
-                            child: TextButton(
-                              child: Text(
-                                'Upcoming Quizzes',
-                                textAlign: TextAlign.center,
-                                style: !controller.upcomingQuizzes.value
-                                    ? Theme.of(context)
-                                        .primaryTextTheme
-                                        .headline3
-                                    : Theme.of(context)
-                                        .primaryTextTheme
-                                        .headline3!
-                                        .copyWith(color: Colors.white),
-                              ),
-                              onPressed: () =>
-                                  controller.upcomingQuizzes.value = true,
-                            ),
+                          topRight: Radius.circular(
+                            SizeConfig.safeBlockHorizontal! * 10,
                           ),
                         ),
-                        Container(
-                          width: SizeConfig.screenWidth! * 0.4,
-                          height: SizeConfig.screenHeight! * 0.06,
-                          decoration: BoxDecoration(
-                            color: !controller.upcomingQuizzes.value
-                                ? Theme.of(context).primaryColor
-                                : kGreyBgColor,
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(30.0),
-                              bottomRight: Radius.circular(30.0),
-                            ),
-                          ),
-                          child: Center(
-                            child: TextButton(
-                              child: Text(
-                                'Past Quizzes',
-                                textAlign: TextAlign.center,
-                                style: controller.upcomingQuizzes.value
-                                    ? Theme.of(context)
-                                        .primaryTextTheme
-                                        .headline3
-                                    : Theme.of(context)
-                                        .primaryTextTheme
-                                        .headline3!
-                                        .copyWith(color: Colors.white),
+                      ),
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        // physics: const NeverScrollableScrollPhysics(),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: SizeConfig.screenWidth! * 0.1,
                               ),
-                              onPressed: () =>
-                                  controller.upcomingQuizzes.value = false,
+                              alignment: Alignment.topCenter,
+                              child: Row(
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () =>
+                                        controller.upcomingQuizzes.value = true,
+                                    child: Container(
+                                      width: SizeConfig.screenWidth! * 0.4,
+                                      height: SizeConfig.screenHeight! * 0.06,
+                                      decoration: BoxDecoration(
+                                        color: controller.upcomingQuizzes.value
+                                            ? Theme.of(context).primaryColor
+                                            : kGreyBgColor,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(30.0),
+                                          bottomLeft: Radius.circular(30.0),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Upcoming Quizzes',
+                                          textAlign: TextAlign.center,
+                                          style:
+                                              !controller.upcomingQuizzes.value
+                                                  ? Theme.of(context)
+                                                      .primaryTextTheme
+                                                      .headline3
+                                                  : Theme.of(context)
+                                                      .primaryTextTheme
+                                                      .headline3!
+                                                      .copyWith(
+                                                        color: Colors.white,
+                                                      ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => controller
+                                        .upcomingQuizzes.value = false,
+                                    child: Container(
+                                      width: SizeConfig.screenWidth! * 0.4,
+                                      height: SizeConfig.screenHeight! * 0.06,
+                                      decoration: BoxDecoration(
+                                        color: !controller.upcomingQuizzes.value
+                                            ? Theme.of(context).primaryColor
+                                            : kGreyBgColor,
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(30.0),
+                                          bottomRight: Radius.circular(30.0),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Past Quizzes',
+                                          textAlign: TextAlign.center,
+                                          style:
+                                              controller.upcomingQuizzes.value
+                                                  ? Theme.of(context)
+                                                      .primaryTextTheme
+                                                      .headline3
+                                                  : Theme.of(context)
+                                                      .primaryTextTheme
+                                                      .headline3!
+                                                      .copyWith(
+                                                          color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+                            GridView.count(
+                              shrinkWrap: true,
+                              primary: false,
+                              crossAxisCount: 2,
+                              children: <Widget>[
+                                HomeGridTile(),
+                                HomeGridTile(),
+                                HomeGridTile(),
+                                HomeGridTile(),
+                                HomeGridTile(),
+                                HomeGridTile(),
+                                HomeGridTile(),
+                              ],
+                            )
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
