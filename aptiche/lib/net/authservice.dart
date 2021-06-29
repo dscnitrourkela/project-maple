@@ -1,25 +1,32 @@
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
+import 'package:aptiche/views/home/homescreen.dart';
+import 'package:aptiche/views/login/loginscreen.dart';
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
-  String? handleAuth() {
-    String? route;
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null)
-        route = '/login';
-      else
-        route = '/home';
-    }, onError: () {
-      route = '/login';
-    });
-    return route;
+  StreamBuilder<User?> handleAuth() {
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot<Object?> snapshot) {
+          if (snapshot.hasError) {
+            return const LoginView();
+          } else {
+            if (snapshot.hasData) {
+              return const HomeScreen();
+            } else {
+              return const LoginView();
+            }
+          }
+        });
   }
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    Get.offAllNamed<dynamic>('/splash');
+    Get.offAll<dynamic>(const SplashScreen());
   }
 
   void signInwithOTP(String smsCode, String verId) async {

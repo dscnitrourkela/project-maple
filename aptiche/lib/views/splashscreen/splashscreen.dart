@@ -1,6 +1,7 @@
 import 'package:aptiche/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -32,10 +33,10 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              final String? route = _authService.handleAuth();
+              final StreamBuilder<User?> route = _authService.handleAuth();
 
               if (status == AnimationStatus.completed) {
-                Get.offAndToNamed<dynamic>(route.toString());
+                Get.to<dynamic>(() => route);
               }
             });
             animationController

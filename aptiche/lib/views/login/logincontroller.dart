@@ -23,12 +23,15 @@ class LoginController extends GetxController {
       verificationId.toString(),
     );
     sent.toggle();
+    phoneEditController.clear();
   }
 
   Future<void> verifyPhone() async {
     final PhoneVerificationCompleted verified =
         (AuthCredential authResult) async {
       await FirebaseAuth.instance.signInWithCredential(authResult);
+      customSnackBar('Authentication Successful',
+          'User Verified with mobile number $phoneNo');
       Get.to<dynamic>(() => const DataEntryScreen());
     };
 
