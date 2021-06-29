@@ -1,4 +1,4 @@
-import 'package:aptiche/net/authservice.dart';
+import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
 import 'package:aptiche/views/home/home_controller.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
