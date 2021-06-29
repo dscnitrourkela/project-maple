@@ -1,9 +1,8 @@
-import 'package:aptiche/main.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
-
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,21 +11,22 @@ class AuthService extends GetxController {
   StreamBuilder<User?> handleAuth() {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<User?> snapshot,
-        ) {
-          if (snapshot.hasData) {
-            return const HomeScreen();
-          } else {
+        builder: (BuildContext context, AsyncSnapshot<Object?> snapshot) {
+          if (snapshot.hasError) {
             return const LoginView();
+          } else {
+            if (snapshot.hasData) {
+              return const HomeScreen();
+            } else {
+              return const LoginView();
+            }
           }
         });
   }
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    Get.offAll<dynamic>(MyApp());
+    Get.offAll<dynamic>(const SplashScreen());
   }
 
   void signInwithOTP(String smsCode, String verId) async {

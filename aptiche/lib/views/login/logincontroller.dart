@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = Get.find();
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final TextEditingController phoneEditController = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  TextEditingController phoneEditController = TextEditingController();
   final RxBool sent = false.obs;
   RxBool status = false.obs;
   RxString phoneNo = ''.obs;
@@ -22,12 +22,16 @@ class LoginController extends GetxController {
       smsCode.toString(),
       verificationId.toString(),
     );
+    sent.toggle();
+    phoneEditController.clear();
   }
 
   Future<void> verifyPhone() async {
     final PhoneVerificationCompleted verified =
         (AuthCredential authResult) async {
       await FirebaseAuth.instance.signInWithCredential(authResult);
+      customSnackBar('Authentication Successful',
+          'User Verified with mobile number $phoneNo');
       Get.to<dynamic>(() => const DataEntryScreen());
     };
 
