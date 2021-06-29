@@ -3,7 +3,8 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/home/home_controller.dart';
-import 'package:aptiche/widgets/homeScreenGrid.dart';
+import 'package:aptiche/widgets/drawer_list_tile.dart';
+import 'package:aptiche/widgets/home_screen_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,14 +16,53 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final AuthService _authService = Get.find();
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Column(
+                children: <Widget>[
+                  IconButton(
+                    alignment: Alignment.topLeft,
+                    iconSize: 40.0,
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
+                  ),
+                  Text(
+                    'Swagat Subhakanta Das',
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .headline3!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '119CH0063 \n +917749914583 \n dasswagat142@gmail.com',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .bodyText2!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            DrawerListTile(text: 'About AIChE'),
+            DrawerListTile(text: 'About AIChE NITR'),
+            DrawerListTile(text: 'Privacy Policy'),
+            DrawerListTile(text: 'Developers Info'),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: kGreyBgColor,
         elevation: 0,
-        leading: IconButton(
-          color: Colors.black,
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-          iconSize: 40.0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            color: Colors.black,
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            iconSize: 40.0,
+          ),
         ),
         title: Text(
           'Apti-Che',
@@ -49,8 +89,9 @@ class HomeScreen extends GetView<HomeController> {
               ),
             ),
             DraggableScrollableSheet(
-              builder: (context, scrollController) {
-                return Container(
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return SizedBox(
                   height: SizeConfig.screenHeight! * 0.45,
                   width: SizeConfig.screenWidth,
                   child: Obx(
@@ -144,7 +185,8 @@ class HomeScreen extends GetView<HomeController> {
                                                       .primaryTextTheme
                                                       .headline3!
                                                       .copyWith(
-                                                          color: Colors.white),
+                                                        color: Colors.white,
+                                                      ),
                                         ),
                                       ),
                                     ),
@@ -156,15 +198,8 @@ class HomeScreen extends GetView<HomeController> {
                               shrinkWrap: true,
                               primary: false,
                               crossAxisCount: 2,
-                              children: <Widget>[
-                                HomeGridTile(),
-                                HomeGridTile(),
-                                HomeGridTile(),
-                                HomeGridTile(),
-                                HomeGridTile(),
-                                HomeGridTile(),
-                                HomeGridTile(),
-                              ],
+                              children: List.generate(
+                                  9, (int index) => HomeGridTile()),
                             )
                           ],
                         ),
