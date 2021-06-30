@@ -1,5 +1,5 @@
 import 'package:aptiche/services/net/authservice.dart';
-import 'package:aptiche/services/net/third_party_services.dart';
+import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
@@ -16,7 +16,7 @@ class HomeScreenDrawer extends StatelessWidget {
 
   final AuthService _authService;
 
-  final ThirdPartyServices _thirdPartyServices = Get.put(ThirdPartyServices());
+  final ThirdPartyServices _thirdPartyServices = Get.find();
 
   @override
   Widget build(BuildContext context) {

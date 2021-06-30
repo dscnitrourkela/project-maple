@@ -1,4 +1,5 @@
 import 'package:aptiche/services/net/authservice.dart';
+import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
 import 'package:aptiche/views/home/home_controller.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
@@ -9,7 +10,8 @@ class HomeBinding implements Bindings {
   void dependencies() {
     Get.put<AuthService>(AuthService());
     Get.put<LoginController>(LoginController());
-    Get.put<DataEntryController>(DataEntryController());
-    Get.put<HomeController>(HomeController());
+    Get.lazyPut<DataEntryController>(() => DataEntryController());
+    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<ThirdPartyServices>(() => ThirdPartyServices());
   }
 }

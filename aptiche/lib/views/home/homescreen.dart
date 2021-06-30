@@ -15,7 +15,6 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _authService = Get.find();
     return Scaffold(
       drawer: HomeScreenDrawer(authService: _authService),
       appBar: AppBar(
