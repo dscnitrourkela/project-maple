@@ -11,7 +11,7 @@ class HomeBinding implements Bindings {
     Get.put<AuthService>(AuthService());
     Get.put<LoginController>(LoginController());
     Get.lazyPut<DataEntryController>(() => DataEntryController());
-    Get.lazyPut<HomeController>(() => HomeController());
+    Get.put<HomeController>(HomeController());
     Get.lazyPut<ThirdPartyServices>(() => ThirdPartyServices());
   }
 }
