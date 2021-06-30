@@ -26,9 +26,12 @@ class HomeGridTile extends StatelessWidget {
           const SizedBox(
             height: 10.0,
           ),
-          Image.asset(quizPNG),
+          Image.asset(
+            quizPNG,
+            width: 60.0,
+          ),
           const SizedBox(
-            height: 15.0,
+            height: 10.0,
           ),
           Text(
             'Aptitude Test-1',
