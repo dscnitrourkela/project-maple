@@ -16,7 +16,7 @@ class AuthService extends GetxController {
             return const LoginView();
           } else {
             if (snapshot.hasData) {
-              return const HomeScreen();
+              return HomeScreen();
             } else {
               return const LoginView();
             }
