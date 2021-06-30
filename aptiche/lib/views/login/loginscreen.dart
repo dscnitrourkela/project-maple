@@ -111,33 +111,38 @@ class LoginView extends GetView<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            CustomButton(
-                              text: !controller.sent.value ? 'LOGIN' : 'VERIFY',
-                              onTap: !controller.sent.value
-                                  ? () {
-                                      if (controller.formkey.currentState!
-                                          .validate()) {
-                                        controller.phoneNo.value = controller
-                                            .phoneEditController.text
-                                            .trim();
-                                        debugPrint(
-                                          'status1: ${controller.status.value}',
-                                        );
-                                        controller.verifyPhone();
-                                        controller.sent.toggle();
+                            if (controller.loading.value == true)
+                              const CircularProgressIndicator(
+                                backgroundColor: kPrimaryColor,
+                              )
+                            else
+                              CustomButton(
+                                text:
+                                    !controller.sent.value ? 'LOGIN' : 'VERIFY',
+                                onTap: !controller.sent.value
+                                    ? () {
+                                        if (controller.formkey.currentState!
+                                            .validate()) {
+                                          controller.phoneNo.value = controller
+                                              .phoneEditController.text
+                                              .trim();
+                                          controller.verifyPhone();
+                                          controller.sent.toggle();
+                                          controller.loading.value = true;
+                                        }
+                                        controller.phoneEditController.clear();
                                       }
-                                      controller.phoneEditController.clear();
-                                    }
-                                  : () {
-                                      if (controller.formkey.currentState!
-                                          .validate()) {
-                                        controller.smsCode.value = controller
-                                            .phoneEditController.text
-                                            .trim();
-                                        controller.createUser();
-                                      }
-                                    },
-                            ),
+                                    : () {
+                                        if (controller.formkey.currentState!
+                                            .validate()) {
+                                          controller.smsCode.value = controller
+                                              .phoneEditController.text
+                                              .trim();
+                                          controller.loading.value = true;
+                                          controller.createUser();
+                                        }
+                                      },
+                              ),
                             if (controller.sent.value)
                               Container(
                                 alignment: Alignment.center,

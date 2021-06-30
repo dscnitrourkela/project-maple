@@ -10,7 +10,7 @@ class LoginController extends GetxController {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController phoneEditController = TextEditingController();
   final RxBool sent = false.obs;
-  RxBool status = false.obs;
+
   RxString phoneNo = ''.obs;
   String verificationId = '';
   RxString smsCode = ''.obs;
@@ -22,8 +22,7 @@ class LoginController extends GetxController {
       smsCode.toString(),
       verificationId.toString(),
     );
-    sent.toggle();
-    phoneEditController.clear();
+    loading.value = false;
   }
 
   Future<void> verifyPhone() async {
@@ -32,20 +31,19 @@ class LoginController extends GetxController {
       await FirebaseAuth.instance.signInWithCredential(authResult);
       customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      Get.to<dynamic>(() => const DataEntryScreen());
+      Get.off<dynamic>(() => const DataEntryScreen());
     };
 
     final PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
       customSnackBar('Authentication Error - WRONG MOBILE NUMBER',
           authException.message.toString());
-      status.value = false;
     };
 
     final PhoneCodeSent smsSent = (String verId, [int? forceResend]) async {
       codeSent.value = true;
-      loading.value = false;
       debugPrint('code sent to $phoneNo');
+      loading.value = false;
       verificationId = verId;
     };
     final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {
