@@ -32,13 +32,13 @@ class HomeScreenDrawer extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(
+                    child: Icon(
                       Icons.close,
-                      size: 40.0,
+                      size: SizeConfig.safeBlockHorizontal! * 10,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: SizeConfig.safeBlockVertical! * 3,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -65,13 +65,15 @@ class HomeScreenDrawer extends StatelessWidget {
               ),
             ),
           ),
-          DrawerListTile(text: 'About AIChE'),
-          DrawerListTile(text: 'About AIChE NITR'),
-          DrawerListTile(text: 'Privacy Policy'),
-          DrawerListTile(text: 'Developers Info'),
-          SizedBox(height: 30.0),
+          const DrawerListTile(text: 'About AIChE'),
+          const DrawerListTile(text: 'About AIChE NITR'),
+          const DrawerListTile(text: 'Privacy Policy'),
+          const DrawerListTile(text: 'Developers Info'),
+          SizedBox(height: SizeConfig.safeBlockVertical! * 4),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 45.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.safeBlockHorizontal! * 10,
+            ),
             child: TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
@@ -92,11 +94,11 @@ class HomeScreenDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 30.0,
+          SizedBox(
+            height: SizeConfig.safeBlockVertical! * 4,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 28.0),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal! * 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -105,7 +107,7 @@ class HomeScreenDrawer extends StatelessWidget {
                   style: Theme.of(context).primaryTextTheme.headline2!.copyWith(
                         fontFamily: kPoppins,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: SizeConfig.safeBlockHorizontal! * 5,
                       ),
                 ),
                 Row(
@@ -115,7 +117,8 @@ class HomeScreenDrawer extends StatelessWidget {
                       style: Theme.of(context)
                           .primaryTextTheme
                           .bodyText1!
-                          .copyWith(fontSize: 20),
+                          .copyWith(
+                              fontSize: SizeConfig.safeBlockHorizontal! * 5),
                     ),
                     const SizedBox(
                       width: 10.0,
@@ -147,7 +150,8 @@ class HomeScreenDrawer extends StatelessWidget {
                       style: Theme.of(context)
                           .primaryTextTheme
                           .bodyText1!
-                          .copyWith(fontSize: 20),
+                          .copyWith(
+                              fontSize: SizeConfig.safeBlockHorizontal! * 5),
                     ),
                     const SizedBox(
                       width: 10.0,

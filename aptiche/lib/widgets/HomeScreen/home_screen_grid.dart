@@ -23,23 +23,23 @@ class HomeGridTile extends StatelessWidget {
       width: SizeConfig.screenWidth! * 0.45,
       child: Column(
         children: <Widget>[
-          const SizedBox(
-            height: 10.0,
+          SizedBox(
+            height: SizeConfig.safeBlockVertical,
           ),
           Image.asset(
             quizPNG,
-            width: 60.0,
+            width: SizeConfig.safeBlockHorizontal! * 15,
           ),
-          const SizedBox(
-            height: 10.0,
+          SizedBox(
+            height: SizeConfig.safeBlockVertical,
           ),
           Text(
             'Aptitude Test-1',
             textAlign: TextAlign.center,
             style: Theme.of(context).primaryTextTheme.headline2,
           ),
-          const SizedBox(
-            height: 5.0,
+          SizedBox(
+            height: SizeConfig.safeBlockVertical! * 0.5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,15 +50,15 @@ class HomeGridTile extends StatelessWidget {
               const Text('18:00'),
             ],
           ),
-          const SizedBox(
-            height: 5.0,
+          SizedBox(
+            height: SizeConfig.safeBlockVertical,
           ),
           Text(
             '30 Questions, 60 mins',
             style: Theme.of(context)
                 .primaryTextTheme
                 .headline3!
-                .copyWith(fontSize: 12.0),
+                .copyWith(fontSize: SizeConfig.safeBlockHorizontal! * 3),
           ),
         ],
       ),
