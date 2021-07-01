@@ -131,7 +131,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                           onTap: () {
                             if (controller.formKey.currentState!.validate()) {
                               controller.formKey.currentState!.save();
-                              Get.off<dynamic>(() => const HomeScreen());
+                              Get.off<dynamic>(() => HomeScreen());
                             }
                           }),
                     ),

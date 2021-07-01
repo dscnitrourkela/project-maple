@@ -1,4 +1,4 @@
-import 'package:aptiche/net/authservice.dart';
+import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:firebase_auth/firebase_auth.dart';

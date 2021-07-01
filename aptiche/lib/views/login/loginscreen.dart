@@ -16,7 +16,7 @@ class LoginView extends GetView<LoginController> {
     SizeConfig().init(context);
     return Scaffold(
       //resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xfff6f6f6),
+      backgroundColor: kGreyBgColor,
       body: SafeArea(
         child: Stack(
           children: <Widget>[
