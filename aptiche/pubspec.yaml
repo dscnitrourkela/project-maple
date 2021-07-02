@@ -13,11 +13,11 @@ dependencies:
     sdk: flutter
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
-  dio: ^4.0.0
   lottie: ^1.0.1
   flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
   get: ^4.1.4
+  get_storage: ^2.0.2
   url_launcher: ^6.0.7
 
 dev_dependencies:

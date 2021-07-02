@@ -14,6 +14,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
 
   @override
   Widget build(BuildContext context) {
+    DataEntryController().readUser();
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: SafeArea(
@@ -131,6 +132,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                           onTap: () {
                             if (controller.formKey.currentState!.validate()) {
                               controller.formKey.currentState!.save();
+                              DataEntryController().writeUser();
                               Get.off<dynamic>(() => HomeScreen());
                             }
                           }),
