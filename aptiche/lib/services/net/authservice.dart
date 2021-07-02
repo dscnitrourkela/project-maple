@@ -1,8 +1,8 @@
-import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +39,7 @@ class AuthService extends GetxController {
 
       Get.to<dynamic>(() => const DataEntryScreen());
     } catch (error) {
-      customSnackBar(
+      CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
         'Please enter the correct OTP sent to your mobile number',
       );
