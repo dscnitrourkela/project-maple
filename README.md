@@ -28,7 +28,7 @@ NOTE 2: Please abide by the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Starware
 
-This is Starware.  
+This is not Starware.  
 This means you're free to use the project, as long as you star its GitHub repository.  
 Your appreciation makes us grow and glow up. ⭐
 
