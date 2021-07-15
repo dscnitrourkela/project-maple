@@ -27,7 +27,7 @@ class HomeGridTile extends StatelessWidget {
             height: SizeConfig.safeBlockVertical,
           ),
           Image.asset(
-            quizPNG,
+            Strings.quizPNG,
             width: SizeConfig.safeBlockHorizontal! * 15,
           ),
           SizedBox(

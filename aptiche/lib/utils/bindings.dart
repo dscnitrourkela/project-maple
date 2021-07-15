@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
@@ -8,6 +9,7 @@ import 'package:get/instance_manager.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
+    Get.put<GraphQL>(GraphQL());
     Get.put<AuthService>(AuthService());
     Get.put<LoginController>(LoginController());
     Get.lazyPut<DataEntryController>(() => DataEntryController());
