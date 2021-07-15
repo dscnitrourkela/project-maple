@@ -1,4 +1,4 @@
-import 'package:aptiche/datamodels/quiz.dart';
+import 'package:aptiche/datamodels/api_models.dart';
 
 abstract class Api {
   Future<List<Quiz>> getPastQuiz();

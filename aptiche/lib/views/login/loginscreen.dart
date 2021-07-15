@@ -189,7 +189,7 @@ class LoginView extends GetView<LoginController> {
               left: SizeConfig.screenWidth! * 0.175,
               right: SizeConfig.screenWidth! * 0.175,
               child: SvgPicture.asset(
-                loginScreenSVG,
+                Strings.loginScreenSVG,
                 alignment: Alignment.center,
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),

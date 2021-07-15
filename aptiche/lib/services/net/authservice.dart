@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/data%20entry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxController {
+  GraphQL graphQL = Get.find();
   StreamBuilder<User?> handleAuth() {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -44,5 +46,14 @@ class AuthService extends GetxController {
         'Please enter the correct OTP sent to your mobile number',
       );
     }
+  }
+
+  Future<String> getUserToken() async {
+    return FirebaseAuth.instance.currentUser!.getIdToken(true);
+  }
+
+  Future<void> getUsers() async {
+    await graphQL.initGraphQL();
+    await graphQL.getUser();
   }
 }
