@@ -124,7 +124,6 @@ class HomeScreen extends GetView<HomeController> {
                                   GestureDetector(
                                     onTap: () {
                                       controller.upcomingQuizzes.value = false;
-                                      AuthService().getUsers();
                                     },
                                     child: Container(
                                       width: SizeConfig.screenWidth! * 0.4,

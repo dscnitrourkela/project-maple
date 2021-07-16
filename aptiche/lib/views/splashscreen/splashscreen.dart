@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
@@ -18,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
   final AuthService _authService = Get.find();
   @override
   Widget build(BuildContext context) {
+    GraphQL().initGraphQL();
     final AnimationController animationController =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
     SizeConfig().init(context);
