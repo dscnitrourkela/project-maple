@@ -22,7 +22,6 @@ class LoginController extends GetxController {
       smsCode.toString(),
       verificationId.toString(),
     );
-
     loading.value = false;
   }
 
