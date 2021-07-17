@@ -17,9 +17,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   final AuthService _authService = Get.find();
+  final GraphQL _graphQL = Get.find();
   @override
   Widget build(BuildContext context) {
-    GraphQL().initGraphQL();
     final AnimationController animationController =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
     SizeConfig().init(context);
@@ -35,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen>
             animationController
                 .addStatusListener((AnimationStatus status) async {
               final StreamBuilder<User?> route = _authService.handleAuth();
-
               if (status == AnimationStatus.completed) {
+                await _graphQL.initGraphQL();
                 Get.to<dynamic>(() => route);
               }
             });

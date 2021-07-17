@@ -18,6 +18,8 @@ class GraphQL {
     final Link _link = _authLink.concat(_httpLink);
 
     _client = GraphQLClient(link: _link, cache: GraphQLCache());
+
+    print('GraphQL initialised');
   }
 
   // Queries
@@ -37,7 +39,9 @@ class GraphQL {
         }
     ''';
     final QueryOptions options = QueryOptions(
-        document: gql(query), variables: <String, List<String>>{'ids': []});
+      document: gql(query),
+      variables: <String, List<String>>{'ids': []},
+    );
 
     final QueryResult result = await _client.query(options);
 
@@ -48,32 +52,37 @@ class GraphQL {
     print('result: ${result.data}');
   }
 
-  Future<List<Quiz>> getQuizzes() async {
+  Future<void> getQuizzes() async {
     const String query = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){
-          name,
-          startTime,
-          endTime
+          _id
         }
       }
     ''';
+    print('started');
     final QueryOptions options = QueryOptions(
-        document: gql(query), variables: <String, List<String>>{'ids': []});
-
-    final QueryResult result = await _client.query(options);
-
-    if (result.hasException) {
-      stderr.writeln(result.exception.toString());
+      document: gql(query),
+      variables: <String, dynamic>{'ids': []},
+    );
+    try {
+      final QueryResult result = await _client.query(options);
+      if (result.hasException) {
+        stderr.writeln(result.exception.toString());
+      }
+      print('stopped');
+      print(result.data);
+    } catch (e) {
+      rethrow;
     }
 
-    final List<Quiz> quizzes = result.data! as List<Quiz>;
+    // final List<Quiz> quizzes = result.data! as List<Quiz>;
 
-    print(quizzes);
+    // print(quizzes);
 
     // List<Quiz> quizzes =
     //     result.data!.map<Quiz>((Quiz json) => Quiz.fromJson(json)).toList();
 
-    return quizzes;
+    // return quizzes;
   }
 }

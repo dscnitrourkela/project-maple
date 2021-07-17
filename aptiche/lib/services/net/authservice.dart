@@ -53,7 +53,6 @@ class AuthService extends GetxController {
   }
 
   Future<void> getUsers() async {
-    await graphQL.initGraphQL();
     await graphQL.getUser();
   }
 }
