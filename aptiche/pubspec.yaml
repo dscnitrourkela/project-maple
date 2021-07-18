@@ -13,21 +13,19 @@ dependencies:
     sdk: flutter
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
+  firebase_messaging: ^10.0.4
   lottie: ^1.0.1
-  ferry: ^0.10.3
   flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
   get: ^4.1.4
   get_storage: ^2.0.2
-  gql_http_link: ^0.4.0
   url_launcher: ^6.0.7
-  firebase_messaging: ^10.0.3
+  graphql: ^5.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.0.7
-  ferry_generator: ^0.4.3
   build_runner: ^2.0.6
 
 flutter:

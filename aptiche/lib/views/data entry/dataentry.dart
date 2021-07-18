@@ -26,7 +26,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
               left: SizeConfig.screenWidth! * 0.075,
               right: SizeConfig.screenWidth! * 0.075,
               child: SvgPicture.asset(
-                dataEntryScreen,
+                Strings.dataEntryScreen,
                 alignment: Alignment.center,
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),

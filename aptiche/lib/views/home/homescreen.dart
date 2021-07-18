@@ -43,7 +43,7 @@ class HomeScreen extends GetView<HomeController> {
               left: SizeConfig.screenWidth! * 0.175,
               right: SizeConfig.screenWidth! * 0.175,
               child: SvgPicture.asset(
-                homeScreenSVG,
+                Strings.homeScreenSVG,
                 alignment: Alignment.center,
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),
@@ -122,8 +122,9 @@ class HomeScreen extends GetView<HomeController> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () => controller
-                                        .upcomingQuizzes.value = false,
+                                    onTap: () {
+                                      controller.upcomingQuizzes.value = false;
+                                    },
                                     child: Container(
                                       width: SizeConfig.screenWidth! * 0.4,
                                       height: SizeConfig.screenHeight! * 0.06,

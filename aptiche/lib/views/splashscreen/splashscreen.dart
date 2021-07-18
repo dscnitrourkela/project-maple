@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
@@ -18,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   final AuthService _authService = Get.find();
+  final GraphQL _graphQL = Get.find();
   @override
   Widget build(BuildContext context) {
     FirebaseMessaging.instance.onTokenRefresh.listen(
@@ -40,8 +42,8 @@ class _SplashScreenState extends State<SplashScreen>
             animationController
                 .addStatusListener((AnimationStatus status) async {
               final StreamBuilder<User?> route = _authService.handleAuth();
-
               if (status == AnimationStatus.completed) {
+                await _graphQL.initGraphQL();
                 Get.to<dynamic>(() => route);
               }
             });
