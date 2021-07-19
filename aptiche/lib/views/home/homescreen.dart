@@ -154,16 +154,27 @@ class HomeScreen extends GetView<HomeController> {
                                 ),
                               ],
                             ),
+                            // GridView.builder(
+                            //   shrinkWrap: true,
+                            //   primary: false,
+                            //   gridDelegate:
+                            //       const SliverGridDelegateWithFixedCrossAxisCount(
+                            //     crossAxisCount: 2,
+                            //   ),
+                            //   itemBuilder: (BuildContext context, int index) {
+                            //     return const HomeGridTile();
+                            //   },
+                            // ),
+                            // GridView.count(
+                            //   shrinkWrap: true,
+                            //   primary: false,
+                            //   crossAxisCount: 2,
+                            //   children: List<Widget>.generate(
+                            //     controller.quizzes.length,
+                            //     (int index) => const HomeGridTile(),
+                            //   ),
+                            // )
                           ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            crossAxisCount: 2,
-                            children: List<Widget>.generate(
-                              9,
-                              (int index) => const HomeGridTile(),
-                            ),
-                          )
                         ],
                       ),
                     ),
