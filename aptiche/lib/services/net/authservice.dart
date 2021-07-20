@@ -6,6 +6,7 @@ import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxController {
   StreamBuilder<User?> handleAuth() {
@@ -25,6 +26,7 @@ class AuthService extends GetxController {
   }
 
   void signOut() {
+    GetStorage('User').erase();
     FirebaseAuth.instance.signOut();
     Get.offAll<dynamic>(const SplashScreen());
   }

@@ -1,8 +1,8 @@
+import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/query.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLService {
@@ -31,20 +31,35 @@ class GraphQLService {
     }
   }
 
-  Future<String> createUsers() async {
-    final MutationOptions options = MutationOptions(
-      document: gql(createUser),
-      update: (GraphQLDataProxy cache, QueryResult result) {
-        return cache;
-      },
-      // or do something with the result.data on completion
-      onCompleted: (dynamic resultData) {
-        print(resultData);
-      },
-      //variables: <String,UserInput>{'input': UserInput()}
-    );
+  Future<String> createUsers(
+    String? uId,
+    String? fcmTokens,
+    String? name,
+    String? email,
+    String? phoneNo,
+    String? rollNo,
+    List<String>? quizList,
+  ) async {
+    MutationOptions(
+        document: gql(createUser),
+        onCompleted: (dynamic resultData) {
+          return resultData.toString();
+        },
+        onError: (OperationException? error) {
+          debugPrint(error!.graphqlErrors.toString());
+        },
+        variables: <String, UserInput>{
+          'input': UserInput(
+              name: name,
+              email: email,
+              phoneNo: phoneNo,
+              uId: uId,
+              fcmTokens: fcmTokens,
+              rollNo: rollNo,
+              quizList: quizList)
+        });
 
-    ;
+    return 'fetching error';
   }
 
   /* Future<void> getQuizzes() async {

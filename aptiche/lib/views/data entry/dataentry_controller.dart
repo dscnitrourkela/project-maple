@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class DataEntryController extends GetxController {
   final String? authId = FirebaseAuth.instance.currentUser?.uid;
   final GetStorage localUserStorage = GetStorage('User');
   String? token;
+  String? docId;
 
   Future<String?> getFCMToken() async {
     await FirebaseMessaging.instance.getToken();
@@ -20,6 +22,15 @@ class DataEntryController extends GetxController {
 
   void writeUser() async {
     token = await getFCMToken();
+    docId = await GraphQLService().createUsers(
+      authId,
+      token,
+      nameController.text,
+      emailController.text,
+      phoneNo,
+      rollNoController.text,
+      <String>[],
+    );
     localUserStorage.write('name', nameController.text);
     localUserStorage.write('rollNo', rollNoController.text);
     localUserStorage.write('email', emailController.text);
