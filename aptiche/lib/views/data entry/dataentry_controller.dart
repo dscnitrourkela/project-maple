@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:aptiche/datamodels/user.dart';
 
 class DataEntryController extends GetxController {
   TextEditingController nameController = TextEditingController();
@@ -25,15 +24,6 @@ class DataEntryController extends GetxController {
     localUserStorage.write('rollNo', rollNoController.text);
     localUserStorage.write('email', emailController.text);
     localUserStorage.write('phoneNo', phoneNo);
-    setNewUser(UserObject(
-      authId: authId,
-      rollNo: rollNoController.text,
-      fcmToken: token,
-      email: emailController.text,
-      quizList: null,
-      phoneNo: phoneNo,
-      name: nameController.text,
-    ));
   }
 
   void readUser() {

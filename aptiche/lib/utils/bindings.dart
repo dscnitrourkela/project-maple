@@ -9,7 +9,7 @@ import 'package:get/instance_manager.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<GraphQL>(GraphQL());
+    Get.put<GraphQLService>(GraphQLService());
     Get.put<AuthService>(AuthService());
     Get.put<LoginController>(LoginController());
     Get.lazyPut<DataEntryController>(() => DataEntryController());

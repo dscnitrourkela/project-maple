@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:aptiche/datamodels/user.dart';
+
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,14 +19,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   final AuthService _authService = Get.find();
-  final GraphQL _graphQL = Get.find();
+  final GraphQLService _graphQL = Get.find();
   @override
   Widget build(BuildContext context) {
-    FirebaseMessaging.instance.onTokenRefresh.listen(
-      (String event) {
-        setFCMToken(event);
-      },
-    );
     final AnimationController animationController =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
     SizeConfig().init(context);
@@ -42,8 +37,8 @@ class _SplashScreenState extends State<SplashScreen>
             animationController
                 .addStatusListener((AnimationStatus status) async {
               final StreamBuilder<User?> route = _authService.handleAuth();
+              await _graphQL.initGraphQL();
               if (status == AnimationStatus.completed) {
-                await _graphQL.initGraphQL();
                 Get.to<dynamic>(() => route);
               }
             });

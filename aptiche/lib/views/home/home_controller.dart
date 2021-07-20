@@ -3,7 +3,7 @@ import 'package:aptiche/services/graphql.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final GraphQL _graphQL = Get.find();
+  final GraphQLService _graphQL = Get.find();
   RxBool upcomingQuizzes = true.obs;
 
   late List<Quiz> quizzes;

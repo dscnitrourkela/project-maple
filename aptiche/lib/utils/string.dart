@@ -10,4 +10,6 @@ abstract class Strings {
 
   static const String GRAPHQL_URL =
       'https://aptiche.dscnitrourkela.org/graphql?apikey=SriramForTheDiro';
+  static const String GRAPHQL_WSL =
+      'wss://aptiche.dscnitrourkela.org/graphql?apikey=SriramForTheDiro';
 }
