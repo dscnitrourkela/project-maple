@@ -1,13 +1,19 @@
+import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/home/home_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomeGridTile extends StatelessWidget {
-  const HomeGridTile({
+  HomeGridTile({
     Key? key,
+    required this.controller,
+    required this.index,
   }) : super(key: key);
 
+  final HomeController controller;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,9 +40,9 @@ class HomeGridTile extends StatelessWidget {
             height: SizeConfig.safeBlockVertical,
           ),
           Text(
-            'Aptitude Test-1',
+            controller.quizzes[index].name.toString(),
             textAlign: TextAlign.center,
-            style: Theme.of(context).primaryTextTheme.headline2,
+            style: Theme.of(context).primaryTextTheme.headline3,
           ),
           SizedBox(
             height: SizeConfig.safeBlockVertical! * 0.5,
@@ -45,9 +51,11 @@ class HomeGridTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Icon(Icons.calendar_today),
-              const Text('xx/xx/xxxx'),
+              Text(formatDateTime(controller.quizzes[index].startTime)['date']
+                  .toString()),
               const Icon(Icons.timelapse),
-              const Text('18:00'),
+              Text(formatDateTime(controller.quizzes[index].startTime)['time']
+                  .toString()),
             ],
           ),
           SizedBox(

@@ -1,0 +1,1 @@
+enum CurrentState { busy, ready }
