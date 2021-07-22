@@ -17,7 +17,7 @@ class AuthService extends GetxController {
             return const LoginView();
           } else {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return const HomeScreen();
             } else {
               return const LoginView();
             }
@@ -26,8 +26,8 @@ class AuthService extends GetxController {
   }
 
   void signOut() {
-    GetStorage('User').erase();
     FirebaseAuth.instance.signOut();
+    GetStorage('User').erase();
     Get.offAll<dynamic>(const SplashScreen());
   }
 
@@ -48,7 +48,11 @@ class AuthService extends GetxController {
     }
   }
 
-  Future<String> getUserToken() async {
-    return FirebaseAuth.instance.currentUser!.getIdToken(true);
+  Future<String?> getUserToken() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return FirebaseAuth.instance.currentUser!.getIdToken(true);
+    } else {
+      return '';
+    }
   }
 }

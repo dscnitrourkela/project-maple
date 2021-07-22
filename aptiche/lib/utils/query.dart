@@ -25,6 +25,7 @@ const String getQuiz = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){
           _id
+          name
         }
       }
     ''';

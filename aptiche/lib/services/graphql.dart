@@ -1,5 +1,4 @@
 import 'package:aptiche/datamodels/api_models.dart';
-import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/query.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 class GraphQLService {
   late GraphQLClient client;
 
-  Future<void> initGraphQL() async {
-    final String token = await AuthService().getUserToken();
+  Future<void> initGraphQL(String? token) async {
     final HttpLink _httpLink = HttpLink(Strings.GRAPHQL_URL);
     final AuthLink _authLink = AuthLink(getToken: () async => 'Bearer $token');
 
@@ -45,6 +43,7 @@ class GraphQLService {
         onCompleted: (dynamic resultData) {
           return resultData.toString();
         },
+        update: (GraphQLDataProxy cache, QueryResult? result) {},
         onError: (OperationException? error) {
           debugPrint(error!.graphqlErrors.toString());
         },
@@ -62,7 +61,7 @@ class GraphQLService {
     return 'fetching error';
   }
 
-  /* Future<void> getQuizzes() async {
+  Future<void> getQuizzes() async {
     final QueryOptions options = QueryOptions(
       document: gql(getQuiz),
       variables: <String, dynamic>{'ids': <String>[]},
@@ -75,5 +74,5 @@ class GraphQLService {
     } catch (e) {
       rethrow;
     }
-  } */
+  }
 }

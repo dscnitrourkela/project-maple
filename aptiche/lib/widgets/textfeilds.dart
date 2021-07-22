@@ -2,7 +2,7 @@ import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   const CustomTextField({
     this.editingController,
     this.validator,
@@ -19,16 +19,27 @@ class CustomTextField extends StatelessWidget {
   final String? hint;
   final TextInputType? type;
   final IconData? icon;
+
+  @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: SizeConfig.screenWidth! * 0.85,
       padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockVertical!),
       child: TextFormField(
-        keyboardType: type,
+        keyboardType: widget.type,
         textCapitalization: TextCapitalization.words,
-        controller: editingController,
-        validator: validator,
+        controller: widget.editingController,
+        validator: widget.validator,
+        onSaved: (String? value) {
+          setState(() {
+            widget.editingController!.text = value.toString();
+          });
+        },
         style: const TextStyle(color: kTextColourBlack),
         enableSuggestions: true,
         decoration: InputDecoration(
@@ -45,11 +56,11 @@ class CustomTextField extends StatelessWidget {
             borderSide: const BorderSide(color: kTertiaryColor),
             borderRadius: BorderRadius.circular(20.0),
           ),
-          prefixIcon: Icon(icon, color: kTextColourBlack),
-          labelText: label,
+          prefixIcon: Icon(widget.icon, color: kTextColourBlack),
+          labelText: widget.label,
           labelStyle: const TextStyle(color: kTextColourBlack),
           alignLabelWithHint: true,
-          hintText: hint,
+          hintText: widget.hint,
           hintStyle: const TextStyle(color: Colors.grey),
         ),
       ),

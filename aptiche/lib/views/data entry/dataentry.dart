@@ -75,50 +75,160 @@ class DataEntryScreen extends GetView<DataEntryController> {
                             vertical: SizeConfig.safeBlockHorizontal! * 4),
                         child: Column(
                           children: <Widget>[
-                            CustomTextField(
-                              editingController:
-                                  DataEntryController().nameController,
-                              validator: (String? value) {
-                                if (value!.trim() == null || value.isEmpty) {
-                                  return 'Please enter a valid name';
-                                }
-                                return null;
-                              },
-                              label: 'Enter Name',
-                              hint: 'John Doe',
-                              type: TextInputType.name,
-                              icon: Icons.person,
+                            Container(
+                              width: SizeConfig.screenWidth! * 0.85,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: SizeConfig.safeBlockVertical!),
+                              child: TextFormField(
+                                keyboardType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
+                                controller: controller.nameController,
+                                validator: (String? value) {
+                                  if (value!.trim() == null || value.isEmpty) {
+                                    return 'Please enter a valid name';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (String? value) {
+                                  controller.nameController.text =
+                                      value.toString();
+                                },
+                                style: const TextStyle(color: kTextColourBlack),
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.safeBlockHorizontal! *
+                                              7.5),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: kSecondaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: kTertiaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  prefixIcon: const Icon(Icons.person,
+                                      color: kTextColourBlack),
+                                  labelText: 'Enter Name',
+                                  labelStyle:
+                                      const TextStyle(color: kTextColourBlack),
+                                  alignLabelWithHint: true,
+                                  hintText: 'John Doe',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.grey),
+                                ),
+                              ),
                             ),
-                            CustomTextField(
-                              editingController:
-                                  DataEntryController().rollNoController,
-                              validator: (String? value) {
-                                if (value!.trim() == null ||
-                                    value.isEmpty ||
-                                    !value[3].isAlphabetOnly ||
-                                    !value[4].isAlphabetOnly) {
-                                  return 'Please enter a valid NIT Rourkela Roll Number';
-                                }
-                                return null;
-                              },
-                              label: 'Enter Roll Number',
-                              hint: '118CH001',
-                              type: TextInputType.text,
-                              icon: Icons.school_rounded,
+                            Container(
+                              width: SizeConfig.screenWidth! * 0.85,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: SizeConfig.safeBlockVertical!),
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                textCapitalization:
+                                    TextCapitalization.characters,
+                                controller: controller.rollNoController,
+                                validator: (String? value) {
+                                  if (value!.trim() == null ||
+                                      value.isEmpty ||
+                                      !value[3].isAlphabetOnly ||
+                                      !value[4].isAlphabetOnly) {
+                                    return 'Please enter a valid NIT Rourkela Roll Number';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (String? value) {
+                                  controller.rollNoController.text =
+                                      value.toString();
+                                },
+                                style: const TextStyle(color: kTextColourBlack),
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.safeBlockHorizontal! *
+                                              7.5),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: kSecondaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: kTertiaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  prefixIcon: const Icon(Icons.person,
+                                      color: kTextColourBlack),
+                                  labelText: 'Enter Roll Number',
+                                  labelStyle:
+                                      const TextStyle(color: kTextColourBlack),
+                                  alignLabelWithHint: true,
+                                  hintText: '118CH001',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.grey),
+                                ),
+                              ),
                             ),
-                            CustomTextField(
-                              editingController:
-                                  DataEntryController().emailController,
-                              validator: (String? value) {
-                                if (value!.trim() == null || !value.isEmail) {
-                                  return 'Please enter a valid e-mail address';
-                                }
-                                return null;
-                              },
-                              label: 'Enter Email Address',
-                              hint: 'foo@bar.in',
-                              type: TextInputType.emailAddress,
-                              icon: Icons.email_rounded,
+                            Container(
+                              width: SizeConfig.screenWidth! * 0.85,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: SizeConfig.safeBlockVertical!),
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                textCapitalization:
+                                    TextCapitalization.characters,
+                                controller: controller.emailController,
+                                validator: (String? value) {
+                                  if (value!.trim() == null || !value.isEmail) {
+                                    return 'Please enter a valid e-mail address';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (String? value) {
+                                  controller.emailController.text =
+                                      value.toString();
+                                },
+                                style: const TextStyle(color: kTextColourBlack),
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.safeBlockHorizontal! *
+                                              7.5),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: kSecondaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: kTertiaryColor),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  prefixIcon: const Icon(Icons.email_rounded,
+                                      color: kTextColourBlack),
+                                  labelText: 'Enter Email Address',
+                                  labelStyle:
+                                      const TextStyle(color: kTextColourBlack),
+                                  alignLabelWithHint: true,
+                                  hintText: 'foo@bar.in',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.grey),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -130,10 +240,12 @@ class DataEntryScreen extends GetView<DataEntryController> {
                       child: CustomButton(
                           text: 'PROCEED',
                           onTap: () {
+                            print(controller.nameController.text);
                             if (controller.formKey.currentState!.validate()) {
                               controller.formKey.currentState!.save();
-                              DataEntryController().writeUser();
-                              Get.off<dynamic>(() => HomeScreen());
+                              print(controller.emailController.text);
+                              //DataEntryController().writeUser();
+                              //Get.off<dynamic>(() => HomeScreen());
                             }
                           }),
                     ),

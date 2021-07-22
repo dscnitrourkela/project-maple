@@ -8,15 +8,17 @@ import 'package:aptiche/widgets/HomeScreen/home_screen_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:aptiche/services/graphql.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomeScreen extends GetView<HomeController> {
-  HomeScreen({Key? key}) : super(key: key);
-  final AuthService _authService = Get.find();
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    HomeController().init();
     return Scaffold(
-      drawer: HomeScreenDrawer(authService: _authService),
+      //drawer: HomeScreenDrawer(authService: _authService),
       appBar: AppBar(
         backgroundColor: kGreyBgColor,
         elevation: 0,
@@ -36,7 +38,12 @@ class HomeScreen extends GetView<HomeController> {
       ),
       backgroundColor: kGreyBgColor,
       body: SafeArea(
-        child: Stack(
+          child: ElevatedButton(
+              onPressed: () {
+                AuthService().signOut();
+              },
+              child: Text("signout"))
+          /*  Stack(
           children: <Widget>[
             Positioned(
               bottom: SizeConfig.screenHeight! * 0.500,
@@ -177,8 +184,8 @@ class HomeScreen extends GetView<HomeController> {
               },
             ),
           ],
-        ),
-      ),
+        ), */
+          ),
     );
   }
 }
