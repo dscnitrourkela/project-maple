@@ -18,14 +18,14 @@ class DataEntryController extends GetxController {
   String? docId;
   String? jwttoken;
 
-  Future<String?> getFCMToken() async {
-    await FirebaseMessaging.instance.getToken();
-  }
+  void writeUser(String name, String rollNo, String email, String phone) async {
+    debugPrint('write-user start');
+    if (FirebaseAuth.instance.currentUser != null) {
+      jwttoken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+      await _graphQLService.initGraphQL(jwttoken);
+    }
 
-  void writeUser() async {
-    print("write-user start");
-    await _graphQLService.initGraphQL(jwttoken);
-    fcmtoken = await getFCMToken();
+    fcmtoken = await FirebaseMessaging.instance.getToken();
     docId = await _graphQLService.createUsers(
       authId,
       fcmtoken,
@@ -35,21 +35,19 @@ class DataEntryController extends GetxController {
       rollNoController.text,
       <String>[],
     );
-    debugPrint('$fcmtoken $docId');
-    localUserStorage.write('name', nameController.text);
-    localUserStorage.write('rollNo', rollNoController.text);
-    localUserStorage.write('email', emailController.text);
-    localUserStorage.write('phoneNo', phoneNo);
+
+    localUserStorage.write('name', name);
+    localUserStorage.write('rollNo', rollNo);
+    localUserStorage.write('email', email);
+    localUserStorage.write('phoneNo', phone);
     localUserStorage.write('dbID', docId);
+    debugPrint(localUserStorage.read('dbID'));
   }
 
-  void readUser() async {
+  Future<String?> readUser() async {
     if (FirebaseAuth.instance.currentUser != null) {
       jwttoken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
     }
-
-    nameController.text = localUserStorage.read<String?>('name').toString();
-    rollNoController.text = localUserStorage.read<String?>('rollNo').toString();
-    emailController.text = localUserStorage.read<String?>('email').toString();
+    return jwttoken;
   }
 }
