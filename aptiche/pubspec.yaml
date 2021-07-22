@@ -12,8 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_auth: ^3.0.1
+<<<<<<< HEAD
   firebase_core: ^1.4.0
   firebase_messaging: ^10.0.4
+=======
+  firebase_core: ^1.1.1
+  dio: ^4.0.0
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
   lottie: ^1.0.1
   flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
@@ -21,13 +26,21 @@ dependencies:
   get_storage: ^2.0.2
   graphql_flutter: ^5.0.0
   url_launcher: ^6.0.7
+<<<<<<< HEAD
   
+=======
+  graphql_flutter: ^5.0.0
+  intl: ^0.17.0
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+<<<<<<< HEAD
   mockito: ^5.0.7
   build_runner: ^2.0.6
+=======
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
 
 flutter:
 

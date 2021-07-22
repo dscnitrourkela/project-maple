@@ -21,38 +21,40 @@ class Question {
 }
 
 class Quiz {
-  Quiz(
-      {required this.quizId,
-      required this.name,
-      required this.startTime,
-      required this.endTime,
-      required this.questions,
-      required this.instructions,
-      // required this.description,
-      // required this.submissions,
-      required this.active});
-
-  final String? quizId;
-  final String? name;
-  final DateTime startTime;
-  final DateTime endTime;
-  final List<Question> questions; // string - questionId
-  final List<String> instructions;
-  // final String description;
-  // final dynamic submissions; // string - userId, int - score
-  final bool active;
+  Quiz({
+    required this.quizId,
+    required this.name,
+    required this.startTime,
+    required this.endTime,
+    // required this.questions,
+    // required this.instructions,
+    // required this.description,
+    // required this.submissions,
+    // required this.active
+  });
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
-      quizId: json['id'] as String,
+      quizId: json['_id'] as String,
       name: json['name'] as String,
-      startTime: json['startTime'] as DateTime,
-      endTime: json['endTime'] as DateTime,
-      questions: json['questions'] as List<Question>,
-      instructions: json['instructions'] as List<String>,
-      active: json['active'] as bool,
+      startTime: json['startTime'] as String,
+      endTime: json['endTime'] as String,
+      // questions: json['questions'] as List<Question>,
+      // instructions: json['instructions'] as List<String>,
+      // active: json['active'] as bool,
     );
   }
+
+  final String? quizId;
+  final String? name;
+  String startTime;
+  String endTime;
+  // final List<Question> questions; // string - questionId
+  // final List<String> instructions;
+  // final String description;
+  // final dynamic submissions; // string - userId, int - score
+  // final bool active;
+
 }
 
 class UserInput {
