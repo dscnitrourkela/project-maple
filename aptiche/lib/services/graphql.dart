@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:aptiche/utils/query.dart';
 =======
 import 'dart:convert';
 
+=======
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
 import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/authservice.dart';
 >>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
@@ -76,19 +79,23 @@ class GraphQLService {
     return result.data!['createUser']['_id'].toString();
   }
 
+<<<<<<< HEAD
   Future<void> getQuizzes() async {
 <<<<<<< HEAD
     final QueryOptions options = QueryOptions(
       document: gql(getQuiz),
       variables: <String, dynamic>{'ids': <String>[]},
 =======
+=======
+  Future<List<Quiz>> getQuizzes() async {
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
     const String query = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){
-          _id,
-          name,
-          startTime,
-          endTime,
+          _id
+          name
+          startTime
+          endTime
         }
       }
     ''';
@@ -107,22 +114,36 @@ class GraphQLService {
         print(result.exception);
       }
 
-      // print(result.data);
+      /// Takes in data from [QueryResult] and converts it to a map
+      List<Map<String, dynamic>> toMap(Map<String, dynamic> data) {
+        final List<Map<String, dynamic>> list = [];
+        for (final dynamic quiz in data['getQuizzes']) {
+          final Map<String, dynamic> listItem = <String, dynamic>{
+            '_id': quiz['_id'],
+            'name': quiz['name'],
+            'startTime': quiz['startTime'],
+            'endTime': quiz['endTime'],
+          };
+          list.add(listItem);
+        }
+        return list;
+      }
 
-      List<Object?> quizzes = result.data!['getQuizzes'] as List<Object?>;
+      final List<Map<String, dynamic>> getQuizzes = toMap(result.data!);
 
-      // quizzes.forEach(Object (element) {
-      //   Quiz.fromJson(element);
-      // });
+      final List<Quiz> quizzes = [];
 
-      // quizzes.map<Quiz>((json) => Quiz.fromJson(json)).toList();
+      for (final Map<String, dynamic> quiz in getQuizzes) {
+        final Quiz singleQuiz = Quiz.fromJson(quiz);
+        quizzes.add(singleQuiz);
+      }
 
-      // final List<Quiz> quizzes = result.data! as List<Quiz>;
-
-      print(quizzes);
-
+<<<<<<< HEAD
       // return quizzes;
 >>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
+=======
+      return quizzes;
+>>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
     } catch (e) {
       rethrow;
     }
