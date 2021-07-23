@@ -34,7 +34,8 @@ class HomeGridTile extends StatelessWidget {
           ),
           Image.asset(
             Strings.quizPNG,
-            width: SizeConfig.safeBlockHorizontal! * 15,
+            width: SizeConfig.safeBlockHorizontal! * 20,
+            height: SizeConfig.safeBlockVertical! * 10,
           ),
           SizedBox(
             height: SizeConfig.safeBlockVertical,
@@ -50,10 +51,17 @@ class HomeGridTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(Icons.calendar_today),
+              Icon(Icons.calendar_today,
+                  size: SizeConfig.safeBlockHorizontal! * 4),
               Text(formatDateTime(controller.quizzes[index].startTime)['date']
                   .toString()),
-              const Icon(Icons.timelapse),
+              SizedBox(
+                width: SizeConfig.safeBlockHorizontal! * 2,
+              ),
+              Icon(
+                Icons.timelapse,
+                size: SizeConfig.safeBlockHorizontal! * 4,
+              ),
               Text(formatDateTime(controller.quizzes[index].startTime)['time']
                   .toString()),
             ],
@@ -62,7 +70,7 @@ class HomeGridTile extends StatelessWidget {
             height: SizeConfig.safeBlockVertical,
           ),
           Text(
-            '30 Questions, 60 mins',
+            '30 Questions, ${calcuateTestDuration(controller.quizzes[index].startTime, controller.quizzes[index].endTime)} mins',
             style: Theme.of(context)
                 .primaryTextTheme
                 .headline3!
