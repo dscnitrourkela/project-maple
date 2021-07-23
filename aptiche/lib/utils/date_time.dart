@@ -20,3 +20,13 @@ Map<String, String> formatDateTime(String isoString) {
 
   return formattedData;
 }
+
+int calcuateTestDuration(String startTime, String endTime) {
+  final DateTime formattedStartTime = DateTime.parse(startTime);
+  final DateTime formattedEndTime = DateTime.parse(endTime);
+
+  final int timeDifference =
+      formattedEndTime.difference(formattedStartTime).inMinutes;
+
+  return timeDifference;
+}
