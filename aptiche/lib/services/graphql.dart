@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLService {
-  late GraphQLClient client;
+  late GraphQLClient _client;
 
   Future<void> initGraphQL(String? token) async {
     final HttpLink _httpLink = HttpLink(Strings.GRAPHQL_URL);
     final AuthLink _authLink = AuthLink(getToken: () async => 'Bearer $token');
 
     final Link _link = _authLink.concat(_httpLink);
-    client = GraphQLClient(link: _link, cache: GraphQLCache());
+    _client = GraphQLClient(link: _link, cache: GraphQLCache());
+
     debugPrint('GraphQL initialised');
   }
 
@@ -22,43 +23,38 @@ class GraphQLService {
         variables: <String, List<String>>{'ids': <String>[]},
         pollInterval: const Duration(seconds: 10));
 
-    final QueryResult result = await client.query(options);
+    final QueryResult result = await _client.query(options);
 
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
   }
 
-  Future<String> createUsers(
-    String? uId,
+  Future<String?> createUsers(
     String? fcmTokens,
     String? name,
     String? email,
     String? phoneNo,
     String? rollNo,
-    List<String>? quizList,
+    List<String?>? quizzes,
   ) async {
-    MutationOptions(
-        document: gql(createUser),
-        onCompleted: (dynamic resultData) {
-          return resultData.toString();
-        },
-        update: (GraphQLDataProxy cache, QueryResult? result) {},
-        onError: (OperationException? error) {
-          debugPrint(error!.graphqlErrors.toString());
-        },
-        variables: <String, UserInput>{
-          'input': UserInput(
-              name: name,
-              email: email,
-              phoneNo: phoneNo,
-              uId: uId,
-              fcmTokens: fcmTokens,
-              rollNo: rollNo,
-              quizList: quizList)
-        });
+    final QueryResult result = await _client.query(
+      QueryOptions(document: gql(createUser), variables: <String, dynamic>{
+        'userInput': {
+          'name': name,
+          'email': email,
+          'phoneNo': phoneNo,
+          'fcmToken': fcmTokens,
+          'rollNo': rollNo,
+          'quizzes': quizzes
+        }
+      }),
+    );
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
 
-    return 'fetching error';
+    return result.data.toString();
   }
 
   Future<void> getQuizzes() async {
@@ -67,7 +63,7 @@ class GraphQLService {
       variables: <String, dynamic>{'ids': <String>[]},
     );
     try {
-      final QueryResult result = await client.query(options);
+      final QueryResult result = await _client.query(options);
       if (result.hasException) {
         debugPrint(result.exception.toString());
       }

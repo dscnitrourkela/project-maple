@@ -26,15 +26,8 @@ class DataEntryController extends GetxController {
     }
 
     fcmtoken = await FirebaseMessaging.instance.getToken();
-    docId = await _graphQLService.createUsers(
-      authId,
-      fcmtoken,
-      nameController.text,
-      emailController.text,
-      phoneNo,
-      rollNoController.text,
-      <String>[],
-    );
+    docId = await _graphQLService.createUsers(fcmtoken, nameController.text,
+        emailController.text, phoneNo, rollNoController.text, []);
 
     localUserStorage.write('name', name);
     localUserStorage.write('rollNo', rollNo);

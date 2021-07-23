@@ -56,20 +56,17 @@ class Quiz {
 }
 
 class UserInput {
-  UserInput(
-      {required this.uId,
-      required this.fcmTokens,
-      required this.name,
-      required this.email,
-      required this.phoneNo,
-      required this.rollNo,
-      required this.quizList});
+  UserInput({
+    required this.fcmTokens,
+    required this.name,
+    required this.email,
+    required this.phoneNo,
+    required this.rollNo,
+  });
 
-  final String? uId;
   final String? fcmTokens;
   final String? name;
   final String? email;
   final String? phoneNo;
   final String? rollNo;
-  final List<String>? quizList;
 }

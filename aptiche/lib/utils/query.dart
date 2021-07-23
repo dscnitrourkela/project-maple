@@ -15,8 +15,7 @@ const String getUsers = r'''
 const String createUser = r'''
 mutation createUser($userInput: UserInput!) {
   createUser(userDetails: $userInput) {
-    name
-    _id
+      _id
   }
 }
 ''';
