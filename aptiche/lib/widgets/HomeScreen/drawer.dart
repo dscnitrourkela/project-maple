@@ -2,7 +2,7 @@ import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/widgets/homeScreen/drawer_list_tile.dart';
+import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

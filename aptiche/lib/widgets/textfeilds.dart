@@ -2,7 +2,7 @@ import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextField extends StatelessWidget {
   const CustomTextField({
     this.editingController,
     this.validator,
@@ -19,27 +19,16 @@ class CustomTextField extends StatefulWidget {
   final String? hint;
   final TextInputType? type;
   final IconData? icon;
-
-  @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: SizeConfig.screenWidth! * 0.85,
       padding: EdgeInsets.symmetric(vertical: SizeConfig.safeBlockVertical!),
       child: TextFormField(
-        keyboardType: widget.type,
+        keyboardType: type,
         textCapitalization: TextCapitalization.words,
-        controller: widget.editingController,
-        validator: widget.validator,
-        onSaved: (String? value) {
-          setState(() {
-            widget.editingController!.text = value.toString();
-          });
-        },
+        controller: editingController,
+        validator: validator,
         style: const TextStyle(color: kTextColourBlack),
         enableSuggestions: true,
         decoration: InputDecoration(
@@ -56,11 +45,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderSide: const BorderSide(color: kTertiaryColor),
             borderRadius: BorderRadius.circular(20.0),
           ),
-          prefixIcon: Icon(widget.icon, color: kTextColourBlack),
-          labelText: widget.label,
+          prefixIcon: Icon(icon, color: kTextColourBlack),
+          labelText: label,
           labelStyle: const TextStyle(color: kTextColourBlack),
           alignLabelWithHint: true,
-          hintText: widget.hint,
+          hintText: hint,
           hintStyle: const TextStyle(color: Colors.grey),
         ),
       ),
