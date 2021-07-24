@@ -3,11 +3,10 @@ import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/views/home/home_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomeGridTile extends StatelessWidget {
-  HomeGridTile({
+  const HomeGridTile({
     Key? key,
     required this.quiz,
   }) : super(key: key);
