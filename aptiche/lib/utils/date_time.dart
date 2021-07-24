@@ -13,7 +13,7 @@ Map<String, String> formatDateTime(String isoString) {
 
   final String formattedTime = '${dateTime.hour}:${dateTime.minute}';
 
-  final Map<String, String> formattedData = {
+  final Map<String, String> formattedData = <String, String>{
     'date': formattedDate,
     'time': formattedTime
   };
@@ -21,6 +21,7 @@ Map<String, String> formatDateTime(String isoString) {
   return formattedData;
 }
 
+/// Takes startTime and endTime and calculates the duration between them.
 int calcuateTestDuration(String startTime, String endTime) {
   final DateTime formattedStartTime = DateTime.parse(startTime);
   final DateTime formattedEndTime = DateTime.parse(endTime);
