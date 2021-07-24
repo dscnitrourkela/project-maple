@@ -11,20 +11,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^1.1.4
-  firebase_core: ^1.1.1
-  dio: ^4.0.0
+  firebase_auth: ^3.0.1
+  firebase_core: ^1.4.0
+  firebase_messaging: ^10.0.4
   lottie: ^1.0.1
   flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
   get: ^4.1.4
+  get_storage: ^2.0.2
+  graphql_flutter: ^5.0.0
   url_launcher: ^6.0.7
-  graphql: ^5.0.0
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.0.7
+  build_runner: ^2.0.6
 
 flutter:
 

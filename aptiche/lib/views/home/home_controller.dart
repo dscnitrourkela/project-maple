@@ -1,14 +1,14 @@
-import 'package:aptiche/datamodels/api_models.dart';
+import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/graphql.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final GraphQL _graphQL = Get.find();
-  RxBool upcomingQuizzes = true.obs;
+  final AuthService _authService = Get.find();
+  final GraphQLService _graphQLService = Get.find();
 
-  late List<Quiz> quizzes;
-
-  Future<void> getQuizzes() async {
-    quizzes = await _graphQL.getQuizzes();
+  void init() async {
+    _graphQLService.initGraphQL(await _authService.getUserToken());
   }
+
+  RxBool upcomingQuizzes = true.obs;
 }

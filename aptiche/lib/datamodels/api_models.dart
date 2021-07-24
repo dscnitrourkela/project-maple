@@ -55,21 +55,18 @@ class Quiz {
   }
 }
 
-class User {
-  User(
-      {required this.userId,
-      required this.authId,
-      required this.name,
-      required this.email,
-      required this.phoneNo,
-      required this.rollNo,
-      required this.quizList});
+class UserInput {
+  UserInput({
+    required this.fcmTokens,
+    required this.name,
+    required this.email,
+    required this.phoneNo,
+    required this.rollNo,
+  });
 
-  final String? userId;
-  final String? authId;
+  final String? fcmTokens;
   final String? name;
   final String? email;
   final String? phoneNo;
   final String? rollNo;
-  final dynamic quizList;
 }

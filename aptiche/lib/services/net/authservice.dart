@@ -1,15 +1,14 @@
-import 'package:aptiche/services/graphql.dart';
-import 'package:aptiche/utils/theme.dart';
-import 'package:aptiche/views/data%20entry/dataentry.dart';
+import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxController {
-  GraphQL graphQL = Get.find();
   StreamBuilder<User?> handleAuth() {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -18,7 +17,7 @@ class AuthService extends GetxController {
             return const LoginView();
           } else {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return const HomeScreen();
             } else {
               return const LoginView();
             }
@@ -28,6 +27,7 @@ class AuthService extends GetxController {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
+    GetStorage('User').erase();
     Get.offAll<dynamic>(const SplashScreen());
   }
 
@@ -41,18 +41,18 @@ class AuthService extends GetxController {
 
       Get.to<dynamic>(() => const DataEntryScreen());
     } catch (error) {
-      customSnackBar(
+      CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
         'Please enter the correct OTP sent to your mobile number',
       );
     }
   }
 
-  Future<String> getUserToken() async {
-    return FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-
-  Future<void> getUsers() async {
-    await graphQL.getUser();
+  Future<String?> getUserToken() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return FirebaseAuth.instance.currentUser!.getIdToken(true);
+    } else {
+      return '';
+    }
   }
 }

@@ -167,6 +167,7 @@ class LoginView extends GetView<LoginController> {
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               controller.sent.toggle();
+                                              controller.loading.toggle();
                                               controller.phoneEditController
                                                   .clear();
                                             }),
@@ -194,7 +195,9 @@ class LoginView extends GetView<LoginController> {
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),
                     alignment: Alignment.center,
-                    child: const CircularProgressIndicator()),
+                    child: const CircularProgressIndicator(
+                      backgroundColor: kPrimaryColor,
+                    )),
                 height: SizeConfig.screenHeight! * 0.32,
               ),
             ),

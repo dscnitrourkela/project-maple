@@ -1,10 +1,11 @@
-import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   final AuthService _authService = Get.find();
-  final GraphQL _graphQL = Get.find();
+
   @override
   Widget build(BuildContext context) {
     final AnimationController animationController =
@@ -35,8 +36,9 @@ class _SplashScreenState extends State<SplashScreen>
             animationController
                 .addStatusListener((AnimationStatus status) async {
               final StreamBuilder<User?> route = _authService.handleAuth();
+
               if (status == AnimationStatus.completed) {
-                await _graphQL.initGraphQL();
+                await GetStorage().initStorage;
                 Get.to<dynamic>(() => route);
               }
             });
