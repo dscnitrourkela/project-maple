@@ -1,3 +1,4 @@
+import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
@@ -8,12 +9,11 @@ import 'package:flutter/material.dart';
 class HomeGridTile extends StatelessWidget {
   HomeGridTile({
     Key? key,
-    required this.controller,
-    required this.index,
+    required this.quiz,
   }) : super(key: key);
 
-  final HomeController controller;
-  final int index;
+  final Quiz quiz;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +41,7 @@ class HomeGridTile extends StatelessWidget {
             height: SizeConfig.safeBlockVertical,
           ),
           Text(
-            controller.quizzes[index].name.toString(),
+            quiz.name.toString(),
             textAlign: TextAlign.center,
             style: Theme.of(context).primaryTextTheme.headline3,
           ),
@@ -53,8 +53,7 @@ class HomeGridTile extends StatelessWidget {
             children: <Widget>[
               Icon(Icons.calendar_today,
                   size: SizeConfig.safeBlockHorizontal! * 4),
-              Text(formatDateTime(controller.quizzes[index].startTime)['date']
-                  .toString()),
+              Text(formatDateTime(quiz.startTime)['date'].toString()),
               SizedBox(
                 width: SizeConfig.safeBlockHorizontal! * 2,
               ),
@@ -62,19 +61,17 @@ class HomeGridTile extends StatelessWidget {
                 Icons.timelapse,
                 size: SizeConfig.safeBlockHorizontal! * 4,
               ),
-              Text(formatDateTime(controller.quizzes[index].startTime)['time']
-                  .toString()),
+              Text(formatDateTime(quiz.startTime)['time'].toString()),
             ],
           ),
           SizedBox(
             height: SizeConfig.safeBlockVertical,
           ),
           Text(
-            '30 Questions, ${calcuateTestDuration(controller.quizzes[index].startTime, controller.quizzes[index].endTime)} mins',
-            style: Theme.of(context)
-                .primaryTextTheme
-                .headline3!
-                .copyWith(fontSize: SizeConfig.safeBlockHorizontal! * 3),
+            '30 Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+            style: Theme.of(context).primaryTextTheme.headline3!.copyWith(
+                  fontSize: SizeConfig.safeBlockHorizontal! * 3,
+                ),
           ),
         ],
       ),
