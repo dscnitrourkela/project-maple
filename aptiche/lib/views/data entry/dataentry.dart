@@ -276,7 +276,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                     controller.emailController.text,
                                     controller.phoneNo.toString(),
                                   );
-                                  Get.to<dynamic>(() => const HomeScreen());
+                                  //Get.to<dynamic>(() => const HomeScreen());
                                 }
                               }),
                         ),

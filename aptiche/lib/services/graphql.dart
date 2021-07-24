@@ -31,29 +31,27 @@ class GraphQLService {
   }
 
   Future<String?> createUsers(
-    String? fcmTokens,
+    List<String?> fcmTokens,
     String? name,
     String? email,
     String? phoneNo,
     String? rollNo,
     List<String?>? quizzes,
   ) async {
-    final QueryResult result = await _client.query(
-      QueryOptions(document: gql(createUser), variables: <String, dynamic>{
-        'userInput': {
-          'name': name,
-          'email': email,
-          'phoneNo': phoneNo,
-          'fcmToken': fcmTokens,
-          'rollNo': rollNo,
-          'quizzes': quizzes
-        }
+    final QueryResult result = await _client.mutate(
+      MutationOptions(document: gql(createUser), variables: <String, dynamic>{
+        'name': name,
+        'email': email,
+        'phoneNo': phoneNo,
+        'rollNo': rollNo,
+        'fcmToken': fcmTokens,
+        'quizzes': quizzes
       }),
     );
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
-
+    print(result);
     return result.data.toString();
   }
 
