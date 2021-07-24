@@ -2,6 +2,7 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
+import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -275,7 +276,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                     controller.emailController.text,
                                     controller.phoneNo.toString(),
                                   );
-                                  //Get.off<dynamic>(() => HomeScreen());
+                                  Get.to<dynamic>(() => const HomeScreen());
                                 }
                               }),
                         ),
