@@ -14,7 +14,7 @@ class DataEntryController extends GetxController {
   final String? phoneNo = FirebaseAuth.instance.currentUser?.phoneNumber;
   final String? authId = FirebaseAuth.instance.currentUser?.uid;
   final GetStorage localUserStorage = GetStorage('User');
-  List<String?> fcmtoken = [];
+  List<String?> fcmtoken = <String?>[];
   String? docId;
   String? jwttoken;
 
@@ -26,8 +26,14 @@ class DataEntryController extends GetxController {
     }
 
     fcmtoken.add(await FirebaseMessaging.instance.getToken());
-    docId = await _graphQLService.createUsers(fcmtoken, nameController.text,
-        emailController.text, phoneNo, rollNoController.text, []);
+    docId = await _graphQLService.createUsers(
+      fcmTokens: fcmtoken,
+      name: name,
+      rollNo: rollNo,
+      email: email,
+      phoneNo: phone,
+      quizzes: <String?>[],
+    );
 
     localUserStorage.write('name', name);
     localUserStorage.write('rollNo', rollNo);

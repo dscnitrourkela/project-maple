@@ -1,4 +1,3 @@
-import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/utils/query.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +29,14 @@ class GraphQLService {
     }
   }
 
-  Future<String?> createUsers(
-    List<String?> fcmTokens,
+  Future<String?> createUsers({
+    List<String?>? fcmTokens,
     String? name,
     String? email,
     String? phoneNo,
     String? rollNo,
     List<String?>? quizzes,
-  ) async {
+  }) async {
     final QueryResult result = await _client.mutate(
       MutationOptions(document: gql(createUser), variables: <String, dynamic>{
         'name': name,
@@ -51,8 +50,8 @@ class GraphQLService {
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
-    print(result);
-    return result.data.toString();
+    debugPrint(result.toString());
+    return result.data!['createUser']['_id'].toString();
   }
 
   Future<void> getQuizzes() async {

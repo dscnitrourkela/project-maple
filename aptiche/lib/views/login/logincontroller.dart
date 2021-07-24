@@ -1,5 +1,5 @@
 import 'package:aptiche/services/net/authservice.dart';
-import 'package:aptiche/views/data%20entry/dataentry.dart';
+import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

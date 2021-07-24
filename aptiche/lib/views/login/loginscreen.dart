@@ -167,6 +167,7 @@ class LoginView extends GetView<LoginController> {
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               controller.sent.toggle();
+                                              controller.loading.toggle();
                                               controller.phoneEditController
                                                   .clear();
                                             }),

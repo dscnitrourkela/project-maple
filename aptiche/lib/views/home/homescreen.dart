@@ -1,4 +1,3 @@
-import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';

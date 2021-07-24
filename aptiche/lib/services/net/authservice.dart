@@ -1,4 +1,4 @@
-import 'package:aptiche/views/data%20entry/dataentry.dart';
+import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';

@@ -1,7 +1,7 @@
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/views/data%20entry/dataentry_controller.dart';
+import 'package:aptiche/views/dataentry/dataentry_controller.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/foundation.dart';
@@ -269,14 +269,13 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                 if (controller.formKey.currentState!
                                     .validate()) {
                                   controller.formKey.currentState!.save();
-
                                   DataEntryController().writeUser(
                                     controller.nameController.text,
                                     controller.rollNoController.text,
                                     controller.emailController.text,
                                     controller.phoneNo.toString(),
                                   );
-                                  //Get.to<dynamic>(() => const HomeScreen());
+                                  Get.to<dynamic>(() => const HomeScreen());
                                 }
                               }),
                         ),
