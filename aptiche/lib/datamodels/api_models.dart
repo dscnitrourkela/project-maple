@@ -21,17 +21,16 @@ class Question {
 }
 
 class Quiz {
-  Quiz({
-    required this.quizId,
-    required this.name,
-    required this.startTime,
-    required this.endTime,
-    // required this.questions,
-    // required this.instructions,
-    // required this.description,
-    // required this.submissions,
-    // required this.active
-  });
+  Quiz(
+      {required this.quizId,
+      required this.name,
+      required this.startTime,
+      required this.endTime,
+      // required this.questions,
+      // required this.instructions,
+      // required this.description,
+      // required this.submissions,
+      required this.active});
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
@@ -41,7 +40,7 @@ class Quiz {
       endTime: json['endTime'] as String,
       // questions: json['questions'] as List<Question>,
       // instructions: json['instructions'] as List<String>,
-      // active: json['active'] as bool,
+      active: json['active'] as bool,
     );
   }
 
@@ -53,8 +52,7 @@ class Quiz {
   // final List<String> instructions;
   // final String description;
   // final dynamic submissions; // string - userId, int - score
-  // final bool active;
-
+  final bool active;
 }
 
 class UserInput {

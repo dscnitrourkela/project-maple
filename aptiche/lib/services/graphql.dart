@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'package:aptiche/utils/query.dart';
-=======
+
 import 'dart:convert';
 
-=======
->>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
 import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/authservice.dart';
->>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
+
 import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -27,8 +23,6 @@ class GraphQLService {
   }
 
   Future<void> getUser() async {
-<<<<<<< HEAD
-=======
     const String query = r'''
       query getUsers($ids: [ObjectId!]!){
         getUsers(ids: $ids) {
@@ -41,7 +35,7 @@ class GraphQLService {
           }
         }
     ''';
->>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
+
     final QueryOptions options = QueryOptions(
         document: gql(getUsers),
         variables: <String, List<String>>{'ids': <String>[]},
@@ -79,16 +73,7 @@ class GraphQLService {
     return result.data!['createUser']['_id'].toString();
   }
 
-<<<<<<< HEAD
-  Future<void> getQuizzes() async {
-<<<<<<< HEAD
-    final QueryOptions options = QueryOptions(
-      document: gql(getQuiz),
-      variables: <String, dynamic>{'ids': <String>[]},
-=======
-=======
   Future<List<Quiz>> getQuizzes() async {
->>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
     const String query = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){
@@ -96,33 +81,30 @@ class GraphQLService {
           name
           startTime
           endTime
+          active
         }
       }
     ''';
     final QueryOptions options = QueryOptions(
       document: gql(query),
-      variables: <String, List<String>>{'ids': []},
->>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
+      variables: <String, List<String>>{'ids': <String>[]},
     );
     try {
       final QueryResult result = await _client.query(options);
       if (result.hasException) {
-<<<<<<< HEAD
-        debugPrint(result.exception.toString());
-      }
-=======
         print(result.exception);
       }
 
       /// Takes in data from [QueryResult] and converts it to a map
       List<Map<String, dynamic>> toMap(Map<String, dynamic> data) {
-        final List<Map<String, dynamic>> list = [];
+        final List<Map<String, dynamic>> list = <Map<String, dynamic>>[];
         for (final dynamic quiz in data['getQuizzes']) {
           final Map<String, dynamic> listItem = <String, dynamic>{
             '_id': quiz['_id'],
             'name': quiz['name'],
             'startTime': quiz['startTime'],
             'endTime': quiz['endTime'],
+            'active': quiz['active']
           };
           list.add(listItem);
         }
@@ -131,19 +113,14 @@ class GraphQLService {
 
       final List<Map<String, dynamic>> getQuizzes = toMap(result.data!);
 
-      final List<Quiz> quizzes = [];
+      final List<Quiz> quizzes = <Quiz>[];
 
       for (final Map<String, dynamic> quiz in getQuizzes) {
         final Quiz singleQuiz = Quiz.fromJson(quiz);
         quizzes.add(singleQuiz);
       }
 
-<<<<<<< HEAD
-      // return quizzes;
->>>>>>> b6c3b76 (Fixes bugs with getQuizzes query)
-=======
       return quizzes;
->>>>>>> 901d790 (Fixes error with object type and map in getQuizzes, upgrades packages)
     } catch (e) {
       rethrow;
     }

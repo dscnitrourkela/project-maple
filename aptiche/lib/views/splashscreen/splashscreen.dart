@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
@@ -17,6 +18,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
+  final GraphQLService _graphQL = Get.find();
   final AuthService _authService = Get.find();
 
   @override

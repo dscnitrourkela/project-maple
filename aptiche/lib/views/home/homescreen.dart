@@ -77,7 +77,6 @@ class HomeScreen extends GetView<HomeController> {
                     ),
                     child: SingleChildScrollView(
                       controller: scrollController,
-                      // physics: const NeverScrollableScrollPhysics(),
                       child: Column(
                         children: <Widget>[
                           Container(
@@ -88,13 +87,15 @@ class HomeScreen extends GetView<HomeController> {
                             child: Row(
                               children: <Widget>[
                                 GestureDetector(
-                                  onTap: () =>
-                                      controller.upcomingQuizzes.value = true,
+                                  onTap: () {
+                                    controller.upcomingQuiz.value = true;
+                                    controller.assignList();
+                                  },
                                   child: Container(
                                     width: SizeConfig.screenWidth! * 0.4,
                                     height: SizeConfig.screenHeight! * 0.06,
                                     decoration: BoxDecoration(
-                                      color: controller.upcomingQuizzes.value
+                                      color: controller.upcomingQuiz.value
                                           ? Theme.of(context).primaryColor
                                           : kGreyBgColor,
                                       borderRadius: const BorderRadius.only(
@@ -106,7 +107,7 @@ class HomeScreen extends GetView<HomeController> {
                                       child: Text(
                                         'Upcoming Quizzes',
                                         textAlign: TextAlign.center,
-                                        style: !controller.upcomingQuizzes.value
+                                        style: !controller.upcomingQuiz.value
                                             ? Theme.of(context)
                                                 .primaryTextTheme
                                                 .headline3
@@ -122,13 +123,14 @@ class HomeScreen extends GetView<HomeController> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller.upcomingQuizzes.value = false;
+                                    controller.upcomingQuiz.value = false;
+                                    controller.assignList();
                                   },
                                   child: Container(
                                     width: SizeConfig.screenWidth! * 0.4,
                                     height: SizeConfig.screenHeight! * 0.06,
                                     decoration: BoxDecoration(
-                                      color: !controller.upcomingQuizzes.value
+                                      color: !controller.upcomingQuiz.value
                                           ? Theme.of(context).primaryColor
                                           : kGreyBgColor,
                                       borderRadius: const BorderRadius.only(
@@ -140,7 +142,7 @@ class HomeScreen extends GetView<HomeController> {
                                       child: Text(
                                         'Past Quizzes',
                                         textAlign: TextAlign.center,
-                                        style: controller.upcomingQuizzes.value
+                                        style: controller.upcomingQuiz.value
                                             ? Theme.of(context)
                                                 .primaryTextTheme
                                                 .headline3
@@ -156,27 +158,35 @@ class HomeScreen extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                            // GridView.builder(
-                            //   shrinkWrap: true,
-                            //   primary: false,
-                            //   gridDelegate:
-                            //       const SliverGridDelegateWithFixedCrossAxisCount(
-                            //     crossAxisCount: 2,
-                            //   ),
-                            //   itemBuilder: (BuildContext context, int index) {
-                            //     return const HomeGridTile();
-                            //   },
-                            // ),
-                            // GridView.count(
-                            //   shrinkWrap: true,
-                            //   primary: false,
-                            //   crossAxisCount: 2,
-                            //   children: List<Widget>.generate(
-                            //     controller.quizzes.length,
-                            //     (int index) => const HomeGridTile(),
-                            //   ),
-                            // )
                           ),
+                          Builder(
+                            builder: (BuildContext context) {
+                              if (controller.homeState == CurrentState.ready &&
+                                  controller.desiredList.isNotEmpty) {
+                                return GridView.count(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  crossAxisCount: 2,
+                                  children: List<Widget>.generate(
+                                    controller.desiredList.length,
+                                    (int index) {
+                                      return HomeGridTile(
+                                        quiz: controller.desiredList[index],
+                                      );
+                                    },
+                                  ),
+                                );
+                              } else if (controller.desiredList.isEmpty) {
+                                return const Center(
+                                  child: Text('Oops, there are no quizzes'),
+                                );
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          )
                         ],
                       ),
                     ),
