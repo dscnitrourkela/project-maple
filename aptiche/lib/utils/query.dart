@@ -41,6 +41,9 @@ const String getQuiz = r'''
         getQuizzes(ids: $ids){
           _id
           name
+          startTime
+          endTime
+          active
         }
       }
     ''';

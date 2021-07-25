@@ -1,4 +1,3 @@
-import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/enums.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
@@ -6,7 +5,6 @@ import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/home/home_controller.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer.dart';
 import 'package:aptiche/widgets/HomeScreen/home_screen_grid.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -16,7 +14,10 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    HomeController().init();
+    // return FutureBuilder<void>(
+    //   future: controller.init(),
+    //   builder: (context, snapshot) {
+    // if (snapshot.connectionState == ConnectionState.done) {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -198,5 +199,12 @@ class HomeScreen extends GetView<HomeController> {
         ],
       ),
     );
+    // } else {
+    //   return const Center(
+    //     child: CircularProgressIndicator(),
+    //   );
+    // }
+    //   },
+    // );
   }
 }
