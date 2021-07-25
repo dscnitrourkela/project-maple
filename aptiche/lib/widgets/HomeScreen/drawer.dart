@@ -12,8 +12,8 @@ import 'package:get_storage/get_storage.dart';
 
 class MainDrawer extends StatelessWidget {
   MainDrawer({Key? key}) : super(key: key);
-  final ThirdPartyServices _thirdPartyServices = Get.find();
   final AuthService _authService = Get.find();
+  final ThirdPartyServices _thirdPartyServices = Get.find();
 
   final GetStorage localUserStorage = GetStorage('User');
   @override

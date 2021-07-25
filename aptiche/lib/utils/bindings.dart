@@ -12,8 +12,8 @@ class HomeBinding implements Bindings {
     Get.put<GraphQLService>(GraphQLService());
     Get.put<AuthService>(AuthService());
     Get.put<LoginController>(LoginController());
-    Get.lazyPut<DataEntryController>(() => DataEntryController());
-    Get.put<HomeController>(HomeController());
+    Get.lazyPut<DataEntryController>(() => DataEntryController(), fenix: true);
+    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.put<ThirdPartyServices>(ThirdPartyServices());
   }
 }

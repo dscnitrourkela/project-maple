@@ -1,10 +1,5 @@
 import 'package:aptiche/utils/query.dart';
-
-import 'dart:convert';
-
 import 'package:aptiche/datamodels/api_models.dart';
-import 'package:aptiche/services/net/authservice.dart';
-
 import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -23,19 +18,6 @@ class GraphQLService {
   }
 
   Future<void> getUser() async {
-    const String query = r'''
-      query getUsers($ids: [ObjectId!]!){
-        getUsers(ids: $ids) {
-            name
-            email
-            rollNo
-            _id
-            uid
-            fcmToken
-          }
-        }
-    ''';
-
     final QueryOptions options = QueryOptions(
         document: gql(getUsers),
         variables: <String, List<String>>{'ids': <String>[]},
@@ -74,19 +56,8 @@ class GraphQLService {
   }
 
   Future<List<Quiz>> getQuizzes() async {
-    const String query = r'''
-      query getQuizzes($ids: [ObjectId!]!){
-        getQuizzes(ids: $ids){
-          _id
-          name
-          startTime
-          endTime
-          active
-        }
-      }
-    ''';
     final QueryOptions options = QueryOptions(
-      document: gql(query),
+      document: gql(getQuiz),
       variables: <String, List<String>>{'ids': <String>[]},
     );
     try {

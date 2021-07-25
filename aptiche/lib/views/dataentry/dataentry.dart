@@ -3,6 +3,7 @@ import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/dataentry/dataentry_controller.dart';
 import 'package:aptiche/views/home/homescreen.dart';
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String?>(
-      future: DataEntryController().readUser(),
+      future: controller.readUser(),
       builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
         if (snapshot.data == null) {
           return const Scaffold(
@@ -269,13 +270,13 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                 if (controller.formKey.currentState!
                                     .validate()) {
                                   controller.formKey.currentState!.save();
-                                  DataEntryController().writeUser(
+                                  controller.writeUser(
                                     controller.nameController.text,
                                     controller.rollNoController.text,
                                     controller.emailController.text,
                                     controller.phoneNo.toString(),
                                   );
-                                  Get.to<dynamic>(() => const HomeScreen());
+                                  Get.offAll<dynamic>(() => const HomeScreen());
                                 }
                               }),
                         ),

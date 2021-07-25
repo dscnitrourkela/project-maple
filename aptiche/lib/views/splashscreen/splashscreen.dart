@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  final GraphQLService _graphQL = Get.find();
+  final GraphQLService _graphQLService = Get.find();
   final AuthService _authService = Get.find();
 
   @override
@@ -41,6 +41,10 @@ class _SplashScreenState extends State<SplashScreen>
 
               if (status == AnimationStatus.completed) {
                 await GetStorage().initStorage;
+                if (FirebaseAuth.instance.currentUser != null) {
+                  _graphQLService
+                      .initGraphQL(await _authService.getUserToken());
+                }
                 Get.to<dynamic>(() => route);
               }
             });

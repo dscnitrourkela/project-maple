@@ -2,6 +2,7 @@ import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/utils/enums.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -17,12 +18,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    // init();
     getQuizzes();
     super.onInit();
-  }
-
-  void init() async {
-    _graphQL.initGraphQL(await _authService.getUserToken());
   }
 
   void assignList() {
