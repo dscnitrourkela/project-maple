@@ -14,10 +14,6 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    // return FutureBuilder<void>(
-    //   future: controller.init(),
-    //   builder: (context, snapshot) {
-    // if (snapshot.connectionState == ConnectionState.done) {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -199,12 +195,5 @@ class HomeScreen extends GetView<HomeController> {
         ],
       ),
     );
-    // } else {
-    //   return const Center(
-    //     child: CircularProgressIndicator(),
-    //   );
-    // }
-    //   },
-    // );
   }
 }
