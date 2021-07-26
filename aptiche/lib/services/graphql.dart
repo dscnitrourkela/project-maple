@@ -10,6 +10,7 @@ class GraphQLService {
   Future<void> initGraphQL(String? token) async {
     final HttpLink _httpLink = HttpLink(Strings.GRAPHQL_URL);
     final AuthLink _authLink = AuthLink(getToken: () async => 'Bearer $token');
+    debugPrint(token);
 
     final Link _link = _authLink.concat(_httpLink);
     _client = GraphQLClient(link: _link, cache: GraphQLCache());
@@ -68,14 +69,23 @@ class GraphQLService {
 
       /// Takes in data from [QueryResult] and converts it to a map
       List<Map<String, dynamic>> toMap(Map<String, dynamic> data) {
+        /// Stores the list of instruction strings.
+        final List<String> instructionsList = <String>[];
+
         final List<Map<String, dynamic>> list = <Map<String, dynamic>>[];
+        // Since graphql is returning everything as an object, each string in
+        // the instructions list is first converted from an object to string
+        // and then parsed into the map.
         for (final dynamic quiz in data['getQuizzes']) {
+          for (final dynamic instruction in quiz['instructions']) {
+            instructionsList.add(instruction.toString());
+          }
           final Map<String, dynamic> listItem = <String, dynamic>{
             '_id': quiz['_id'],
             'name': quiz['name'],
             'startTime': quiz['startTime'],
             'endTime': quiz['endTime'],
-            'instructions': quiz['instructions'],
+            'instructions': instructionsList,
             'active': quiz['active']
           };
           list.add(listItem);

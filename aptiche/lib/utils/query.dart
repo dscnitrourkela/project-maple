@@ -43,6 +43,7 @@ const String getQuiz = r'''
           name
           startTime
           endTime
+          instructions
           active
         }
       }
