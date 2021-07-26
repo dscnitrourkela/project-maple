@@ -88,15 +88,11 @@ class TestPreviewView extends StatelessWidget {
                       ),
                       Text(
                         '''
-The test is divided into 3 sections namely-
+${quiz.instructions[0]}
 
-• Verbal Ability & Reading Comprehension
-• Logical Reasoning
-• Quantitative Aptitude
+${quiz.instructions[1]}
 
-Each section will have 10 questions.
-Total number of questions will be 30.
-Each correct answer carries +3 marks while the wrong answers will be -1 marks.
+${quiz.instructions[2]}
 
 Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins.
                       ''',
