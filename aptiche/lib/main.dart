@@ -1,7 +1,6 @@
 import 'package:aptiche/utils/bindings.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
-import 'package:aptiche/views/testpreview/test_preview_view.dart';
 import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
               enableLog: true,
               defaultTransition: Transition.rightToLeftWithFade,
               popGesture: Get.isPopGestureEnable,
-              home: const TestPreviewScreen(),
+              home: const SplashScreen(),
             );
           }
           return const CircularProgressIndicator();
