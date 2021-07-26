@@ -27,7 +27,7 @@ class Quiz {
       required this.startTime,
       required this.endTime,
       // required this.questions,
-      // required this.instructions,
+      required this.instructions,
       // required this.description,
       // required this.submissions,
       required this.active});
@@ -39,7 +39,7 @@ class Quiz {
       startTime: json['startTime'] as String,
       endTime: json['endTime'] as String,
       // questions: json['questions'] as List<Question>,
-      // instructions: json['instructions'] as List<String>,
+      instructions: json['instructions'] as List<String>,
       active: json['active'] as bool,
     );
   }
@@ -49,7 +49,7 @@ class Quiz {
   String startTime;
   String endTime;
   // final List<Question> questions; // string - questionId
-  // final List<String> instructions;
+  final List<String> instructions;
   // final String description;
   // final dynamic submissions; // string - userId, int - score
   final bool active;

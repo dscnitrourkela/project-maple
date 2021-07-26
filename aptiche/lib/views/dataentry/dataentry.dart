@@ -3,7 +3,6 @@ import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/dataentry/dataentry_controller.dart';
 import 'package:aptiche/views/home/homescreen.dart';
-import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

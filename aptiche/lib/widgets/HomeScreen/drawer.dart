@@ -33,25 +33,6 @@ class MainDrawer extends StatelessWidget {
                 softWrap: true,
                 style: Theme.of(context).primaryTextTheme.headline2,
               ),
-              /* leading: SizedBox(
-                height: SizeConfig.safeBlockHorizontal! * 30,
-                width: SizeConfig.safeBlockHorizontal! * 20,
-                child: TextDrawable(
-                  text: localUserStorage.read<String?>('name').toString(),
-                  length: 2,
-                  height: SizeConfig.safeBlockHorizontal! * 30,
-                  width: SizeConfig.safeBlockHorizontal! * 20,
-                  textStyle: const TextStyle(
-                    fontSize: 32,
-                    fontFamily: kSfpro,
-                    fontWeight: FontWeight.w700,
-                    color: kBgColour,
-                  ),
-                  backgroundColor: kTextColourBlue,
-                  boxShape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ), */
               subtitle: RichText(
                 text: TextSpan(
                   children: <TextSpan>[
@@ -60,7 +41,7 @@ class MainDrawer extends StatelessWidget {
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            print('There is no profile page');
+                            debugPrint('There is no profile page');
                           }),
                   ],
                 ),

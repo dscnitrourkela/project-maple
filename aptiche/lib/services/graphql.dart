@@ -63,7 +63,7 @@ class GraphQLService {
     try {
       final QueryResult result = await _client.query(options);
       if (result.hasException) {
-        print(result.exception);
+        debugPrint(result.exception.toString());
       }
 
       /// Takes in data from [QueryResult] and converts it to a map
@@ -75,6 +75,7 @@ class GraphQLService {
             'name': quiz['name'],
             'startTime': quiz['startTime'],
             'endTime': quiz['endTime'],
+            'instructions': quiz['instructions'],
             'active': quiz['active']
           };
           list.add(listItem);
