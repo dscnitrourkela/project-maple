@@ -1,13 +1,10 @@
 import 'package:aptiche/datamodels/api_models.dart';
-import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/utils/enums.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final GraphQLService _graphQL = Get.find();
-  final AuthService _authService = Get.find();
   RxBool upcomingQuiz = true.obs;
   CurrentState homeState = CurrentState.busy;
 
@@ -18,7 +15,6 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    // init();
     getQuizzes();
     super.onInit();
   }
