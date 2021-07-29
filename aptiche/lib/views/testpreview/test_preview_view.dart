@@ -3,9 +3,11 @@ import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/quiz/quiz_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class TestPreviewView extends StatelessWidget {
   const TestPreviewView({Key? key, required this.quiz}) : super(key: key);
@@ -13,7 +15,6 @@ class TestPreviewView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -102,7 +103,9 @@ Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, 
                         height: SizeConfig.safeBlockVertical! * 4,
                       ),
                       CustomButton(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to<QuizView>(const QuizView());
+                        },
                         text: 'Begin Test',
                       ),
                     ],
