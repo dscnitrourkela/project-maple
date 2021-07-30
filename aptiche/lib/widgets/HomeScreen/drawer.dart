@@ -2,6 +2,8 @@ import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/drawer/aiche.dart';
+import 'package:aptiche/views/drawer/aichenitr.dart';
 import 'package:aptiche/views/drawer/dev_info.dart';
 import 'package:aptiche/views/drawer/privacy_policy.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
@@ -68,11 +70,15 @@ class MainDrawer extends StatelessWidget {
             ),
             DrawerListTile(
               text: 'About AIChE',
-              function: () {},
+              function: () {
+                Get.to<AboutAICHENITR>(const AboutAICHENITR());
+              },
             ),
             DrawerListTile(
               text: 'About AIChE NITR',
-              function: () {},
+              function: () {
+                Get.to<AboutAICHE>(const AboutAICHE());
+              },
             ),
             DrawerListTile(
               text: 'Privacy Policy',
