@@ -1,12 +1,10 @@
+import 'package:aptiche/utils/string.dart';
+import 'package:aptiche/widgets/HomeScreen/contact_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/third_party_services.dart';
 import '../../utils/theme.dart';
 import '../../utils/ui_scaling.dart';
-
-const String aboutText =
-    'Google Developer Student Clubs (GDSC) is a Google Developers powered program for university students to learn mobile and web development skills. The clubs will be open to any student interested to learn, ranging from novice developers who are just starting, to advanced developers who want to further their skills. The clubs are intended as a space for students to try out new ideas and collaborate to solve mobile and web development problems.\n\n'
-    'GDSC NIT Rourkela is a student chapter of GDSC India with a motive to nurture developers within the community and solve real-life problems in the community through technology.';
 
 class DevInfo extends StatelessWidget {
   final ThirdPartyServices _thirdPartyServices = Get.find();
@@ -56,7 +54,7 @@ class DevInfo extends StatelessWidget {
                     horizontal: SizeConfig.safeBlockHorizontal! * 4,
                     vertical: SizeConfig.safeBlockHorizontal! * 4),
                 child: Text(
-                  aboutText,
+                  Strings.aboutText,
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: SizeConfig.safeBlockHorizontal! * 4,
@@ -80,77 +78,39 @@ class DevInfo extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  contactCard(
-                    context,
-                    'Abhibhaw Asthana',
-                    'https://github.com/abhibhaw',
+                  ContactCard(
+                    context: context,
+                    thirdPartyServices: _thirdPartyServices,
+                    name: 'Abhibhaw Asthana',
+                    contact: 'https://github.com/abhibhaw',
                   ),
-                  contactCard(
-                    context,
-                    'Astha Nayak',
-                    'https://github.com/nayakastha',
+                  ContactCard(
+                    context: context,
+                    thirdPartyServices: _thirdPartyServices,
+                    name: 'Astha Nayak',
+                    contact: 'https://github.com/nayakastha',
                   ),
-                  contactCard(
-                    context,
-                    'Patibanda Sriram ',
-                    'https://github.com/SriramPatibanda',
+                  ContactCard(
+                    context: context,
+                    thirdPartyServices: _thirdPartyServices,
+                    name: 'Patibanda Sriram ',
+                    contact: 'https://github.com/SriramPatibanda',
                   ),
-                  contactCard(
-                    context,
-                    'Pritish Samal ',
-                    'https://github.com/riteshsp2000',
+                  ContactCard(
+                    context: context,
+                    thirdPartyServices: _thirdPartyServices,
+                    name: 'Pritish Samal ',
+                    contact: 'https://github.com/riteshsp2000',
                   ),
-                  contactCard(
-                    context,
-                    'Ritesh Patil ',
-                    'https://github.com/CIPHERTron',
+                  ContactCard(
+                    context: context,
+                    thirdPartyServices: _thirdPartyServices,
+                    name: 'Ritesh Patil ',
+                    contact: 'https://github.com/CIPHERTron',
                   ),
                 ],
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget contactCard(BuildContext context, String name, String contact) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: () {
-          if (contact != "") {
-            _thirdPartyServices.urlLauncher(contact);
-          } else {}
-        },
-        child: Card(
-          elevation: 5.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    name,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: SizeConfig.safeBlockHorizontal! * 5,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                ),
-                Text(
-                  contact,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: SizeConfig.safeBlockHorizontal! * 4,
-                      fontWeight: FontWeight.w400,
-                      color: kPrimaryColor),
-                )
-              ],
-            ),
           ),
         ),
       ),
