@@ -16,6 +16,7 @@ dependencies:
   firebase_messaging: ^10.0.4
   lottie: ^1.0.1
   flutter_svg: ^0.22.0
+  flutter_text_drawable: ^1.0.0
   font_awesome_flutter: ^9.1.0
   get: ^4.1.4
   get_storage: ^2.0.2
