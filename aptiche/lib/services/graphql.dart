@@ -10,7 +10,6 @@ class GraphQLService {
   Future<void> initGraphQL(String? token) async {
     final HttpLink _httpLink = HttpLink(Strings.GRAPHQL_URL);
     final AuthLink _authLink = AuthLink(getToken: () async => 'Bearer $token');
-    debugPrint(token);
 
     final Link _link = _authLink.concat(_httpLink);
     _client = GraphQLClient(link: _link, cache: GraphQLCache());
