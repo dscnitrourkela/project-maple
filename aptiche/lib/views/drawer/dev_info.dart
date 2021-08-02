@@ -62,6 +62,16 @@ class DevInfo extends StatelessWidget {
                       ),
                 ),
               ),
+              SizedBox(
+                width: double.maxFinite,
+                child: Image.asset(
+                  'assets/images/gdsc.png',
+                  fit: BoxFit.contain,
+                  width: SizeConfig.screenWidth! * 0.3,
+                  height: SizeConfig.screenWidth! * 0.3,
+                  alignment: Alignment.center,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 child: Center(

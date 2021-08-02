@@ -17,7 +17,7 @@ abstract class Strings {
       'Google Developer Student Clubs (GDSC) is a Google Developers powered program for university students to learn mobile and web development skills. The clubs will be open to any student interested to learn, ranging from novice developers who are just starting, to advanced developers who want to further their skills. The clubs are intended as a space for students to try out new ideas and collaborate to solve mobile and web development problems.\n\n'
       'GDSC NIT Rourkela is a student chapter of GDSC India with a motive to nurture developers within the community and solve real-life problems in the community through technology.';
 
-  static const String privacy_policy = 'Privacy Policy\n '
+  static const String privacy_policy =
       'GDSC NIT Rourkela built the aptiche app as an Open Source app. This SERVICE is provided by GDSC NIT Rourkela at no cost and is intended for use as is. '
       'This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service. '
       'If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy. '
@@ -47,4 +47,10 @@ abstract class Strings {
       'This policy is effective as of 2021-08-15 '
       '\n\nContact Us\n '
       'If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at dsc.nitr@gmail.com. ';
+
+  static const String aiche =
+      "AIChE is the global home for chemical engineers. It aims to create awareness about the recent developments in chemical engineering and inspire young minds to find out better alternatives to combat global challenges. It enlightens its members about recognized, promising chemical engineering processes and methods and provides them a platform to connect with a global network of intelligent, resourceful colleagues and their shared wisdom. AIChE's vision is to provide value as the Global Leader of the Chemical Engineering profession. ";
+
+  static const String aiche_nitr =
+      'AIChE NITR Student Chapter saw its inception in the year 2016 under the able and elite guidance of the Faculty Advisor of the club Dr. Sujit Sen from the Department of Chemical Engineering. Since 2016 the club has grown manifolds carving a niche for itself among the active student chapters of India. It aims to create awareness about the recent developments in chemical engineering and inspire young minds to find out better alternatives to combat global challenges. It enlightens its members about recognized, promising chemical engineering processes and methods and provides them a platform to connect with a global network of intelligent, resourceful colleagues and their shared wisdom. The club members have perpetually toiled hard to promote among the students the urgency of a sustainable environment and the significance of technology to accomplish this purpose.';
 }

@@ -71,13 +71,13 @@ class MainDrawer extends StatelessWidget {
             DrawerListTile(
               text: 'About AIChE',
               function: () {
-                Get.to<AboutAICHENITR>(const AboutAICHENITR());
+                Get.to<AboutAICHE>(const AboutAICHE());
               },
             ),
             DrawerListTile(
               text: 'About AIChE NITR',
               function: () {
-                Get.to<AboutAICHE>(const AboutAICHE());
+                Get.to<AboutAICHENITR>(const AboutAICHENITR());
               },
             ),
             DrawerListTile(
