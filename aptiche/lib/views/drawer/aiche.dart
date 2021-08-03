@@ -35,7 +35,7 @@ class AboutAICHE extends StatelessWidget {
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               SizedBox(
                 width: double.infinity,
                 child: Image.asset(
