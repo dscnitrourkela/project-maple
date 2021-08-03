@@ -2,7 +2,7 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
 
 class AboutAICHENITR extends StatelessWidget {
@@ -36,7 +36,7 @@ class AboutAICHENITR extends StatelessWidget {
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               SizedBox(
                 width: double.infinity,
                 child: Image.asset(
