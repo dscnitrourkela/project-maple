@@ -58,15 +58,23 @@ class HomeGridTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.calendar_today,
-                    size: SizeConfig.safeBlockHorizontal! * 4),
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: SizeConfig.safeBlockHorizontal!),
+                  child: Icon(Icons.calendar_today,
+                      size: SizeConfig.safeBlockHorizontal! * 4),
+                ),
                 Text(formatDateTime(quiz.startTime)['date'].toString()),
                 SizedBox(
                   width: SizeConfig.safeBlockHorizontal! * 2,
                 ),
-                Icon(
-                  Icons.timelapse,
-                  size: SizeConfig.safeBlockHorizontal! * 4,
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: SizeConfig.safeBlockHorizontal!),
+                  child: Icon(
+                    Icons.timelapse,
+                    size: SizeConfig.safeBlockHorizontal! * 4,
+                  ),
                 ),
                 Text(formatDateTime(quiz.startTime)['time'].toString()),
               ],
