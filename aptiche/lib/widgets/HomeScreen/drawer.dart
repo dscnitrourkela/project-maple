@@ -6,6 +6,7 @@ import 'package:aptiche/views/drawer/aiche.dart';
 import 'package:aptiche/views/drawer/aichenitr.dart';
 import 'package:aptiche/views/drawer/dev_info.dart';
 import 'package:aptiche/views/drawer/privacy_policy.dart';
+import 'package:aptiche/views/drawer/profile_page.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -32,21 +33,20 @@ class MainDrawer extends StatelessWidget {
           children: <Widget>[
             ListTile(
               leading: SizedBox(
-                child: TextDrawable(
-                  text: localUserStorage.read<String?>('name').toString(),
-                  height: SizeConfig.safeBlockHorizontal! * 25,
-                  width: SizeConfig.safeBlockHorizontal! * 15,
-                  textStyle: const TextStyle(
-                    fontSize: 32,
-                    fontFamily: kSfpro,
-                    fontWeight: FontWeight.w700,
-                    color: kBgColour,
-                  ),
-                  backgroundColor: kTextColourBlue,
-                  boxShape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20),
+                  child: TextDrawable(
+                text: localUserStorage.read<String?>('name').toString(),
+                height: SizeConfig.safeBlockHorizontal! * 25,
+                width: SizeConfig.safeBlockHorizontal! * 15,
+                textStyle: const TextStyle(
+                  fontSize: 32,
+                  fontFamily: kSfpro,
+                  fontWeight: FontWeight.w700,
+                  color: kBgColour,
                 ),
-              ),
+                backgroundColor: kTextColourBlue,
+                boxShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20),
+              )),
               title: Text(
                 localUserStorage.read<String?>('name').toString(),
                 textAlign: TextAlign.left,
@@ -62,7 +62,7 @@ class MainDrawer extends StatelessWidget {
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            debugPrint('There is no profile page');
+                            Get.to<ProfilePage>(ProfilePage());
                           }),
                   ],
                 ),
