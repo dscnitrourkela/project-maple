@@ -35,15 +35,14 @@ class AboutAICHENITR extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: double.infinity,
+              Container(
+                padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
+                width: SizeConfig.screenWidth! * 0.5,
                 child: Image.asset(
                   'assets/images/aichenitr.png',
-                  width: SizeConfig.screenWidth! * 0.65,
-                  height: SizeConfig.screenWidth! * 0.65,
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                 ),
               ),
               Padding(
@@ -54,7 +53,7 @@ class AboutAICHENITR extends StatelessWidget {
                   Strings.aiche_nitr,
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                        fontSize: SizeConfig.safeBlockHorizontal! * 4.5,
                         fontWeight: FontWeight.w400,
                       ),
                 ),

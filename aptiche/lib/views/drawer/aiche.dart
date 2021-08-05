@@ -34,14 +34,13 @@ class AboutAICHE extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: double.infinity,
+              Container(
+                padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 3),
+                width: SizeConfig.screenWidth! * 0.7,
                 child: Image.asset(
                   'assets/images/aiche.png',
-                  width: SizeConfig.screenWidth! * 0.6,
-                  height: SizeConfig.screenWidth! * 0.6,
                   alignment: Alignment.center,
                 ),
               ),
@@ -53,7 +52,7 @@ class AboutAICHE extends StatelessWidget {
                   Strings.aiche,
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: SizeConfig.safeBlockHorizontal! * 4,
+                        fontSize: SizeConfig.safeBlockHorizontal! * 4.5,
                         fontWeight: FontWeight.w400,
                       ),
                 ),

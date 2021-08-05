@@ -128,8 +128,9 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(left: SizeConfig.safeBlockHorizontal! * 5),
+              padding: EdgeInsets.only(
+                  left: SizeConfig.safeBlockHorizontal! * 5,
+                  top: SizeConfig.safeBlockVertical! * 3.25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -143,6 +144,7 @@ class MainDrawer extends StatelessWidget {
                             ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
                         'AIChE NITR',
@@ -152,23 +154,32 @@ class MainDrawer extends StatelessWidget {
                             .copyWith(
                                 fontSize: SizeConfig.safeBlockHorizontal! * 5),
                       ),
-                      const SizedBox(
-                        width: 10.0,
+                      SizedBox(
+                        width: SizeConfig.safeBlockHorizontal! * 4,
                       ),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.instagram),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.instagram.com/aiche.nitrkl');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.linkedin),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.linkedin,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.linkedin.com/company/aiche-nitr');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.facebook),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.facebook,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.facebook.com/AIChENITR');
@@ -176,6 +187,7 @@ class MainDrawer extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
                         'GDSC NITR   ',
@@ -185,23 +197,33 @@ class MainDrawer extends StatelessWidget {
                             .copyWith(
                                 fontSize: SizeConfig.safeBlockHorizontal! * 5),
                       ),
-                      const SizedBox(
-                        width: 10.0,
+                      SizedBox(
+                        width: SizeConfig.safeBlockHorizontal! * 4,
                       ),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.globe),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.globe,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
-                            _thirdPartyServices
-                                .urlLauncher('https://dscnitrourkela.org');
+                            _thirdPartyServices.urlLauncher(
+                              'https://dscnitrourkela.org',
+                            );
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.instagram),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.instagram.com/dscnitrourkela');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.github),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.github,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://github.com/dscnitrourkela');
