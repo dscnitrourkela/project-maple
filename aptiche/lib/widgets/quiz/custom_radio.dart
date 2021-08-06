@@ -1,8 +1,8 @@
 import 'package:aptiche/utils/enums.dart';
 import 'package:flutter/material.dart';
 
-class LabeledRadio extends StatelessWidget {
-  const LabeledRadio({
+class CustomRadio extends StatelessWidget {
+  const CustomRadio({
     Key? key,
     required this.label,
     required this.padding,

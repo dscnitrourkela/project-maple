@@ -1,7 +1,9 @@
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
-import 'package:aptiche/widgets/quiz/options.dart';
+import 'package:aptiche/widgets/buttons.dart';
+import 'package:aptiche/widgets/quiz/choices_list_view.dart';
 import 'package:aptiche/widgets/quiz/quiz_question.dart';
+import 'package:aptiche/widgets/quiz/quiz_timer.dart';
 import 'package:aptiche/widgets/quiz/quiz_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -12,6 +14,33 @@ class QuizView extends GetView<QuizController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.safeBlockHorizontal! * 2,
+          vertical: SizeConfig.safeBlockVertical!,
+        ),
+        height: SizeConfig.screenHeight! * 0.075,
+        alignment: Alignment.bottomCenter,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            CustomButton(
+              horizontalPadding: 7,
+              verticalPadding: 2,
+              text: 'Previous',
+              onTap: () {},
+            ),
+            CustomButton(
+              horizontalPadding: 7,
+              verticalPadding: 2,
+              text: 'Save & Next',
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -37,7 +66,10 @@ class QuizView extends GetView<QuizController> {
               height: SizeConfig.safeBlockVertical! * 4,
             ),
             const QuizQuestion(),
-            // ListView.builder(itemBuilder: (context, index) => ListTile(leading: ,),)
+            SizedBox(
+              height: SizeConfig.safeBlockVertical! * 2,
+            ),
+            ChoicesListView(controller: controller),
           ],
         ),
       ),
