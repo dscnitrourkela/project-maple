@@ -19,8 +19,10 @@ class QuizController extends GetxController {
   /// Stores the value of the timer.
   Rx<Duration> timeout = const Duration(hours: 1).obs;
 
+  /// Stores the list of all question of that quiz.
   late List<Question> questions;
 
+  /// Stores th current index of the question displyed in the quiz.
   Rx<int> questionIndex = 0.obs;
 
   // Functions
@@ -54,28 +56,40 @@ class QuizController extends GetxController {
     update();
   }
 
+  /// A function which assigns the selected option of the current question to
+  /// the choice variable of [Question] and shows the next question in the quiz.
   void saveAndNext() {
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
     questionIndex.value++;
+    // The radio group value has to be set to NON for the next question.
     radioGroupValue.value = ChoicesEnum.NON;
   }
 
+  /// A function when triggered shows the previous question in the quiz.
   void previous() {
     questionIndex.value--;
   }
 
+  /// A function that calculates the total score of the user.
   void calculateScore() {
+    // This is done so that the last entry of the user gets saved.
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
+
+    /// Stores the score of the user for that quiz.
     int score = 0;
+
     for (final Question question in questions) {
       if (question.choice == question.answer) {
-        score = score + 3;
+        // adds the positive marks when the user answers correct/
+        score = score + question.positiveMark;
       } else if (question.choice == null) {
+        // doesn't change the score when left unasnwered.
         score = score;
       } else {
-        score--;
+        // adds the negative mark when answered incorrect.
+        score = score + question.negativeMark;
       }
     }
 
