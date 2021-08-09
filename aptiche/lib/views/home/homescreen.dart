@@ -83,6 +83,7 @@ class HomeScreen extends GetView<HomeController> {
                             alignment: Alignment.topCenter,
                             child: Row(
                               children: <Widget>[
+                                // TODO: A button must be provided which displays only the active quizzes
                                 GestureDetector(
                                   onTap: () {
                                     controller.upcomingQuiz.value = true;

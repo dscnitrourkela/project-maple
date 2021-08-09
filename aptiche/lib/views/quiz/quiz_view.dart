@@ -80,6 +80,7 @@ class QuizView extends GetView<QuizController> {
                 height: SizeConfig.safeBlockVertical! * 2,
               ),
               const ChoicesListView(),
+              // TODO: A button must be provided to clear the selected option.
             ],
           ),
         ),

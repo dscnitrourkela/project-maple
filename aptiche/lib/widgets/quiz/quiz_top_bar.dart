@@ -19,10 +19,9 @@ class QuizTopBar extends GetView<QuizController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            //TODO: Decide if it's going to be a dropdown list or something else
-            //and imlpement
+            //TODO: Decide if it's going to be a dropdown list or something else and implement
             Text(
-              '${controller.questionIndex.value + 1} of 20',
+              '${controller.questionIndex.value + 1} of ${controller.questions.length}',
               style: Theme.of(context).textTheme.headline6,
             ),
             CustomButton(
