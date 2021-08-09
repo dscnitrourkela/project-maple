@@ -2,22 +2,36 @@ class Question {
   Question({
     required this.questionId,
     required this.question,
-    required this.url,
+    // required this.url,
     required this.options,
     required this.answer,
     required this.positiveMark,
     required this.negativeMark,
     required this.explanation,
+    this.choice,
   });
+
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      questionId: json['_id'] as String,
+      question: json['question'] as String,
+      options: json['options'] as List<String>,
+      answer: json['answer'] as String,
+      positiveMark: json['positiveMark'] as int,
+      negativeMark: json['negativeMark'] as int,
+      explanation: json['explanation'] as String,
+    );
+  }
 
   String questionId;
   String question;
-  String url;
-  dynamic options;
+  // String url;
+  List<String> options;
   String answer;
-  dynamic positiveMark;
-  dynamic negativeMark;
+  int positiveMark;
+  int negativeMark;
   String explanation;
+  String? choice;
 }
 
 class Quiz {

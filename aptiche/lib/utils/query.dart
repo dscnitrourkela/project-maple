@@ -12,30 +12,6 @@ const String getUsers = r'''
         }
     ''';
 
-const String createUser = r'''
-mutation createUser(
-  $name: String!
-  $email: String!
-  $phoneNo: String!
-  $rollNo: String!
-  $fcmToken: [String!]!
-  $quizzes: [ObjectId!]!
-) {
-  createUser(
-    userDetails: {
-      name: $name
-      email: $email
-      phoneNo: $phoneNo
-      rollNo: $rollNo
-      fcmToken: $fcmToken
-      quizzes: $quizzes
-    }
-  ) {
-    _id
-  }
-}
-''';
-
 const String getQuiz = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){
@@ -48,3 +24,31 @@ const String getQuiz = r'''
         }
       }
     ''';
+
+const String getQuizzesByTimeQuery = r'''
+        query getQuizByTime($int: Int!) {
+          getQuizzesByTime(int: $int) {
+            _id
+            name
+            startTime
+            endTime
+            instructions
+            active
+          }
+        }
+        ''';
+
+const String getQuestionsByQuizQuery = r'''
+        query getQuestionByQuiz($ids: [ObjectId!]!){
+          getQuestionsForQuiz(ids: $ids){
+            _id
+            question
+            image
+            options
+            answer
+            positiveMark
+            negativeMark
+            explanation
+          }
+        }
+        ''';
