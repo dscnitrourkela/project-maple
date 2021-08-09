@@ -156,27 +156,29 @@ class HomeScreen extends GetView<HomeController> {
                               ],
                             ),
                           ),
+                          // TODO: Future handling has to be done as late initialization error occurs
                           Builder(
                             builder: (BuildContext context) {
-                              if (controller.homeState == CurrentState.ready &&
-                                  controller.desiredList.isNotEmpty) {
-                                return GridView.count(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  crossAxisCount: 2,
-                                  children: List<Widget>.generate(
-                                    controller.desiredList.length,
-                                    (int index) {
-                                      return HomeGridTile(
-                                        quiz: controller.desiredList[index],
-                                      );
-                                    },
-                                  ),
-                                );
-                              } else if (controller.desiredList.isEmpty) {
-                                return const Center(
-                                  child: Text('Oops, there are no quizzes'),
-                                );
+                              if (controller.homeState.value ==
+                                  CurrentState.ready) {
+                                if (controller.desiredList!.isEmpty)
+                                  return const Center(
+                                    child: Text('Oops, there are no quizzes'),
+                                  );
+                                else
+                                  return GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    crossAxisCount: 2,
+                                    children: List<Widget>.generate(
+                                      controller.desiredList!.length,
+                                      (int index) {
+                                        return HomeGridTile(
+                                          quiz: controller.desiredList![index],
+                                        );
+                                      },
+                                    ),
+                                  );
                               } else {
                                 return const Center(
                                   child: CircularProgressIndicator(),
