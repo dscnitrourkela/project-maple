@@ -140,7 +140,11 @@ class GraphQLService {
         // and then parsed into the map.
         for (final dynamic quiz in data['getQuestionsForQuiz']) {
           for (final dynamic question in quiz) {
+            /// Stores the parsed option from the data['options'].
             final List<String> options = <String>[];
+            // The list is emptied so that everytime the loop is run,
+            // the options of the current question won't get added to the
+            //options of the previous questions.
             options.length = 0;
 
             for (final dynamic option in question['options']) {
