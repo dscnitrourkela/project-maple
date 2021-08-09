@@ -5,39 +5,38 @@ import 'package:aptiche/widgets/quiz/custom_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class ChoicesListView extends StatelessWidget {
+class ChoicesListView extends GetView<QuizController> {
   const ChoicesListView({
     Key? key,
-    required this.controller,
   }) : super(key: key);
-
-  final QuizController controller;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: 4,
-      itemBuilder: (BuildContext context, int index) => Column(
-        children: <Widget>[
-          Obx(
-            () => CustomRadio(
-              label: '14',
-              padding: EdgeInsets.zero,
-              groupValue: controller.radioGroupValue.value,
-              value: ChoicesEnum.values[index],
-              onChanged: (ChoicesEnum newValue) {
-                controller.selectOption(newValue);
-              },
+    return Column(
+      children: List<Widget>.generate(
+        4,
+        (int index) => Column(
+          children: <Widget>[
+            Obx(
+              () => CustomRadio(
+                label: controller
+                    .questions[controller.questionIndex.value].options[index],
+                padding: EdgeInsets.zero,
+                groupValue: controller.radioGroupValue.value,
+                value: ChoicesEnum.values[index],
+                onChanged: (ChoicesEnum newValue) {
+                  controller.selectOption(newValue);
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.safeBlockHorizontal! * 6,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.safeBlockHorizontal! * 6,
+              ),
+              child: const Divider(),
             ),
-            child: const Divider(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
