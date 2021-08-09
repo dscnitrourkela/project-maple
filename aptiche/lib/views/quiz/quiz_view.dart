@@ -26,51 +26,62 @@ class QuizView extends GetView<QuizController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CustomButton(
-              horizontalPadding: 7,
-              verticalPadding: 2,
-              text: 'Previous',
-              onTap: () {},
-            ),
-            CustomButton(
-              horizontalPadding: 7,
-              verticalPadding: 2,
-              text: 'Save & Next',
-              onTap: () {},
-            ),
+            if (controller.questionIndex.value > 0)
+              CustomButton(
+                horizontalPadding: 7,
+                verticalPadding: 2,
+                text: 'Previous',
+                onTap: () {
+                  controller.previous();
+                },
+              ),
+            if (controller.questionIndex.value + 1 <
+                controller.questions.length)
+              CustomButton(
+                horizontalPadding: 7,
+                verticalPadding: 2,
+                text: 'Save & Next',
+                onTap: () {
+                  controller.saveAndNext();
+                },
+              ),
           ],
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            const QuizTimer(),
-            SizedBox(
-              height: SizeConfig.safeBlockVertical! * 0.4,
-            ),
-            const QuizTopBar(),
-            const Divider(),
-            SizedBox(
-              height: SizeConfig.safeBlockVertical! * 2,
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.safeBlockHorizontal! * 2),
-              child: Text(
-                'Question 14',
-                style: Theme.of(context).textTheme.headline6,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const QuizTimer(),
+              SizedBox(
+                height: SizeConfig.safeBlockVertical! * 0.4,
               ),
-            ),
-            SizedBox(
-              height: SizeConfig.safeBlockVertical! * 4,
-            ),
-            const QuizQuestion(),
-            SizedBox(
-              height: SizeConfig.safeBlockVertical! * 2,
-            ),
-            ChoicesListView(controller: controller),
-          ],
+              const QuizTopBar(),
+              const Divider(),
+              SizedBox(
+                height: SizeConfig.safeBlockVertical! * 2,
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.safeBlockHorizontal! * 2),
+                child: Obx(
+                  () => Text(
+                    'Question ${controller.questionIndex.value + 1}',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: SizeConfig.safeBlockVertical! * 4,
+              ),
+              const QuizQuestion(),
+              SizedBox(
+                height: SizeConfig.safeBlockVertical! * 2,
+              ),
+              const ChoicesListView(),
+            ],
+          ),
         ),
       ),
     );

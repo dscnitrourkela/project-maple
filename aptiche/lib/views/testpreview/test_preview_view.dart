@@ -61,7 +61,6 @@ class TestPreviewView extends GetView<QuizController> {
                     children: <Widget>[
                       Text(
                         quiz.name.toString(),
-                        // 'APTITUDE TEST-1',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline3!.copyWith(
                               color: kTextColourBlue,
@@ -107,6 +106,9 @@ Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, 
                         horizontalPadding: 15,
                         verticalPadding: 2,
                         onTap: () async {
+                          await controller
+                              .getQuestionsByQuiz(<String>[quiz.quizId!]);
+                          // TODO: Has to be changed so that the user can't exit the quiz screen by pressing back.
                           Get.to<QuizView>(() => const QuizView());
                           controller.startTimeout();
                         },
