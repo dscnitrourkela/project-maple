@@ -12,8 +12,8 @@ class CustomButton extends StatelessWidget {
       : super(key: key);
   final String? text;
   final VoidCallback? onTap;
-  final int verticalPadding;
-  final int horizontalPadding;
+  final double verticalPadding;
+  final double horizontalPadding;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
