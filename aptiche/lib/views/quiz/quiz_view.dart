@@ -22,30 +22,32 @@ class QuizView extends GetView<QuizController> {
         height: SizeConfig.screenHeight! * 0.075,
         alignment: Alignment.bottomCenter,
         color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            if (controller.questionIndex.value > 0)
-              CustomButton(
-                horizontalPadding: 7,
-                verticalPadding: 2,
-                text: 'Previous',
-                onTap: () {
-                  controller.previous();
-                },
-              ),
-            if (controller.questionIndex.value + 1 <
-                controller.questions.length)
-              CustomButton(
-                horizontalPadding: 7,
-                verticalPadding: 2,
-                text: 'Save & Next',
-                onTap: () {
-                  controller.saveAndNext();
-                },
-              ),
-          ],
+        child: Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              if (controller.questionIndex.value > 0)
+                CustomButton(
+                  horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.6,
+                  verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                  text: 'Previous',
+                  onTap: () {
+                    controller.previous();
+                  },
+                ),
+              if (controller.questionIndex.value + 1 <
+                  controller.questions.length)
+                CustomButton(
+                  horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.6,
+                  verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                  text: 'Save & Next',
+                  onTap: () {
+                    controller.saveAndNext();
+                  },
+                ),
+            ],
+          ),
         ),
       ),
       body: SafeArea(

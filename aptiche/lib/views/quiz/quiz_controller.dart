@@ -63,12 +63,18 @@ class QuizController extends GetxController {
         questions[questionIndex.value].options[radioGroupValue.value.index];
     questionIndex.value++;
     // The radio group value has to be set to NON for the next question.
-    radioGroupValue.value = ChoicesEnum.NON;
+    if (questions[questionIndex.value].choice == null) {
+      radioGroupValue.value = ChoicesEnum.NON;
+    }
+    print(questionIndex.value);
   }
 
   /// A function when triggered shows the previous question in the quiz.
   void previous() {
+    questions[questionIndex.value].choice =
+        questions[questionIndex.value].options[radioGroupValue.value.index];
     questionIndex.value--;
+    print(questionIndex.value);
   }
 
   /// A function that calculates the total score of the user.
