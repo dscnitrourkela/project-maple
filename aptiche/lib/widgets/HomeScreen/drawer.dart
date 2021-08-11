@@ -62,7 +62,7 @@ class MainDrawer extends StatelessWidget {
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Get.to<ProfilePage>(ProfilePage());
+                            Get.to<ProfilePage>(const ProfilePage());
                           }),
                   ],
                 ),

@@ -103,8 +103,9 @@ Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, 
                         height: SizeConfig.safeBlockVertical! * 4,
                       ),
                       CustomButton(
-                        horizontalPadding: 15,
-                        verticalPadding: 2,
+                        horizontalPadding:
+                            SizeConfig.safeBlockHorizontal! * 3.5,
+                        verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
                         onTap: () async {
                           await controller
                               .getQuestionsByQuiz(<String>[quiz.quizId!]);
