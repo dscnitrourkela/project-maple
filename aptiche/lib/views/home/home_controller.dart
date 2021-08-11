@@ -9,10 +9,10 @@ class HomeController extends GetxController {
 
   /// A boolean which returns true if the user has chose to display upcoming
   /// quizzes
-  RxBool upcomingQuiz = true.obs;
+  RxBool upcomingQuiz = false.obs;
 
   /// An enum which stores the current state of the [HomeScreen]
-  Rx<CurrentState> homeState = CurrentState.busy.obs;
+  Rx<CurrentState> homeState = CurrentState.ready.obs;
 
   /// A list which stores all the active quizzes.
   late List<Quiz> activeQuizzes;
@@ -51,7 +51,7 @@ class HomeController extends GetxController {
     pastQuizzes = await _graphQL.getQuizzesByTime(1);
     activeQuizzes = await _graphQL.getQuizzesByTime(2);
     upcomingQuizzes = await _graphQL.getQuizzesByTime(3);
-    desiredList = upcomingQuizzes;
+    assignList();
     homeState.value = CurrentState.ready;
     update();
   }
