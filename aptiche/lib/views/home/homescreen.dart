@@ -83,6 +83,7 @@ class HomeScreen extends GetView<HomeController> {
                             alignment: Alignment.topCenter,
                             child: Row(
                               children: <Widget>[
+                                // TODO: A button must be provided which displays only the active quizzes
                                 GestureDetector(
                                   onTap: () {
                                     controller.upcomingQuiz.value = true;
@@ -156,34 +157,31 @@ class HomeScreen extends GetView<HomeController> {
                               ],
                             ),
                           ),
-                          Builder(
-                            builder: (BuildContext context) {
-                              if (controller.homeState == CurrentState.ready &&
-                                  controller.desiredList.isNotEmpty) {
-                                return GridView.count(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  crossAxisCount: 2,
-                                  children: List<Widget>.generate(
-                                    controller.desiredList.length,
-                                    (int index) {
-                                      return HomeGridTile(
-                                        quiz: controller.desiredList[index],
-                                      );
-                                    },
-                                  ),
-                                );
-                              } else if (controller.desiredList.isEmpty) {
-                                return const Center(
-                                  child: Text('Oops, there are no quizzes'),
-                                );
-                              } else {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                            },
-                          )
+                          if (controller.homeState.value == CurrentState.ready)
+                            if (controller.desiredList!.isEmpty)
+                              const Center(
+                                child: Text('Oops, there are no quizzes'),
+                              )
+                            else
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                crossAxisCount: 2,
+                                children: List<Widget>.generate(
+                                  controller.desiredList!.length,
+                                  (int index) {
+                                    return HomeGridTile(
+                                      quiz: controller.desiredList![index],
+                                    );
+                                  },
+                                ),
+                              )
+                          else
+                            const Center(
+                              child: CircularProgressIndicator(
+                                color: kPrimaryColor,
+                              ),
+                            ),
                         ],
                       ),
                     ),

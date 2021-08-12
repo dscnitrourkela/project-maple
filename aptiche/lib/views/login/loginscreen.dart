@@ -117,6 +117,10 @@ class LoginView extends GetView<LoginController> {
                               )
                             else
                               CustomButton(
+                                horizontalPadding:
+                                    SizeConfig.safeBlockHorizontal! * 3.5,
+                                verticalPadding:
+                                    SizeConfig.safeBlockVertical! * 0.27,
                                 text:
                                     !controller.sent.value ? 'LOGIN' : 'VERIFY',
                                 onTap: !controller.sent.value

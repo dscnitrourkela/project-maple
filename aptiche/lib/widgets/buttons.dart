@@ -3,10 +3,17 @@ import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({Key? key, this.text, @required this.onTap})
+  const CustomButton(
+      {Key? key,
+      this.text,
+      @required this.onTap,
+      required this.verticalPadding,
+      required this.horizontalPadding})
       : super(key: key);
   final String? text;
   final VoidCallback? onTap;
+  final double verticalPadding;
+  final double horizontalPadding;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -14,8 +21,8 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: kPrimaryColor,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.safeBlockHorizontal! * 15,
-          vertical: SizeConfig.safeBlockHorizontal! * 2,
+          horizontal: SizeConfig.safeBlockHorizontal! * horizontalPadding,
+          vertical: SizeConfig.safeBlockHorizontal! * verticalPadding,
         ),
         elevation: SizeConfig.safeBlockHorizontal,
         shape: RoundedRectangleBorder(

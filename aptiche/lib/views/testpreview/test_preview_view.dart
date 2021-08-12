@@ -3,17 +3,19 @@ import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/quiz/quiz_controller.dart';
+import 'package:aptiche/views/quiz/quiz_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class TestPreviewView extends StatelessWidget {
+class TestPreviewView extends GetView<QuizController> {
   const TestPreviewView({Key? key, required this.quiz}) : super(key: key);
   final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -59,7 +61,6 @@ class TestPreviewView extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         quiz.name.toString(),
-                        // 'APTITUDE TEST-1',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline3!.copyWith(
                               color: kTextColourBlue,
@@ -102,7 +103,16 @@ Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, 
                         height: SizeConfig.safeBlockVertical! * 4,
                       ),
                       CustomButton(
-                        onTap: () {},
+                        horizontalPadding:
+                            SizeConfig.safeBlockHorizontal! * 3.5,
+                        verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                        onTap: () async {
+                          await controller
+                              .getQuestionsByQuiz(<String>[quiz.quizId!]);
+                          // TODO: Has to be changed so that the user can't exit the quiz screen by pressing back.
+                          Get.to<QuizView>(() => const QuizView());
+                          controller.startTimeout();
+                        },
                         text: 'Begin Test',
                       ),
                     ],

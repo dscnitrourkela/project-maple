@@ -2,10 +2,16 @@ import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/drawer/aiche.dart';
+import 'package:aptiche/views/drawer/aichenitr.dart';
+import 'package:aptiche/views/drawer/dev_info.dart';
+import 'package:aptiche/views/drawer/privacy_policy.dart';
+import 'package:aptiche/views/drawer/profile_page.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_text_drawable/flutter_text_drawable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -26,6 +32,21 @@ class MainDrawer extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: <Widget>[
             ListTile(
+              leading: SizedBox(
+                  child: TextDrawable(
+                text: localUserStorage.read<String?>('name').toString(),
+                height: SizeConfig.safeBlockHorizontal! * 25,
+                width: SizeConfig.safeBlockHorizontal! * 15,
+                textStyle: const TextStyle(
+                  fontSize: 32,
+                  fontFamily: kSfpro,
+                  fontWeight: FontWeight.w700,
+                  color: kBgColour,
+                ),
+                backgroundColor: kTextColourBlue,
+                boxShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20),
+              )),
               title: Text(
                 localUserStorage.read<String?>('name').toString(),
                 textAlign: TextAlign.left,
@@ -41,7 +62,7 @@ class MainDrawer extends StatelessWidget {
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            debugPrint('There is no profile page');
+                            Get.to<ProfilePage>(const ProfilePage());
                           }),
                   ],
                 ),
@@ -49,19 +70,27 @@ class MainDrawer extends StatelessWidget {
             ),
             DrawerListTile(
               text: 'About AIChE',
-              function: () {},
+              function: () {
+                Get.to<AboutAICHE>(const AboutAICHE());
+              },
             ),
             DrawerListTile(
               text: 'About AIChE NITR',
-              function: () {},
+              function: () {
+                Get.to<AboutAICHENITR>(const AboutAICHENITR());
+              },
             ),
             DrawerListTile(
               text: 'Privacy Policy',
-              function: () {},
+              function: () {
+                Get.to<PrivacyPolicyPage>(const PrivacyPolicyPage());
+              },
             ),
             DrawerListTile(
               text: 'Developers Info',
-              function: () {},
+              function: () {
+                Get.to<DevInfo>(DevInfo());
+              },
             ),
             Container(
               alignment: Alignment.centerLeft,
@@ -99,8 +128,9 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(left: SizeConfig.safeBlockHorizontal! * 5),
+              padding: EdgeInsets.only(
+                  left: SizeConfig.safeBlockHorizontal! * 5,
+                  top: SizeConfig.safeBlockVertical! * 3.25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -114,6 +144,7 @@ class MainDrawer extends StatelessWidget {
                             ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
                         'AIChE NITR',
@@ -123,23 +154,32 @@ class MainDrawer extends StatelessWidget {
                             .copyWith(
                                 fontSize: SizeConfig.safeBlockHorizontal! * 5),
                       ),
-                      const SizedBox(
-                        width: 10.0,
+                      SizedBox(
+                        width: SizeConfig.safeBlockHorizontal! * 4,
                       ),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.instagram),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.instagram.com/aiche.nitrkl');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.linkedin),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.linkedin,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.linkedin.com/company/aiche-nitr');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.facebook),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.facebook,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.facebook.com/AIChENITR');
@@ -147,6 +187,7 @@ class MainDrawer extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
                         'GDSC NITR   ',
@@ -156,23 +197,33 @@ class MainDrawer extends StatelessWidget {
                             .copyWith(
                                 fontSize: SizeConfig.safeBlockHorizontal! * 5),
                       ),
-                      const SizedBox(
-                        width: 10.0,
+                      SizedBox(
+                        width: SizeConfig.safeBlockHorizontal! * 4,
                       ),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.globe),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.globe,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
-                            _thirdPartyServices
-                                .urlLauncher('https://dscnitrourkela.org');
+                            _thirdPartyServices.urlLauncher(
+                              'https://dscnitrourkela.org',
+                            );
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.instagram),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://www.instagram.com/dscnitrourkela');
                           }),
                       IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.github),
+                          icon: const FaIcon(
+                            FontAwesomeIcons.github,
+                            color: kTextColourBlue,
+                          ),
                           onPressed: () {
                             _thirdPartyServices.urlLauncher(
                                 'https://github.com/dscnitrourkela');

@@ -264,6 +264,10 @@ class DataEntryScreen extends GetView<DataEntryController> {
                           width: SizeConfig.screenWidth,
                           alignment: Alignment.center,
                           child: CustomButton(
+                              horizontalPadding:
+                                  SizeConfig.safeBlockHorizontal! * 3.5,
+                              verticalPadding:
+                                  SizeConfig.safeBlockVertical! * 0.27,
                               text: 'PROCEED',
                               onTap: () {
                                 if (controller.formKey.currentState!
