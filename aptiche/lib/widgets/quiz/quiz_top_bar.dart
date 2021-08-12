@@ -1,9 +1,11 @@
+import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:awesome_dropdown/awesome_dropdown.dart';
 
 class QuizTopBar extends GetView<QuizController> {
   const QuizTopBar({
@@ -19,11 +21,29 @@ class QuizTopBar extends GetView<QuizController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            //TODO: Decide if it's going to be a dropdown list or something else and implement
-            Text(
-              '${controller.questionIndex.value + 1} of ${controller.questions.length}',
-              style: Theme.of(context).textTheme.headline6,
-            ),
+            AwesomeDropDown(
+                isPanDown: controller.dropDownOpen.value,
+                dropDownBGColor: kBgColour,
+                dropDownOverlayBGColor: Colors.transparent,
+                padding: SizeConfig.safeBlockHorizontal! * 2,
+                dropDownIcon: const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.grey,
+                  size: 23,
+                ),
+                elevation: 10,
+                dropDownBorderRadius: SizeConfig.safeBlockHorizontal!,
+                dropDownTopBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
+                dropDownBottomBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
+                dropDownIconBGColor: Colors.transparent,
+                onDropDownItemClick: (String item) {
+                  controller.dropDownOpen.value = false;
+                  controller.questionIndex.value = int.parse(item[0]) - 1;
+                },
+                dropDownList: List<String>.generate(
+                    controller.questions.length,
+                    (int index) =>
+                        '${index + 1} of ${controller.questions.length}')),
             CustomButton(
               text: 'Finish',
               // TODO: After pressing finish, everything must be stored into local storage and the next time the users opens the same quiz, timer and dinish button must not be shown.
