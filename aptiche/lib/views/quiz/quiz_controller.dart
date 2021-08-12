@@ -25,6 +25,9 @@ class QuizController extends GetxController {
   /// Stores th current index of the question displyed in the quiz.
   Rx<int> questionIndex = 0.obs;
 
+  ///Stores whether the drop down is open or not.
+  Rx<bool> dropDownOpen = false.obs;
+
   // Functions
 
   /// A void function which controls the behaviour of the timer(`timeout`)
