@@ -51,7 +51,7 @@ ThemeData appTheme() {
 
       // Quiz titles in cards
       headline3: TextStyle(
-        fontSize: 18,
+        fontSize: 17,
         fontFamily: kSfpro,
         fontWeight: FontWeight.w500,
         color: kTextColourBlue,
