@@ -3,7 +3,9 @@ import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
+import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/views/testpreview/test_preview_view.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,18 +13,25 @@ class HomeGridTile extends StatelessWidget {
   const HomeGridTile({
     Key? key,
     required this.quiz,
+    required this.classifier,
   }) : super(key: key);
 
   final Quiz quiz;
+  final bool classifier;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to<TestPreviewView>(
-        () => TestPreviewView(
-          quiz: quiz,
-        ),
-      ),
+      onTap: () {
+        if (classifier == true) {
+          CustomLoaders().customSnackBar(
+            'You are trying to attempt a future quiz',
+            '${quiz.name} will be active on ${formatDateTime(quiz.startTime)['date'].toString()}',
+          );
+        } else {
+          //TODO: page with answers of the past quizzes
+        }
+      },
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: SizeConfig.screenWidth! * 0.04,
@@ -83,6 +92,7 @@ class HomeGridTile extends StatelessWidget {
               height: SizeConfig.safeBlockVertical,
             ),
             Text(
+              //TODO : question number isnt 30 always. fetch it from the server
               '30 Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
               style: Theme.of(context).primaryTextTheme.headline3!.copyWith(
                     fontSize: SizeConfig.safeBlockHorizontal! * 3,
@@ -92,5 +102,107 @@ class HomeGridTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class HomeActiveTile extends StatelessWidget {
+  const HomeActiveTile({
+    Key? key,
+    required this.quiz,
+  }) : super(key: key);
+
+  final Quiz quiz;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () => Get.to<TestPreviewView>(
+              () => TestPreviewView(
+                quiz: quiz,
+              ),
+            ),
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * 0.05,
+            vertical: SizeConfig.screenWidth! * 0.02,
+          ),
+
+          decoration: BoxDecoration(
+            borderRadius:
+                BorderRadius.circular(SizeConfig.safeBlockHorizontal! * 6.25),
+            gradient: LinearGradient(
+              end: Alignment.centerLeft,
+              begin: Alignment.centerRight,
+              colors: <Color>[
+                kTertiaryColor.withOpacity(0.7),
+                kPrimaryColor,
+                kSecondaryColor,
+              ],
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.safeBlockHorizontal! * 3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/live.png',
+                  height: SizeConfig.safeBlockHorizontal! * 15,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      quiz.name.toString(),
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .headline2!
+                          .copyWith(color: kBgColour),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: SizeConfig.safeBlockHorizontal!),
+                          child: Icon(Icons.timelapse,
+                              color: kBgColour,
+                              size: SizeConfig.safeBlockHorizontal! * 6),
+                        ),
+                        Text(
+                          '${formatDateTime(quiz.startTime)['time']} - ${formatDateTime(quiz.endTime)['time']}',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline2!
+                              .copyWith(
+                                  color: kBgColour,
+                                  fontSize:
+                                      SizeConfig.safeBlockHorizontal! * 5),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      //TODO : question number isnt 30 always. fetch it from the server
+                      '30 Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .headline2!
+                          .copyWith(
+                            fontSize: SizeConfig.safeBlockHorizontal! * 5,
+                            color: kBgColour,
+                          ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          //child: Text(quiz.quizId.toString()),
+        ));
   }
 }

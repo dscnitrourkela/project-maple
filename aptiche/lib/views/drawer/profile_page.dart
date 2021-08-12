@@ -11,7 +11,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GetStorage localUserStorage = GetStorage('User');
-    final GetStorage localQuizStorage = GetStorage('Quiz');
     return Scaffold(
       appBar: AppBar(
         elevation: 6,

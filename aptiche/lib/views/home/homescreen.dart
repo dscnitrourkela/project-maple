@@ -34,29 +34,53 @@ class HomeScreen extends GetView<HomeController> {
         centerTitle: true,
       ),
       backgroundColor: kGreyBgColor,
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-            bottom: SizeConfig.screenHeight! * 0.500,
-            left: SizeConfig.screenWidth! * 0.175,
-            right: SizeConfig.screenWidth! * 0.175,
-            child: SvgPicture.asset(
-              Strings.homeScreenSVG,
-              alignment: Alignment.center,
-              placeholderBuilder: (BuildContext context) => Container(
-                  padding: const EdgeInsets.all(30.0),
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator()),
-              height: SizeConfig.screenHeight! * 0.32,
+      body: Obx(
+        () => Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: SizeConfig.screenWidth! * 1,
+                  child: SvgPicture.asset(
+                    Strings.homeScreenSVG,
+                    alignment: Alignment.center,
+                    placeholderBuilder: (BuildContext context) => Container(
+                        padding: const EdgeInsets.all(30.0),
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator()),
+                    height: SizeConfig.screenHeight! * 0.275,
+                  ),
+                ),
+                if (controller.homeState.value == CurrentState.ready)
+                  if (controller.activeQuizzes.isNotEmpty)
+                    SizedBox(
+                      height: SizeConfig.screenWidth! * 0.31,
+                      width: SizeConfig.screenWidth! * 1,
+                      child: HomeActiveTile(
+                        quiz: controller.activeQuizzes[0],
+                      ),
+                    )
+                  else
+                    Container()
+                else
+                  Padding(
+                    padding:
+                        EdgeInsets.all(SizeConfig.safeBlockHorizontal! * 10),
+                    child: const CircularProgressIndicator(),
+                  ),
+              ],
             ),
-          ),
-          DraggableScrollableSheet(
-            builder: (BuildContext context, ScrollController scrollController) {
-              return SizedBox(
-                height: SizeConfig.screenHeight! * 0.45,
-                width: SizeConfig.screenWidth,
-                child: Obx(
-                  () => Container(
+            DraggableScrollableSheet(
+              initialChildSize: 0.55,
+              minChildSize: 0.5,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return SizedBox(
+                  height: SizeConfig.screenHeight! * 0.45,
+                  width: SizeConfig.screenWidth,
+                  child: Container(
                     height: SizeConfig.screenHeight! * 0.4,
                     padding: EdgeInsets.only(
                       top: SizeConfig.safeBlockVertical! * 4,
@@ -83,7 +107,6 @@ class HomeScreen extends GetView<HomeController> {
                             alignment: Alignment.topCenter,
                             child: Row(
                               children: <Widget>[
-                                // TODO: A button must be provided which displays only the active quizzes
                                 GestureDetector(
                                   onTap: () {
                                     controller.upcomingQuiz.value = true;
@@ -159,8 +182,16 @@ class HomeScreen extends GetView<HomeController> {
                           ),
                           if (controller.homeState.value == CurrentState.ready)
                             if (controller.desiredList!.isEmpty)
-                              const Center(
-                                child: Text('Oops, there are no quizzes'),
+                              Padding(
+                                padding: EdgeInsets.all(
+                                    SizeConfig.safeBlockHorizontal! * 10),
+                                child: Text(
+                                  'Oops, there are no quiz in this category',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline3,
+                                ),
                               )
                             else
                               GridView.count(
@@ -171,26 +202,27 @@ class HomeScreen extends GetView<HomeController> {
                                   controller.desiredList!.length,
                                   (int index) {
                                     return HomeGridTile(
+                                      classifier: controller.upcomingQuiz.value,
                                       quiz: controller.desiredList![index],
                                     );
                                   },
                                 ),
                               )
                           else
-                            const Center(
-                              child: CircularProgressIndicator(
-                                color: kPrimaryColor,
-                              ),
+                            Padding(
+                              padding: EdgeInsets.all(
+                                  SizeConfig.safeBlockHorizontal! * 10),
+                              child: const CircularProgressIndicator(),
                             ),
                         ],
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
