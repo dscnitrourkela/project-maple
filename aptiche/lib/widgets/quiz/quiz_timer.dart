@@ -1,3 +1,4 @@
+import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,18 @@ class QuizTimer extends GetView<QuizController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).accentColor,
-      height: SizeConfig.safeBlockVertical! * 3.5,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          end: Alignment.centerLeft,
+          begin: Alignment.centerRight,
+          colors: <Color>[
+            kTertiaryColor.withOpacity(0.7),
+            kPrimaryColor,
+            kSecondaryColor,
+          ],
+        ),
+      ),
+      height: SizeConfig.safeBlockVertical! * 4.5,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -27,10 +38,9 @@ class QuizTimer extends GetView<QuizController> {
           Obx(
             () => Text(
               '${controller.timeout.value.inMinutes.remainder(60)} : ${controller.timeout.value.inSeconds.remainder(60)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Colors.white,
+                  ),
             ),
           ),
         ],

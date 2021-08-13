@@ -53,6 +53,11 @@ class QuizController extends GetxController {
     radioGroupValue.value = newValue;
   }
 
+  /// Clears [radioGroupValue] and sets to [ChoicesEnum.NON]
+  void clearRadioGroup() {
+    radioGroupValue.value = ChoicesEnum.NON;
+  }
+
   /// A future that fetches a list of [Question] objects for the Quiz.
   Future<void> getQuestionsByQuiz(List<String> ids) async {
     questions = await _graphQLService.getQuestionsByQuiz(ids);
@@ -64,20 +69,27 @@ class QuizController extends GetxController {
   void saveAndNext() {
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
-    questionIndex.value++;
+
     // The radio group value has to be set to NON for the next question.
     if (questions[questionIndex.value].choice == null) {
       radioGroupValue.value = ChoicesEnum.NON;
     }
-    print(questionIndex.value);
+
+    questionIndex.value++;
+
+    // To show the saved answer if any for the next quiz.
   }
 
   /// A function when triggered shows the previous question in the quiz.
   void previous() {
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
+    if (questions[questionIndex.value].choice == null) {
+      radioGroupValue.value = ChoicesEnum.NON;
+    }
     questionIndex.value--;
-    print(questionIndex.value);
+
+    //To show the saved answer of the previous question.
   }
 
   /// A function that calculates the total score of the user.

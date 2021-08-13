@@ -22,7 +22,7 @@ class ContactCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          if (contact != "") {
+          if (contact != '') {
             thirdPartyServices.urlLauncher(contact);
           } else {}
         },

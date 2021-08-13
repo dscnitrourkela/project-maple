@@ -3,7 +3,6 @@ import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/views/testpreview/test_preview_view.dart';
 import 'package:aptiche/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +28,11 @@ class HomeGridTile extends StatelessWidget {
             '${quiz.name} will be active on ${formatDateTime(quiz.startTime)['date'].toString()}',
           );
         } else {
+          Get.to<TestPreviewView>(
+            () => TestPreviewView(
+              quiz: quiz,
+            ),
+          );
           //TODO: page with answers of the past quizzes
         }
       },
