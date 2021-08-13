@@ -21,29 +21,44 @@ class QuizTopBar extends GetView<QuizController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            AwesomeDropDown(
-                isPanDown: controller.dropDownOpen.value,
-                dropDownBGColor: kBgColour,
-                dropDownOverlayBGColor: Colors.transparent,
-                padding: SizeConfig.safeBlockHorizontal! * 2,
-                dropDownIcon: const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.grey,
-                  size: 23,
-                ),
-                elevation: 10,
-                dropDownBorderRadius: SizeConfig.safeBlockHorizontal!,
-                dropDownTopBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
-                dropDownBottomBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
-                dropDownIconBGColor: Colors.transparent,
-                onDropDownItemClick: (String item) {
-                  controller.dropDownOpen.value = false;
-                  controller.questionIndex.value = int.parse(item[0]) - 1;
-                },
-                dropDownList: List<String>.generate(
-                    controller.questions.length,
-                    (int index) =>
-                        '${index + 1} of ${controller.questions.length}')),
+            SizedBox(
+              height: SizeConfig.safeBlockHorizontal! * 14,
+              width: SizeConfig.screenWidth! * 0.39,
+              child: AwesomeDropDown(
+                  isPanDown: controller.dropDownOpen.value,
+                  dropDownBGColor: kBgColour,
+                  dropDownOverlayBGColor: Colors.transparent,
+                  padding: SizeConfig.safeBlockHorizontal! * 2,
+                  dropDownIcon: const Padding(
+                    padding: EdgeInsets.all(2.0),
+                    child: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.grey,
+                      size: 23,
+                    ),
+                  ),
+                  dropDownListTextStyle:
+                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: kTextColourBlue,
+                          ),
+                  elevation: 10,
+                  dropDownBorderRadius: SizeConfig.safeBlockHorizontal!,
+                  dropDownTopBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
+                  dropDownBottomBorderRadius:
+                      SizeConfig.safeBlockHorizontal! * 5,
+                  dropDownIconBGColor: Colors.transparent,
+                  numOfListItemToShow: 5,
+                  onDropDownItemClick: (String item) {
+                    controller.dropDownOpen.value = false;
+                    controller.questionIndex.value =
+                        int.parse(item.substring(9)) - 1;
+                  },
+                  selectedItem:
+                      'Question ${controller.questionIndex.value + 1}',
+                  dropDownList: List<String>.generate(
+                      controller.questions.length,
+                      (int index) => 'Question ${index + 1}')),
+            ),
             CustomButton(
               text: 'Finish',
               // TODO: After pressing finish, everything must be stored into local storage and the next time the users opens the same quiz, timer and dinish button must not be shown.

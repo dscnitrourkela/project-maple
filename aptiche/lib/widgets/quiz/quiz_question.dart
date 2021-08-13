@@ -12,14 +12,14 @@ class QuizQuestion extends GetView<QuizController> {
   Widget build(BuildContext context) {
     return Container(
       margin:
-          EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 2),
+          EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 4),
       child: Obx(
         () => Text(
           controller.questions[controller.questionIndex.value].question
               .toString(),
           style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 height: SizeConfig.safeBlockHorizontal! * 0.4,
-                fontSize: SizeConfig.safeBlockVertical! * 2,
+                fontSize: SizeConfig.safeBlockVertical! * 2.35,
               ),
         ),
       ),

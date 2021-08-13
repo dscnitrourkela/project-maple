@@ -11,11 +11,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class TestPreviewView extends GetView<QuizController> {
-  const TestPreviewView({Key? key, required this.quiz}) : super(key: key);
+  TestPreviewView({Key? key, required this.quiz}) : super(key: key);
   final Quiz quiz;
-
+  List<String> instructions = <String>[];
   @override
   Widget build(BuildContext context) {
+    for (int i = 0; i < quiz.instructions.length; i++) {
+      instructions.add('${i + 1}.  ${quiz.instructions[i]}');
+    }
+    instructions.add(
+      '${quiz.instructions.length}. Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins.',
+    );
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -35,7 +41,7 @@ class TestPreviewView extends GetView<QuizController> {
               ),
             ),
             Positioned(
-              top: SizeConfig.screenHeight! * 0.375,
+              top: SizeConfig.screenHeight! * 0.355,
               height: SizeConfig.screenHeight! * 0.60,
               width: SizeConfig.screenWidth,
               child: Container(
@@ -57,65 +63,83 @@ class TestPreviewView extends GetView<QuizController> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: SizeConfig.safeBlockHorizontal! * 10),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        quiz.name.toString(),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline3!.copyWith(
-                              color: kTextColourBlue,
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.safeBlockHorizontal! * 7.5,
-                            ),
-                      ),
-                      SizedBox(
-                        height: SizeConfig.safeBlockVertical! * 4,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Instructions for the test:',
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          quiz.name.toString(),
+                          textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .headline3!
                               .copyWith(
-                                fontSize: SizeConfig.safeBlockHorizontal! * 5,
+                                color: kTextColourBlue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: SizeConfig.safeBlockHorizontal! * 7.5,
                               ),
-                          textAlign: TextAlign.left,
                         ),
-                      ),
-                      SizedBox(
-                        height: SizeConfig.safeBlockVertical! * 4,
-                      ),
-                      Text(
-                        '''
-${quiz.instructions[0]}
-
-${quiz.instructions[1]}
-
-${quiz.instructions[2]}
-
-Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins.
-                      ''',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      SizedBox(
-                        height: SizeConfig.safeBlockVertical! * 4,
-                      ),
-                      CustomButton(
-                        horizontalPadding:
-                            SizeConfig.safeBlockHorizontal! * 3.5,
-                        verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
-                        onTap: () async {
-                          await controller
-                              .getQuestionsByQuiz(<String>[quiz.quizId!]);
-                          // TODO: Has to be changed so that the user can't exit the quiz screen by pressing back.
-                          Get.to<QuizView>(() => const QuizView());
-                          controller.startTimeout();
-                        },
-                        text: 'Begin Test',
-                      ),
-                    ],
+                        SizedBox(
+                          height: SizeConfig.safeBlockVertical! * 3,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Instructions for the test:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                  fontSize: SizeConfig.safeBlockHorizontal! * 5,
+                                  color: kTextColourBlack,
+                                ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        SizedBox(
+                          height: SizeConfig.safeBlockVertical! * 2,
+                        ),
+                        ListView.builder(
+                            itemCount: instructions.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Text(
+                                instructions[index],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal! *
+                                              3.75,
+                                      color: kTextColourBlack,
+                                    ),
+                                textAlign: TextAlign.left,
+                              );
+                            }),
+                        SizedBox(
+                          height: SizeConfig.safeBlockVertical! * 4,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: SizeConfig.safeBlockVertical! * 2),
+                          child: CustomButton(
+                            horizontalPadding:
+                                SizeConfig.safeBlockHorizontal! * 3.5,
+                            verticalPadding:
+                                SizeConfig.safeBlockVertical! * 0.27,
+                            onTap: () async {
+                              await controller
+                                  .getQuestionsByQuiz(<String>[quiz.quizId!]);
+                              Get.to<QuizView>(() => QuizView(quiz: quiz));
+                              controller.startTimeout();
+                            },
+                            text: 'Begin Test',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

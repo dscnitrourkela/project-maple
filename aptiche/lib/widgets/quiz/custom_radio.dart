@@ -39,7 +39,11 @@ class CustomRadio extends StatelessWidget {
                 onChanged(newValue);
               },
             ),
-            Flexible(child: Text(label)),
+            Flexible(
+                child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodyText2,
+            )),
           ],
         ),
       ),
