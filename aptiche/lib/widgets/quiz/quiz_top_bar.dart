@@ -8,10 +8,11 @@ import 'package:get/get.dart';
 import 'package:awesome_dropdown/awesome_dropdown.dart';
 
 class QuizTopBar extends GetView<QuizController> {
-  const QuizTopBar({
+  const QuizTopBar(
+    this.quizName, {
     Key? key,
   }) : super(key: key);
-
+  final String quizName;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,8 +63,11 @@ class QuizTopBar extends GetView<QuizController> {
             CustomButton(
               text: 'Finish',
               // TODO: After pressing finish, everything must be stored into local storage and the next time the users opens the same quiz, timer and dinish button must not be shown.
-              onTap: () {
-                controller.calculateScore();
+              onTap: () async {
+                await controller.storeScore(
+                  quizName,
+                  controller.calculateScore(),
+                );
                 controller.timer.cancel();
                 Get.off<HomeScreen>(() => const HomeScreen());
               },

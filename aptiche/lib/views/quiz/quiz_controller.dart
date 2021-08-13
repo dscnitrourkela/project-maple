@@ -3,9 +3,11 @@ import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/utils/enums.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class QuizController extends GetxController {
   // Variables
+  final GetStorage localQuizStorage = GetStorage('Quiz');
 
   /// Finds the [GraphQLService] using [Getx] dependency injection
   final GraphQLService _graphQLService = Get.find();
@@ -77,7 +79,7 @@ class QuizController extends GetxController {
 
     questionIndex.value++;
 
-    // To show the saved answer if any for the next quiz.
+    //TODO:To show the saved answer if any for the next quiz.
   }
 
   /// A function when triggered shows the previous question in the quiz.
@@ -89,11 +91,11 @@ class QuizController extends GetxController {
     }
     questionIndex.value--;
 
-    //To show the saved answer of the previous question.
+    //TODO:To show the saved answer of the previous question.
   }
 
   /// A function that calculates the total score of the user.
-  void calculateScore() {
+  int calculateScore() {
     // This is done so that the last entry of the user gets saved.
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
@@ -113,8 +115,17 @@ class QuizController extends GetxController {
         score = score + question.negativeMark;
       }
     }
+    return score;
+  }
 
-    print('score: $score');
+  ///store the score in the local storage.
+  Future<void> storeScore(String quizId, int score) async {
+    await localQuizStorage.write(quizId, score);
+  }
+
+  ///Function to check whether the quiz is taken already or not.
+  bool checkQuiz(String quizId) {
+    return localQuizStorage.read<String>(quizId) == null;
   }
 
   @override

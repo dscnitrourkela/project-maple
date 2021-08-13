@@ -6,6 +6,7 @@ import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
 import 'package:aptiche/views/quiz/quiz_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -132,8 +133,14 @@ class TestPreviewView extends GetView<QuizController> {
                             onTap: () async {
                               await controller
                                   .getQuestionsByQuiz(<String>[quiz.quizId!]);
-                              Get.to<QuizView>(() => QuizView(quiz: quiz));
-                              controller.startTimeout();
+                              if (controller.checkQuiz(quiz.quizId!)) {
+                                Get.to<QuizView>(() => QuizView(quiz: quiz));
+                                controller.startTimeout();
+                              } else {
+                                CustomLoaders().customSnackBar(
+                                    'Duplicate Test Attempt',
+                                    'You are attempting a test that you have already attempted. Multiple attempts not allowed');
+                              }
                             },
                             text: 'Begin Test',
                           ),

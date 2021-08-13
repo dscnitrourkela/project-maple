@@ -1,5 +1,4 @@
 import 'package:aptiche/datamodels/api_models.dart';
-import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
 import 'package:aptiche/widgets/buttons.dart';
@@ -85,7 +84,7 @@ class QuizView extends GetView<QuizController> {
               SizedBox(
                 height: SizeConfig.safeBlockVertical! * 0.4,
               ),
-              const QuizTopBar(),
+              QuizTopBar(quiz.name!.toString()),
               const Divider(),
               SizedBox(
                 height: SizeConfig.safeBlockVertical! * 2,
