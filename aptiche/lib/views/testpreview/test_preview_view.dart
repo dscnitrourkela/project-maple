@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class TestPreviewView extends GetView<QuizController> {
   TestPreviewView({Key? key, required this.quiz}) : super(key: key);
   final Quiz quiz;

@@ -12,7 +12,18 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final GetStorage localUserStorage = GetStorage('User');
     final GetStorage localQuizStorage = GetStorage('Quiz');
-    print(localQuizStorage);
+
+    final List<String> keys = <String>[];
+    final List<String> values = <String>[];
+
+    for (final String key in localQuizStorage.getKeys()) {
+      keys.add(key.toString());
+    }
+
+    for (final String value in localQuizStorage.getValues()) {
+      values.add(value.toString());
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 6,
@@ -111,17 +122,16 @@ class ProfilePage extends StatelessWidget {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           physics: const BouncingScrollPhysics(),
-                          itemCount: 20,
+                          itemCount: keys.length,
                           itemBuilder: (BuildContext context, int index) {
                             return ListTile(
-                              title: Text('quiz $index name veryyyy long name',
+                              title: Text(keys[index],
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
                                       .copyWith(fontSize: 14)),
-                              subtitle: Text('$index | 08 | 2021'),
                               trailing: Text(
-                                'score : $index',
+                                'score : ${values[index]}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
