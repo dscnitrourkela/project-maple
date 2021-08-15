@@ -18,7 +18,7 @@ class AnswerDisplayer extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.safeBlockHorizontal! * 1.5),
       child: Column(
-        children: [
+        children: <Widget>[
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
@@ -47,12 +47,12 @@ class AnswerDisplayer extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 8,
-                      ),
                       color: kPrimaryColor.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.safeBlockHorizontal! * 1.5,
+                      vertical: SizeConfig.safeBlockHorizontal! * 1.5,
                     ),
                     width: double.maxFinite,
                     child: Text(

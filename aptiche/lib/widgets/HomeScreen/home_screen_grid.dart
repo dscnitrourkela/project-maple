@@ -29,11 +29,6 @@ class HomeGridTile extends StatelessWidget {
             '${quiz.name} will be active on ${formatDateTime(quiz.startTime)['date'].toString()}',
           );
         } else {
-          // Get.to<TestPreviewView>(
-          //   () => TestPreviewView(
-          //     quiz: quiz,
-          //   ),
-          // );
           Get.to<AnswerView>(() => AnswerView(quiz));
         }
       },
@@ -97,8 +92,7 @@ class HomeGridTile extends StatelessWidget {
               height: SizeConfig.safeBlockVertical,
             ),
             Text(
-              //TODO : question number isnt 30 always. fetch it from the server
-              '30 Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+              '${quiz.questionIds!.length}, Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
               style: Theme.of(context).primaryTextTheme.headline3!.copyWith(
                     fontSize: SizeConfig.safeBlockHorizontal! * 3,
                   ),
@@ -192,8 +186,7 @@ class HomeActiveTile extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      //TODO : question number isnt 30 always. fetch it from the server
-                      '30 Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+                      '${quiz.questionIds!.length}, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
                       style: Theme.of(context)
                           .primaryTextTheme
                           .headline2!

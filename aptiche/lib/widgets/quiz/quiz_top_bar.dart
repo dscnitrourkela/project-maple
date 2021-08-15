@@ -62,7 +62,6 @@ class QuizTopBar extends GetView<QuizController> {
             ),
             CustomButton(
               text: 'Finish',
-              // TODO: After pressing finish, everything must be stored into local storage and the next time the users opens the same quiz, timer and dinish button must not be shown.
               onTap: () async {
                 await controller.storeScore(
                   quizName,

@@ -19,6 +19,7 @@ const String getQuiz = r'''
           name
           startTime
           endTime
+          questionIds
           instructions
           active
         }
@@ -31,6 +32,7 @@ const String getQuizzesByTimeQuery = r'''
             _id
             name
             startTime
+            questionIds
             endTime
             instructions
             active
