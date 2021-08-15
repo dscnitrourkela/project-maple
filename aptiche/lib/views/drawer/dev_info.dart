@@ -7,6 +7,9 @@ import '../../utils/theme.dart';
 import '../../utils/ui_scaling.dart';
 
 class DevInfo extends StatelessWidget {
+  DevInfo({
+    Key? key,
+  }) : super(key: key);
   final ThirdPartyServices _thirdPartyServices = Get.find();
   @override
   Widget build(BuildContext context) {
