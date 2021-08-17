@@ -5,10 +5,6 @@ class RemoteConfigService {
   Future<RemoteConfig> setupRemoteConfig() async {
     try {
       remoteConfig = RemoteConfig.instance;
-      remoteConfig.setDefaults(<String, dynamic>{
-        'api_url': 'https://aptiche.dscnitrourkela.org/graphql',
-        'api_key': 'SriramForTheDiro'
-      });
       await remoteConfig.ensureInitialized();
       await remoteConfig.fetchAndActivate();
 
