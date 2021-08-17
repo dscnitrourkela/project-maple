@@ -25,6 +25,7 @@ dependencies:
   graphql_flutter: ^5.0.0
   intl: ^0.17.0
   dartdoc: ^1.0.2
+  firebase_remote_config: ^0.10.0+3
 
 dev_dependencies:
   flutter_test:

@@ -10,9 +10,6 @@ abstract class Strings {
 //PNG Strings
   static const String quizPNG = 'assets/images/quiz.png';
 
-  static const String GRAPHQL_URL =
-      'https://aptiche.dscnitrourkela.org/graphql?apikey=SriramForTheDiro';
-
   static const String aboutText =
       'Google Developer Student Clubs (GDSC) is a Google Developers powered program for university students to learn mobile and web development skills. The clubs will be open to any student interested to learn, ranging from novice developers who are just starting, to advanced developers who want to further their skills. The clubs are intended as a space for students to try out new ideas and collaborate to solve mobile and web development problems.\n\n'
       'GDSC NIT Rourkela is a student chapter of GDSC India with a motive to nurture developers within the community and solve real-life problems in the community through technology.';
