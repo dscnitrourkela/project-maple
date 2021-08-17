@@ -1,17 +1,27 @@
+import 'package:aptiche/services/net/remote_config.dart';
 import 'package:aptiche/utils/mutation.dart';
 import 'package:aptiche/utils/query.dart';
 import 'package:aptiche/datamodels/api_models.dart';
-import 'package:aptiche/utils/string.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLService {
+  final RemoteConfigService _remoteConfigService = Get.find();
+
   /// Stores the [GraphQLClient]
   late GraphQLClient _client;
 
   /// Intialises the [GraphQLClient]
   Future<void> initGraphQL(String? token) async {
-    final HttpLink _httpLink = HttpLink(Strings.GRAPHQL_URL);
+    /// Initialise Remote Config.
+    await _remoteConfigService.setupRemoteConfig();
+
+    /// Get the apiUrl and apiKey from remote config.
+    final HttpLink _httpLink = HttpLink(
+      '${_remoteConfigService.apiUrl}?apikey=${_remoteConfigService.apiKey}',
+    );
+
     final AuthLink _authLink = AuthLink(getToken: () async => 'Bearer $token');
 
     final Link _link = _authLink.concat(_httpLink);
