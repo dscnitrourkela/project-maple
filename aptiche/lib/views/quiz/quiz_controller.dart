@@ -30,6 +30,9 @@ class QuizController extends GetxController {
   ///Stores whether the drop down is open or not.
   Rx<bool> dropDownOpen = false.obs;
 
+  ///Stores the total score of the quiz
+  Rx<int> score = 0.obs;
+
   // Functions
 
   /// A void function which controls the behaviour of the timer(`timeout`)
@@ -55,6 +58,18 @@ class QuizController extends GetxController {
     radioGroupValue.value = newValue;
   }
 
+  /// Checks whether the question is answered or not
+  void checkAnswered() {
+    if (questions[questionIndex.value].choice == null) {
+      radioGroupValue.value = ChoicesEnum.NON;
+    } else {
+      radioGroupValue.value = ChoicesEnum.values.elementAt(
+          questions[questionIndex.value]
+              .options
+              .indexOf(questions[questionIndex.value].choice.toString()));
+    }
+  }
+
   /// Clears [radioGroupValue] and sets to [ChoicesEnum.NON]
   void clearRadioGroup() {
     radioGroupValue.value = ChoicesEnum.NON;
@@ -78,24 +93,23 @@ class QuizController extends GetxController {
     }
 
     questionIndex.value++;
-
-    //TODO:To show the saved answer if any for the next quiz.
+    checkAnswered();
   }
 
   /// A function when triggered shows the previous question in the quiz.
   void previous() {
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
+
     if (questions[questionIndex.value].choice == null) {
       radioGroupValue.value = ChoicesEnum.NON;
     }
     questionIndex.value--;
-
-    //TODO:To show the saved answer of the previous question.
+    checkAnswered();
   }
 
   /// A function that calculates the total score of the user.
-  int calculateScore() {
+  void calculateScore() {
     // This is done so that the last entry of the user gets saved.
     questions[questionIndex.value].choice =
         questions[questionIndex.value].options[radioGroupValue.value.index];
@@ -115,17 +129,25 @@ class QuizController extends GetxController {
         score = score + question.negativeMark;
       }
     }
-    return score;
+    print(score.toString());
   }
 
   ///store the score in the local storage.
-  Future<void> storeScore(String quizId, int score) async {
-    await localQuizStorage.write(quizId, score);
+  Future<void> storeScore(String quizId) async {
+    final Map<String, String> result =
+        localQuizStorage.read<Map<String, String>>('past')!;
+    result[quizId] = score.value.toString();
   }
 
   ///Function to check whether the quiz is taken already or not.
   bool checkQuiz(String quizId) {
-    return localQuizStorage.read<String>(quizId) == null;
+    final Map<String, String> result =
+        localQuizStorage.read<Map<String, String>>('past')!;
+    if (result[quizId] == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   @override

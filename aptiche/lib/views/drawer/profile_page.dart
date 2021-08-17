@@ -13,20 +13,10 @@ class ProfilePage extends StatelessWidget {
     final GetStorage localUserStorage = GetStorage('User');
     final GetStorage localQuizStorage = GetStorage('Quiz');
 
-    final List<String> keys = <String>[];
-    final List<String> values = <String>[];
-
-    for (final String key in localQuizStorage.getKeys()) {
-      keys.add(key.toString());
-    }
-
-    for (final String value in localQuizStorage.getValues()) {
-      values.add(value.toString());
-    }
+    final Map<String, dynamic>? results = localQuizStorage.read('past');
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 6,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
           color: kTextColourBlue,
@@ -40,11 +30,10 @@ class ProfilePage extends StatelessWidget {
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal!),
           child: Text(
             'Profile Dashboard',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontSize: SizeConfig.safeBlockHorizontal! * 7,
-                  color: kTextColourBlue,
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .headline3!
+                .copyWith(fontSize: SizeConfig.safeBlockVertical! * 3.5),
           ),
         ),
       ),
@@ -107,7 +96,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Past Quizzes and Results',
+                    'Past Attempted Quizzes',
                     style: TextStyle(
                       fontSize: SizeConfig.safeBlockHorizontal! * 6.25,
                       fontFamily: kSfpro,
@@ -115,32 +104,41 @@ class ProfilePage extends StatelessWidget {
                       color: kTextColourBlue,
                     ),
                   ),
-                  SingleChildScrollView(
-                    child: SizedBox(
-                      height: SizeConfig.screenHeight! * 0.35,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: keys.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return ListTile(
-                              title: Text(keys[index],
+                  if (results != null)
+                    SingleChildScrollView(
+                      child: SizedBox(
+                        height: SizeConfig.screenHeight! * 0.35,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: results.values.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListTile(
+                                title: Text(results.keys.elementAt(index),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .copyWith(fontSize: 14)),
+                                trailing: Text(
+                                  'score : ${results.values.elementAt(index)}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
-                                      .copyWith(fontSize: 14)),
-                              trailing: Text(
-                                'score : ${values[index]}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(fontSize: 14),
-                              ),
-                            );
-                          }),
+                                      .copyWith(fontSize: 14),
+                                ),
+                              );
+                            }),
+                      ),
+                    )
+                  else
+                    Center(
+                      child: Text(
+                        'You have not attempted any quiz in the past',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).primaryTextTheme.headline3,
+                      ),
                     ),
-                  )
                 ],
               ),
             )

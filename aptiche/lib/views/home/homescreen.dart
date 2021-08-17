@@ -54,12 +54,12 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
                 if (controller.homeState.value == CurrentState.ready)
-                  if (controller.activeQuizzes.isNotEmpty)
+                  if (controller.pastQuizzes.isNotEmpty)
                     SizedBox(
                       height: SizeConfig.screenWidth! * 0.31,
                       width: SizeConfig.screenWidth! * 1,
                       child: HomeActiveTile(
-                        quiz: controller.activeQuizzes[0],
+                        quiz: controller.pastQuizzes[0],
                       ),
                     )
                   else
