@@ -22,7 +22,7 @@ class TestPreviewView extends GetView<QuizController> {
       instructions.add('${i + 1}.  ${quiz.instructions[i]}');
     }
     instructions.add(
-      '${quiz.instructions.length}. Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins.',
+      '${quiz.instructions.length + 1}. Total time alloted for the whole test is ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins.',
     );
     return Scaffold(
       body: SafeArea(

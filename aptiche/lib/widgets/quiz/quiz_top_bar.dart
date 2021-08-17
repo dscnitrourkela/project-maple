@@ -1,7 +1,8 @@
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/views/home/homescreen.dart';
+
 import 'package:aptiche/views/quiz/quiz_controller.dart';
+import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,15 +17,17 @@ class QuizTopBar extends GetView<QuizController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: SizeConfig.safeBlockHorizontal! * 2),
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.safeBlockHorizontal! * 2,
+      ),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: SizeConfig.safeBlockHorizontal! * 14,
-              width: SizeConfig.screenWidth! * 0.39,
+              height: SizeConfig.safeBlockHorizontal! * 16,
+              width: SizeConfig.screenWidth! * 0.42,
               child: AwesomeDropDown(
                   isPanDown: controller.dropDownOpen.value,
                   dropDownBGColor: kBgColour,
@@ -38,10 +41,12 @@ class QuizTopBar extends GetView<QuizController> {
                       size: 23,
                     ),
                   ),
-                  dropDownListTextStyle:
-                      Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: kTextColourBlue,
-                          ),
+                  dropDownListTextStyle: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(
+                          color: kTextColourBlue,
+                          fontSize: SizeConfig.safeBlockHorizontal! * 5),
                   elevation: 10,
                   dropDownBorderRadius: SizeConfig.safeBlockHorizontal!,
                   dropDownTopBorderRadius: SizeConfig.safeBlockHorizontal! * 5,
@@ -51,8 +56,10 @@ class QuizTopBar extends GetView<QuizController> {
                   numOfListItemToShow: 5,
                   onDropDownItemClick: (String item) {
                     controller.dropDownOpen.value = false;
+
                     controller.questionIndex.value =
                         int.parse(item.substring(9)) - 1;
+                    controller.checkAnswered();
                   },
                   selectedItem:
                       'Question ${controller.questionIndex.value + 1}',
@@ -63,15 +70,22 @@ class QuizTopBar extends GetView<QuizController> {
             CustomButton(
               text: 'Finish',
               onTap: () async {
+                controller.calculateScore();
                 await controller.storeScore(
-                  quizName,
-                  controller.calculateScore(),
+                  quizName.toString(),
                 );
                 controller.timer.cancel();
-                Get.off<HomeScreen>(() => const HomeScreen());
+
+                Get.off<ResultView>(
+                  () => ResultView(
+                    score: controller.score.value,
+                    totalScore: controller.questions.length *
+                        controller.questions[0].positiveMark,
+                  ),
+                );
               },
               horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.6,
-              verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+              verticalPadding: SizeConfig.safeBlockVertical! * 0.5,
             )
           ],
         ),

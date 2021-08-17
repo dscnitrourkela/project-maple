@@ -25,7 +25,7 @@ class Question {
 
   String questionId;
   String question;
-  // String url;
+
   List<String> options;
   String answer;
   int positiveMark;
@@ -40,10 +40,8 @@ class Quiz {
       required this.name,
       required this.startTime,
       required this.endTime,
-      required this.questionIds,
       required this.instructions,
-      // required this.description,
-      // required this.submissions,
+      required this.questionIds,
       required this.active});
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
@@ -52,8 +50,8 @@ class Quiz {
       name: json['name'] as String,
       startTime: json['startTime'] as String,
       endTime: json['endTime'] as String,
-      questionIds: json['questionsIds'] as List<String?>?,
       instructions: json['instructions'] as List<String>,
+      questionIds: json['questionIds'] as List<String>,
       active: json['active'] as bool,
     );
   }
@@ -62,10 +60,9 @@ class Quiz {
   final String? name;
   String startTime;
   String endTime;
-  final List<String?>? questionIds; // string - questionId
+  final List<String> questionIds; // string - questionId
   final List<String> instructions;
-  // final String description;
-  // final dynamic submissions; // string - userId, int - score
+  // string - userId, int - score
   final bool active;
 }
 

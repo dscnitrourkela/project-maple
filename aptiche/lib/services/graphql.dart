@@ -79,39 +79,42 @@ class GraphQLService {
       /// Takes in data from [QueryResult] and converts it to a map
       List<Map<String, dynamic>>? toMap(Map<String, dynamic> data) {
         /// Stores the list of instruction strings.
-        final List<String> instructionsList = <String>[];
-        final List<dynamic> questionIdList = <dynamic>[];
+
         final List<Map<String, dynamic>> list = <Map<String, dynamic>>[];
         // Since graphql is returning everything as an object, each string in
         // the instructions list is first converted from an object to string
         // and then parsed into the map.
         for (final dynamic quiz in data['getQuizzesByTime']) {
+          final List<String> questionIdsList = <String>[];
+          final List<String> instructionsList = <String>[];
           for (final dynamic instruction in quiz['instructions']) {
             instructionsList.add(instruction.toString());
           }
-          for (final dynamic instruction in quiz['questionIds']) {
-            questionIdList.add(instruction.toString());
+
+          for (final dynamic questionId in quiz['questionIds']) {
+            questionIdsList.add(questionId.toString());
           }
+
           final Map<String, dynamic> listItem = <String, dynamic>{
             '_id': quiz['_id'],
             'name': quiz['name'],
             'startTime': quiz['startTime'],
             'endTime': quiz['endTime'],
-            'questionIds': questionIdList,
             'instructions': instructionsList,
+            'questionIds': questionIdsList,
             'active': quiz['active']
           };
 
           list.add(listItem);
         }
+
         return list;
       }
 
       final List<Map<String, dynamic>>? getQuizzes = toMap(result.data!);
 
       /// Stores the final result i.e. all the quizzes.
-      // ignore: prefer_final_locals
-      List<Quiz> quizzes = <Quiz>[];
+      final List<Quiz> quizzes = <Quiz>[];
 
       /// Converts the map into a [Quiz] Object
       for (final Map<String, dynamic> quiz in getQuizzes!) {

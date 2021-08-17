@@ -14,6 +14,13 @@ class AnswerView extends GetView<QuizController> {
     return Scaffold(
       backgroundColor: kBgColour,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          color: kTextColourBlue,
+          onPressed: () {
+            Get.back<dynamic>();
+          },
+        ),
         title: Text(
           quiz.name.toString(),
           style: Theme.of(context)

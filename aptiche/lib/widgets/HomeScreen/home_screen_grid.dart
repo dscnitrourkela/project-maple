@@ -92,7 +92,7 @@ class HomeGridTile extends StatelessWidget {
               height: SizeConfig.safeBlockVertical,
             ),
             Text(
-              '${quiz.questionIds!.length}, Questions, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+              'Duration - ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
               style: Theme.of(context).primaryTextTheme.headline3!.copyWith(
                     fontSize: SizeConfig.safeBlockHorizontal! * 3,
                   ),
@@ -141,9 +141,9 @@ class HomeActiveTile extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: SizeConfig.safeBlockHorizontal! * 3),
+                horizontal: SizeConfig.safeBlockHorizontal! * 4.5),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Image.asset(
                   'assets/images/live.png',
@@ -186,7 +186,7 @@ class HomeActiveTile extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      '${quiz.questionIds!.length}, ${calcuateTestDuration(quiz.startTime, quiz.endTime)} mins',
+                      '${quiz.questionIds.length} Questions',
                       style: Theme.of(context)
                           .primaryTextTheme
                           .headline2!

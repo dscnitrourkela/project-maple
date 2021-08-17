@@ -1,7 +1,7 @@
 import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
+import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:aptiche/widgets/quiz/choices_list_view.dart';
 import 'package:aptiche/widgets/quiz/quiz_question.dart';
@@ -33,12 +33,18 @@ class QuizView extends GetView<QuizController> {
                       verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
                       text: 'END QUIZ',
                       onTap: () async {
+                        controller.calculateScore();
                         await controller.storeScore(
                           quiz.name.toString(),
-                          controller.calculateScore(),
                         );
                         controller.timer.cancel();
-                        Get.off<HomeScreen>(() => const HomeScreen());
+                        Get.off<ResultView>(
+                          () => ResultView(
+                            score: controller.score.value,
+                            totalScore: controller.questions.length *
+                                controller.questions[0].positiveMark,
+                          ),
+                        );
                       },
                     ),
                     CustomButton(
@@ -55,7 +61,7 @@ class QuizView extends GetView<QuizController> {
         return Future<bool>.value(false);
       },
       child: Scaffold(
-        appBar: AppBar(
+        /*  appBar: AppBar(
           title: Text(
             quiz.name.toString(),
             style: Theme.of(context)
@@ -63,7 +69,7 @@ class QuizView extends GetView<QuizController> {
                 .headline3!
                 .copyWith(fontSize: SizeConfig.safeBlockVertical! * 3.5),
           ),
-        ),
+        ), */
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.safeBlockHorizontal! * 2,
@@ -80,15 +86,16 @@ class QuizView extends GetView<QuizController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  if (controller.questionIndex.value > 0)
+                  /*  if (controller.questionIndex.value > 0)
                     CustomButton(
                       horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
                       verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
                       text: 'Previous',
                       onTap: () {
-                        controller.previous();
+                        print(controller.radioGroupValue.value);
+                        //controller.previous();
                       },
-                    ),
+                    ), */
                   CustomButton(
                     horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
                     verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
