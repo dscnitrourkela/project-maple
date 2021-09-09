@@ -49,7 +49,7 @@ class ResultView extends StatelessWidget {
                     )),
                 CustomButton(
                     onTap: () {
-                      Get.offAll<HomeScreen>(const HomeScreen());
+                      Get.offAll<HomeScreen>(() => const HomeScreen());
                     },
                     verticalPadding: SizeConfig.safeBlockHorizontal!.toDouble(),
                     horizontalPadding: SizeConfig.safeBlockHorizontal!.abs(),

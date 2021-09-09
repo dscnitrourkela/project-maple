@@ -134,19 +134,27 @@ class QuizController extends GetxController {
 
   ///store the score in the local storage.
   Future<void> storeScore(String quizId) async {
-    final Map<String, String> result =
-        localQuizStorage.read<Map<String, String>>('past')!;
-    result[quizId] = score.value.toString();
+    final Map<String, String>? result =
+        localQuizStorage.read<Map<String, String>>('past');
+    if (result != null) {
+      result[quizId] = score.value.toString();
+      localQuizStorage.save();
+    } else {
+      final Map<String, String> map = <String, String>{
+        quizId: score.value.toString()
+      };
+      localQuizStorage.write('past', map);
+    }
   }
 
   ///Function to check whether the quiz is taken already or not.
-  bool checkQuiz(String quizId) {
-    final Map<String, String> result =
-        localQuizStorage.read<Map<String, String>>('past')!;
-    if (result[quizId] == null) {
-      return false;
-    } else {
+  bool checkIfAttempted(String quizId) {
+    final Map<String, String>? result =
+        localQuizStorage.read<Map<String, String>>('past');
+    if (result != null && result[quizId] != null) {
       return true;
+    } else {
+      return false;
     }
   }
 
