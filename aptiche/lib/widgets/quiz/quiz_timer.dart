@@ -37,7 +37,7 @@ class QuizTimer extends GetView<QuizController> {
           ),
           Obx(
             () => Text(
-              '${controller.timeout.value.inMinutes.remainder(60)} : ${controller.timeout.value.inSeconds.remainder(60)}',
+              '${controller.timeout.value.inMinutes} : ${controller.timeout.value.inSeconds.remainder(60)}',
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: Colors.white,
                   ),

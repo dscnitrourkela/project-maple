@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/graphql.dart';
+import 'package:aptiche/utils/date_time.dart';
 import 'package:aptiche/utils/enums.dart';
+import 'package:aptiche/views/result/result_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -19,7 +21,7 @@ class QuizController extends GetxController {
   late Timer timer;
 
   /// Stores the value of the timer.
-  Rx<Duration> timeout = const Duration(hours: 1).obs;
+  Rx<Duration> timeout = const Duration().obs;
 
   /// Stores the list of all question of that quiz.
   late List<Question> questions;
@@ -36,11 +38,23 @@ class QuizController extends GetxController {
   // Functions
 
   /// A void function which controls the behaviour of the timer(`timeout`)
-  void startTimeout() {
+  void startTimeout(Quiz quiz) {
+    timeout.value =
+        Duration(minutes: calcuateTestDuration(quiz.startTime, quiz.endTime));
     const Duration oneSec = Duration(seconds: 1);
-    timer = Timer.periodic(oneSec, (Timer timer) {
+    timer = Timer.periodic(oneSec, (Timer timer) async {
       if (timeout.value.inSeconds == 0) {
+        calculateScore();
+        await storeScore(
+          quiz.name.toString(),
+        );
         timer.cancel();
+        Get.off<ResultView>(
+          () => ResultView(
+            score: userScore.value,
+            totalScore: questions.length * questions[0].positiveMark,
+          ),
+        );
       } else {
         timeout.value = timeout.value - oneSec;
       }
@@ -121,8 +135,8 @@ class QuizController extends GetxController {
   /// A function that calculates the total score of the user.
   void calculateScore() {
     // This is done so that the last entry of the user gets saved.
-    questions[questionIndex.value].choice =
-        questions[questionIndex.value].options[radioGroupValue.value.index];
+    // questions[questionIndex.value].choice =
+    //     questions[questionIndex.value].options[radioGroupValue.value.index];
 
     /// Stores the score of the user for that quiz.
     int score = 0;

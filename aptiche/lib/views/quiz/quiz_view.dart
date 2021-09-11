@@ -61,15 +61,6 @@ class QuizView extends GetView<QuizController> {
         return Future<bool>.value(false);
       },
       child: Scaffold(
-        /*  appBar: AppBar(
-          title: Text(
-            quiz.name.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .headline3!
-                .copyWith(fontSize: SizeConfig.safeBlockVertical! * 3.5),
-          ),
-        ), */
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.safeBlockHorizontal! * 2,
