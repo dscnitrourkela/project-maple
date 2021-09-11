@@ -30,8 +30,8 @@ class QuizController extends GetxController {
   ///Stores whether the drop down is open or not.
   Rx<bool> dropDownOpen = false.obs;
 
-  ///Stores the total score of the quiz
-  Rx<int> score = 0.obs;
+  ///Stores the user score of the quiz
+  Rx<int> userScore = 0.obs;
 
   // Functions
 
@@ -84,13 +84,17 @@ class QuizController extends GetxController {
   /// A function which assigns the selected option of the current question to
   /// the choice variable of [Question] and shows the next question in the quiz.
   void saveAndNext() {
-    questions[questionIndex.value].choice =
-        questions[questionIndex.value].options[radioGroupValue.value.index];
-
-    // The radio group value has to be set to NON for the next question.
-    if (questions[questionIndex.value].choice == null) {
-      radioGroupValue.value = ChoicesEnum.NON;
+    if (radioGroupValue.value.index != 4) {
+      questions[questionIndex.value].choice =
+          questions[questionIndex.value].options[radioGroupValue.value.index];
+    } else {
+      questions[questionIndex.value].choice = null;
     }
+
+    // // The radio group value has to be set to NON for the next question.
+    // if (questions[questionIndex.value].choice == null) {
+    //   radioGroupValue.value = ChoicesEnum.NON;
+    // }
 
     questionIndex.value++;
     checkAnswered();
@@ -98,12 +102,16 @@ class QuizController extends GetxController {
 
   /// A function when triggered shows the previous question in the quiz.
   void previous() {
-    questions[questionIndex.value].choice =
-        questions[questionIndex.value].options[radioGroupValue.value.index];
-
-    if (questions[questionIndex.value].choice == null) {
-      radioGroupValue.value = ChoicesEnum.NON;
+    if (radioGroupValue.value.index != 4) {
+      questions[questionIndex.value].choice =
+          questions[questionIndex.value].options[radioGroupValue.value.index];
+    } else {
+      questions[questionIndex.value].choice = null;
     }
+
+    // if (questions[questionIndex.value].choice == null) {
+    //   radioGroupValue.value = ChoicesEnum.NON;
+    // }
     questionIndex.value--;
     checkAnswered();
   }
@@ -129,28 +137,28 @@ class QuizController extends GetxController {
         score = score + question.negativeMark;
       }
     }
-    print(score.toString());
+    userScore.value = score;
+    print('score: ${score.toString()}');
   }
 
   ///store the score in the local storage.
   Future<void> storeScore(String quizId) async {
-    final Map<String, String>? result =
-        localQuizStorage.read<Map<String, String>>('past');
+    final Map? result = localQuizStorage.read<Map>('past');
     if (result != null) {
-      result[quizId] = score.value.toString();
+      result[quizId] = userScore.value.toString();
       localQuizStorage.save();
     } else {
       final Map<String, String> map = <String, String>{
-        quizId: score.value.toString()
+        quizId: userScore.value.toString()
       };
       localQuizStorage.write('past', map);
     }
   }
 
   ///Function to check whether the quiz is taken already or not.
+  // ignore_for_file: always_specify_types
   bool checkIfAttempted(String quizId) {
-    final Map<String, String>? result =
-        localQuizStorage.read<Map<String, String>>('past');
+    final Map? result = localQuizStorage.read<Map>('past');
     if (result != null && result[quizId] != null) {
       return true;
     } else {

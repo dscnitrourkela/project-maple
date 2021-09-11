@@ -1,12 +1,11 @@
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-
 import 'package:aptiche/views/quiz/quiz_controller.dart';
 import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
+import 'package:awesome_dropdown/awesome_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:awesome_dropdown/awesome_dropdown.dart';
 
 class QuizTopBar extends GetView<QuizController> {
   const QuizTopBar(
@@ -75,10 +74,9 @@ class QuizTopBar extends GetView<QuizController> {
                   quizName.toString(),
                 );
                 controller.timer.cancel();
-
                 Get.off<ResultView>(
                   () => ResultView(
-                    score: controller.score.value,
+                    score: controller.userScore.value,
                     totalScore: controller.questions.length *
                         controller.questions[0].positiveMark,
                   ),

@@ -40,7 +40,7 @@ class QuizView extends GetView<QuizController> {
                         controller.timer.cancel();
                         Get.off<ResultView>(
                           () => ResultView(
-                            score: controller.score.value,
+                            score: controller.userScore.value,
                             totalScore: controller.questions.length *
                                 controller.questions[0].positiveMark,
                           ),
