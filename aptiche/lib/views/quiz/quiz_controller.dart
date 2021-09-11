@@ -64,9 +64,10 @@ class QuizController extends GetxController {
       radioGroupValue.value = ChoicesEnum.NON;
     } else {
       radioGroupValue.value = ChoicesEnum.values.elementAt(
-          questions[questionIndex.value]
-              .options
-              .indexOf(questions[questionIndex.value].choice.toString()));
+        questions[questionIndex.value].options.indexOf(
+              questions[questionIndex.value].choice.toString(),
+            ),
+      );
     }
   }
 
@@ -95,8 +96,9 @@ class QuizController extends GetxController {
     // if (questions[questionIndex.value].choice == null) {
     //   radioGroupValue.value = ChoicesEnum.NON;
     // }
-
-    questionIndex.value++;
+    if (questionIndex.value + 1 != questions.length) {
+      questionIndex.value++;
+    }
     checkAnswered();
   }
 
@@ -138,7 +140,6 @@ class QuizController extends GetxController {
       }
     }
     userScore.value = score;
-    print('score: ${score.toString()}');
   }
 
   ///store the score in the local storage.
