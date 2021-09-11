@@ -114,6 +114,16 @@ class QuizView extends GetView<QuizController> {
                         controller.saveAndNext();
                       },
                     ),
+                  if (controller.questionIndex.value + 1 ==
+                      controller.questions.length)
+                    CustomButton(
+                      horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
+                      verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                      text: 'Save',
+                      onTap: () {
+                        controller.saveAndNext();
+                      },
+                    ),
                 ],
               ),
             ),
