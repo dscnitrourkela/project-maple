@@ -1,7 +1,7 @@
+import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/remote_config.dart';
 import 'package:aptiche/utils/mutation.dart';
 import 'package:aptiche/utils/query.dart';
-import 'package:aptiche/datamodels/api_models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

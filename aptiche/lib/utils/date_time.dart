@@ -1,5 +1,5 @@
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 /// Takes an ISO String as an argument and returns a map of formatted data
 /// (date in the format of 'dd/MM/yy', time in the format of hh:mm)

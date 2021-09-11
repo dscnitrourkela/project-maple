@@ -28,9 +28,8 @@ ThemeData appTheme() {
       color: kBgColour,
       centerTitle: true,
     ),
-    buttonColor: kPrimaryColor,
     primaryColor: kPrimaryColor,
-    accentColor: kSecondaryColor,
+    secondaryHeaderColor: kSecondaryColor,
     scaffoldBackgroundColor: kBgColour,
     primaryTextTheme: const TextTheme(
       //Heading in Login-SignUp Screens, Quiz Heading in instruction page, Result diplay
