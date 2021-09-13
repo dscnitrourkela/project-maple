@@ -17,8 +17,8 @@ class LoginController extends GetxController {
   RxBool codeSent = false.obs;
   RxBool loading = false.obs;
 
-  void createUser() {
-    _authService.signInwithOTP(
+  Future<void> createUser() async {
+    await _authService.signInwithOTP(
       smsCode.toString(),
       verificationId.toString(),
     );
@@ -31,7 +31,7 @@ class LoginController extends GetxController {
       await FirebaseAuth.instance.signInWithCredential(authResult);
       CustomLoaders().customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      Get.off<dynamic>(() => const DataEntryScreen());
+      await Get.off<dynamic>(() => const DataEntryScreen());
     };
 
     final PhoneVerificationFailed verificationFailed =

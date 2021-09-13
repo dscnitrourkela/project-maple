@@ -136,7 +136,8 @@ class TestPreviewView extends GetView<QuizController> {
                                   .getQuestionsByQuiz(<String>[quiz.quizId!]);
                               if (!controller.checkIfAttempted(quiz.quizId!)) {
                                 controller.startTimeout(quiz);
-                                Get.to<QuizView>(() => QuizView(quiz: quiz));
+                                await Get.to<QuizView>(
+                                    () => QuizView(quiz: quiz));
                               } else {
                                 CustomLoaders().customSnackBar(
                                   'Duplicate Test Attempt',

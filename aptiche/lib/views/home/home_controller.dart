@@ -28,7 +28,7 @@ class HomeController extends GetxController {
   List<Quiz>? desiredList;
 
   @override
-  void onInit() {
+  void onReady() {
     getQuizzes();
     super.onInit();
   }

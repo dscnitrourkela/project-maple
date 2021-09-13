@@ -35,12 +35,13 @@ class DataEntryController extends GetxController {
       quizzes: <String?>[],
     );
 
-    localUserStorage.write('name', name);
-    localUserStorage.write('rollNo', rollNo);
-    localUserStorage.write('email', email);
-    localUserStorage.write('phoneNo', phone);
-    localUserStorage.write('dbID', docId);
+    await localUserStorage.write('name', name);
+    await localUserStorage.write('email', email);
+    await localUserStorage.write('phoneNo', phone);
+    await localUserStorage.write('rollNo', rollNo);
+    await localUserStorage.write('dbID', docId);
     debugPrint(localUserStorage.read('rollNo'));
+    debugPrint('docId: $docId');
   }
 
   Future<String?> readUser() async {

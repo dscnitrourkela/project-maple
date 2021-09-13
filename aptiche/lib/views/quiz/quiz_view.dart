@@ -38,7 +38,7 @@ class QuizView extends GetView<QuizController> {
                           quiz.quizId.toString(),
                         );
                         controller.timer.cancel();
-                        Get.off<ResultView>(
+                        await Get.off<ResultView>(
                           () => ResultView(
                             score: controller.userScore.value,
                             totalScore: controller.questions.length *

@@ -49,7 +49,7 @@ class QuizController extends GetxController {
           quiz.name.toString(),
         );
         timer.cancel();
-        Get.off<ResultView>(
+        await Get.off<ResultView>(
           () => ResultView(
             score: userScore.value,
             totalScore: questions.length * questions[0].positiveMark,
@@ -149,12 +149,12 @@ class QuizController extends GetxController {
     final Map? result = localQuizStorage.read<Map>('past');
     if (result != null) {
       result[quizId] = userScore.value.toString();
-      localQuizStorage.save();
+      await localQuizStorage.save();
     } else {
       final Map<String, String> map = <String, String>{
         quizId: userScore.value.toString()
       };
-      localQuizStorage.write('past', map);
+      await localQuizStorage.write('past', map);
     }
   }
 
