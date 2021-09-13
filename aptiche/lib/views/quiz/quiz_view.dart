@@ -26,7 +26,7 @@ class QuizView extends GetView<QuizController> {
             builder: (BuildContext context) => AlertDialog(
                   title: const Text('Are you sure you want to end the quiz?'),
                   content: const Text(
-                      'You are trying to exit the quiz and doing so will end your ony attempt for this quiz. Do you want to exit? '),
+                      'You are trying to exit the quiz and doing so will end your only attempt for this quiz. Do you want to exit? '),
                   actions: <Widget>[
                     CustomButton(
                       horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
@@ -35,7 +35,7 @@ class QuizView extends GetView<QuizController> {
                       onTap: () async {
                         controller.calculateScore();
                         await controller.storeScore(
-                          quiz.name.toString(),
+                          quiz.quizId.toString(),
                         );
                         controller.timer.cancel();
                         Get.off<ResultView>(
@@ -113,6 +113,7 @@ class QuizView extends GetView<QuizController> {
                       text: 'Save',
                       onTap: () {
                         controller.saveAndNext();
+                        Get.snackbar<dynamic>('Saved', ' ');
                       },
                     ),
                 ],
@@ -128,7 +129,7 @@ class QuizView extends GetView<QuizController> {
                 SizedBox(
                   height: SizeConfig.safeBlockVertical! * 0.4,
                 ),
-                QuizTopBar(quiz.name!.toString()),
+                QuizTopBar(quiz),
                 const Divider(),
                 SizedBox(
                   height: SizeConfig.safeBlockVertical! * 2,
