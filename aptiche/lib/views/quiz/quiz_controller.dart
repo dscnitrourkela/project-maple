@@ -106,10 +106,6 @@ class QuizController extends GetxController {
       questions[questionIndex.value].choice = null;
     }
 
-    // // The radio group value has to be set to NON for the next question.
-    // if (questions[questionIndex.value].choice == null) {
-    //   radioGroupValue.value = ChoicesEnum.NON;
-    // }
     if (questionIndex.value + 1 != questions.length) {
       questionIndex.value++;
     }
@@ -125,20 +121,12 @@ class QuizController extends GetxController {
       questions[questionIndex.value].choice = null;
     }
 
-    // if (questions[questionIndex.value].choice == null) {
-    //   radioGroupValue.value = ChoicesEnum.NON;
-    // }
     questionIndex.value--;
     checkAnswered();
   }
 
   /// A function that calculates the total score of the user.
   void calculateScore() {
-    // This is done so that the last entry of the user gets saved.
-    // questions[questionIndex.value].choice =
-    //     questions[questionIndex.value].options[radioGroupValue.value.index];
-
-    /// Stores the score of the user for that quiz.
     int score = 0;
 
     for (final Question question in questions) {
@@ -175,11 +163,17 @@ class QuizController extends GetxController {
   bool checkIfAttempted(String quizId) {
     final Map? result = localQuizStorage.read<Map>('past');
     if (result != null && result[quizId] != null) {
+      // result.forEach((dynamic key, dynamic value) {
+      //   print('$key : $value');
+      // });
       return true;
     } else {
       return false;
     }
   }
+
+  String score(String quizId) =>
+      localQuizStorage.read<Map>('past')![quizId].toString();
 
   @override
   // ignore: unnecessary_overrides

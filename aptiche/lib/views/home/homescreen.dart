@@ -60,6 +60,7 @@ class HomeScreen extends GetView<HomeController> {
                       width: SizeConfig.screenWidth! * 1,
                       child: HomeActiveTile(
                         quiz: controller.pastQuizzes[0],
+                        // controller.activeQuizzes[0],
                       ),
                     )
                   else

@@ -139,8 +139,9 @@ class TestPreviewView extends GetView<QuizController> {
                                 Get.to<QuizView>(() => QuizView(quiz: quiz));
                               } else {
                                 CustomLoaders().customSnackBar(
-                                    'Duplicate Test Attempt',
-                                    'You are attempting a test that you have already attempted. Multiple attempts not allowed');
+                                  'Duplicate Test Attempt',
+                                  'You are attempting a test that you have already attempted. Multiple attempts not allowed, \n Your score is: ${controller.score(quiz.quizId!)}',
+                                );
                               }
                             },
                             text: 'Begin Test',

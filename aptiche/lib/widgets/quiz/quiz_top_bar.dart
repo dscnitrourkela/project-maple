@@ -1,6 +1,8 @@
+import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
+import 'package:aptiche/views/quiz/quiz_view.dart';
 import 'package:aptiche/views/result/result_view.dart';
 import 'package:aptiche/widgets/buttons.dart';
 import 'package:awesome_dropdown/awesome_dropdown.dart';
@@ -9,10 +11,10 @@ import 'package:get/get.dart';
 
 class QuizTopBar extends GetView<QuizController> {
   const QuizTopBar(
-    this.quizName, {
+    this.quiz, {
     Key? key,
   }) : super(key: key);
-  final String quizName;
+  final Quiz quiz;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,18 +71,48 @@ class QuizTopBar extends GetView<QuizController> {
             CustomButton(
               text: 'Finish',
               onTap: () async {
-                controller.calculateScore();
-                await controller.storeScore(
-                  quizName.toString(),
-                );
-                controller.timer.cancel();
-                Get.off<ResultView>(
-                  () => ResultView(
-                    score: controller.userScore.value,
-                    totalScore: controller.questions.length *
-                        controller.questions[0].positiveMark,
-                  ),
-                );
+                showDialog<bool>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: const Text(
+                              'Are you sure you want to submit the quiz?'),
+                          content: const Text(
+                            'You are trying to exit the quiz and doing so will end your only attempt for this quiz. Do you want to exit? ',
+                          ),
+                          actions: <Widget>[
+                            CustomButton(
+                              horizontalPadding:
+                                  SizeConfig.safeBlockHorizontal! * 1.4,
+                              verticalPadding:
+                                  SizeConfig.safeBlockVertical! * 0.27,
+                              text: 'END QUIZ',
+                              onTap: () async {
+                                controller.calculateScore();
+                                await controller.storeScore(
+                                  quiz.quizId.toString(),
+                                );
+                                controller.timer.cancel();
+                                Get.off<ResultView>(
+                                  () => ResultView(
+                                    score: controller.userScore.value,
+                                    totalScore: controller.questions.length *
+                                        controller.questions[0].positiveMark,
+                                  ),
+                                );
+                              },
+                            ),
+                            CustomButton(
+                              horizontalPadding:
+                                  SizeConfig.safeBlockHorizontal! * 1.4,
+                              verticalPadding:
+                                  SizeConfig.safeBlockVertical! * 0.27,
+                              text: 'CANCEL',
+                              onTap: () async {
+                                Get.back<QuizView>();
+                              },
+                            )
+                          ],
+                        ));
               },
               horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.6,
               verticalPadding: SizeConfig.safeBlockVertical! * 0.5,
