@@ -37,15 +37,17 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              final StreamBuilder<User?> route = _authService.handleAuth();
+              final Widget route = _authService.handleAuth();
 
               if (status == AnimationStatus.completed) {
                 await GetStorage().initStorage;
                 if (FirebaseAuth.instance.currentUser != null) {
-                  _graphQLService
+                  await _graphQLService
                       .initGraphQL(await _authService.getUserToken());
                 }
-                Get.to<dynamic>(() => route);
+                await Get.to<dynamic>(
+                  () => route,
+                );
               }
             });
             animationController

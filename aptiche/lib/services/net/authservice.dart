@@ -9,20 +9,26 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxController {
-  StreamBuilder<User?> handleAuth() {
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot<Object?> snapshot) {
-          if (snapshot.hasError) {
-            return const LoginView();
-          } else {
-            if (snapshot.hasData) {
-              return const HomeScreen();
-            } else {
-              return const LoginView();
-            }
-          }
-        });
+  Widget handleAuth() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return const HomeScreen();
+    } else {
+      return const LoginView();
+    }
+    // return (
+    //   // stream: FirebaseAuth.instance.authStateChanges(),
+    //   builder: (BuildContext context, AsyncSnapshot<Object?> snapshot) {
+    //     if (snapshot.hasError) {
+    //       return const LoginView();
+    //     } else {
+    //       if (snapshot.hasData) {
+    //         return const HomeScreen();
+    //       } else {
+    //         return const LoginView();
+    //       }
+    //     }
+    //   },
+    // );
   }
 
   void signOut() {
@@ -31,7 +37,7 @@ class AuthService extends GetxController {
     Get.offAll<dynamic>(() => const SplashScreen());
   }
 
-  void signInwithOTP(String smsCode, String verId) async {
+  Future<void> signInwithOTP(String smsCode, String verId) async {
     try {
       final AuthCredential authCredential = PhoneAuthProvider.credential(
         verificationId: verId,
@@ -39,7 +45,7 @@ class AuthService extends GetxController {
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
 
-      Get.to<dynamic>(() => const DataEntryScreen());
+      await Get.to<dynamic>(() => const DataEntryScreen());
     } catch (error) {
       CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
@@ -50,9 +56,10 @@ class AuthService extends GetxController {
 
   Future<String?> getUserToken() async {
     if (FirebaseAuth.instance.currentUser != null) {
-      return FirebaseAuth.instance.currentUser!.getIdToken(true);
+      // ignore: unnecessary_await_in_return
+      return await FirebaseAuth.instance.currentUser!.getIdToken(true);
     } else {
-      return '';
+      return Future<String>.value('');
     }
   }
 }
