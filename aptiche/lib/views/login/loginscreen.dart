@@ -136,14 +136,14 @@ class LoginView extends GetView<LoginController> {
                                         }
                                         controller.phoneEditController.clear();
                                       }
-                                    : () {
+                                    : () async {
                                         if (controller.formkey.currentState!
                                             .validate()) {
                                           controller.smsCode.value = controller
                                               .phoneEditController.text
                                               .trim();
                                           controller.loading.value = true;
-                                          controller.createUser();
+                                          await controller.createUser();
                                         }
                                       },
                               ),

@@ -71,7 +71,7 @@ class QuizTopBar extends GetView<QuizController> {
             CustomButton(
               text: 'Finish',
               onTap: () async {
-                showDialog<bool>(
+                await showDialog<bool>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
                           title: const Text(
@@ -92,7 +92,7 @@ class QuizTopBar extends GetView<QuizController> {
                                   quiz.quizId.toString(),
                                 );
                                 controller.timer.cancel();
-                                Get.off<ResultView>(
+                                await Get.off<ResultView>(
                                   () => ResultView(
                                     score: controller.userScore.value,
                                     totalScore: controller.questions.length *

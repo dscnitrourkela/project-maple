@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HomeBinding().dependencies();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           if (snapshot.hasError) {
             return CustomLoaders().customSnackBar(
-                snapshot.error.toString(), 'Could not load the application');
+              snapshot.error.toString(),
+              'Could not load the application',
+            );
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return GetMaterialApp(
