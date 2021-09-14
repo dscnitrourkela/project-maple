@@ -1,5 +1,6 @@
 import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
+import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/snackbar.dart';
@@ -10,30 +11,19 @@ import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxController {
   Widget handleAuth() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      return const HomeScreen();
-    } else {
+    if (FirebaseAuth.instance.currentUser == null)
       return const LoginView();
-    }
-    // return (
-    //   // stream: FirebaseAuth.instance.authStateChanges(),
-    //   builder: (BuildContext context, AsyncSnapshot<Object?> snapshot) {
-    //     if (snapshot.hasError) {
-    //       return const LoginView();
-    //     } else {
-    //       if (snapshot.hasData) {
-    //         return const HomeScreen();
-    //       } else {
-    //         return const LoginView();
-    //       }
-    //     }
-    //   },
-    // );
+    else if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.phoneNumber != null)
+      return const DataEntryScreen();
+    else
+      return const HomeScreen();
   }
 
   void signOut() {
     FirebaseAuth.instance.signOut();
     GetStorage('User').erase();
+    LoginController().codeSent.value = false;
     Get.offAll<SplashScreen>(() => const SplashScreen());
   }
 

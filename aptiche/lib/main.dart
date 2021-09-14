@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
     return FutureBuilder<void>(
         future: _initialization,
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          if (snapshot.hasError) {
+          if (snapshot.hasError ||
+              snapshot.connectionState == ConnectionState.none) {
             return CustomLoaders().customSnackBar(
               snapshot.error.toString(),
-              'Could not load the application',
+              'Please check your internet connection.',
             );
           }
           if (snapshot.connectionState == ConnectionState.done) {

@@ -6,13 +6,22 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({
+    Key? key,
+    required this.name,
+    required this.email,
+    required this.phoneNo,
+    required this.rollNo,
+  }) : super(key: key);
+
+  final String name;
+  final String email;
+  final String phoneNo;
+  final String rollNo;
 
   @override
   Widget build(BuildContext context) {
-    final GetStorage localUserStorage = GetStorage('User');
     final GetStorage localQuizStorage = GetStorage('Quiz');
-
     final Map<String, dynamic>? results = localQuizStorage.read('past');
 
     return Scaffold(
@@ -43,7 +52,7 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextDrawable(
-              text: localUserStorage.read<String?>('name').toString(),
+              text: name,
               height: SizeConfig.safeBlockHorizontal! * 30,
               width: SizeConfig.safeBlockHorizontal! * 30,
               textStyle: TextStyle(
@@ -61,7 +70,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    localUserStorage.read<String?>('name').toString(),
+                    name,
                     style: TextStyle(
                       fontSize: SizeConfig.safeBlockHorizontal! * 8,
                       fontFamily: kSfpro,
@@ -75,21 +84,15 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         DetailCard(
-                          data: localUserStorage
-                              .read<String?>('rollNo')
-                              .toString(),
+                          data: rollNo,
                           icon: Icons.school_rounded,
                         ),
                         DetailCard(
-                          data: localUserStorage
-                              .read<String?>('email')
-                              .toString(),
+                          data: email,
                           icon: Icons.email_rounded,
                         ),
                         DetailCard(
-                          data: localUserStorage
-                              .read<String?>('phoneNo')
-                              .toString(),
+                          data: phoneNo,
                           icon: Icons.phone_rounded,
                         ),
                       ],

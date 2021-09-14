@@ -1,5 +1,6 @@
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/views/dataentry/dataentry.dart';
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,12 @@ class LoginController extends GetxController {
       await FirebaseAuth.instance.signInWithCredential(authResult);
       CustomLoaders().customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      await Get.off<dynamic>(() => const DataEntryScreen());
+      if (FirebaseAuth.instance.currentUser!.metadata.creationTime ==
+          FirebaseAuth.instance.currentUser!.metadata.lastSignInTime) {
+        await Get.off<dynamic>(() => const DataEntryScreen());
+      } else {
+        await Get.off<dynamic>(() => const SplashScreen());
+      }
     };
 
     final PhoneVerificationFailed verificationFailed =
