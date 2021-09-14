@@ -7,6 +7,7 @@ import 'package:aptiche/widgets/quiz/choices_list_view.dart';
 import 'package:aptiche/widgets/quiz/quiz_question.dart';
 import 'package:aptiche/widgets/quiz/quiz_timer.dart';
 import 'package:aptiche/widgets/quiz/quiz_top_bar.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -113,7 +114,10 @@ class QuizView extends GetView<QuizController> {
                       text: 'Save',
                       onTap: () {
                         controller.saveAndNext();
-                        Get.snackbar<dynamic>('Saved', ' ');
+
+                        CustomLoaders().customSnackBar(
+                            'Saved', 'Your choice has been saved',
+                            duration: const Duration(seconds: 1));
                       },
                     ),
                 ],

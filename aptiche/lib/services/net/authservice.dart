@@ -34,7 +34,7 @@ class AuthService extends GetxController {
   void signOut() {
     FirebaseAuth.instance.signOut();
     GetStorage('User').erase();
-    Get.offAll<dynamic>(() => const SplashScreen());
+    Get.offAll<SplashScreen>(() => const SplashScreen());
   }
 
   Future<void> signInwithOTP(String smsCode, String verId) async {
@@ -45,7 +45,7 @@ class AuthService extends GetxController {
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
 
-      await Get.to<dynamic>(() => const DataEntryScreen());
+      await Get.to<DataEntryScreen>(() => const DataEntryScreen());
     } catch (error) {
       CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
