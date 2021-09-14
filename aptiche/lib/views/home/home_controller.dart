@@ -28,8 +28,8 @@ class HomeController extends GetxController {
   List<Quiz>? desiredList;
 
   @override
-  void onReady() {
-    getQuizzes();
+  void onReady() async {
+    await getQuizzes();
     super.onInit();
   }
 
