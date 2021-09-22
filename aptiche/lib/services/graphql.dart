@@ -43,6 +43,23 @@ class GraphQLService {
     }
   }
 
+  ///A graphql query that checks whether a user is pre-existing in the database
+  Future<String?> checkUserbyPhone({String? phoneNo}) async {
+    final QueryOptions options = QueryOptions(
+      document: gql(getUserbyPhone),
+      variables: <String, String?>{'phone': phoneNo},
+    );
+    final QueryResult result = await _client.query(options);
+
+    if (result.hasException) {
+      return Future<String?>.value('null');
+    } else {
+      final Map<String, dynamic>? user = result.data;
+      final String userId = user!['getUserByPhone']['_id'].toString();
+      return userId;
+    }
+  }
+
   /// A graphql mutation that creates a user and stores the data in the
   /// database.
   Future<String?> createUsers({

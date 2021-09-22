@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
@@ -10,11 +11,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxController {
-  Widget handleAuth() {
+  final GraphQLService _graphQL = Get.find();
+  Future<Widget> handleAuth() async {
     if (FirebaseAuth.instance.currentUser == null)
       return const LoginView();
     else if (FirebaseAuth.instance.currentUser != null &&
-        FirebaseAuth.instance.currentUser!.phoneNumber != null)
+        await _graphQL.checkUserbyPhone(
+                phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber) ==
+            'null')
       return const DataEntryScreen();
     else
       return const HomeScreen();
