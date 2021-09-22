@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              final Widget route = _authService.handleAuth();
+              final Widget route = await _authService.handleAuth();
 
               if (status == AnimationStatus.completed) {
                 await GetStorage().initStorage;

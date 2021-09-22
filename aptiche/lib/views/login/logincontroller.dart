@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
@@ -8,6 +9,10 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = Get.find();
+
+  /// Finds the [GraphQLService] using [Getx] dependency injection
+  final GraphQLService _graphQL = Get.find();
+
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController phoneEditController = TextEditingController();
   final RxBool sent = false.obs;
@@ -32,8 +37,7 @@ class LoginController extends GetxController {
       await FirebaseAuth.instance.signInWithCredential(authResult);
       CustomLoaders().customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      if (FirebaseAuth.instance.currentUser!.metadata.creationTime ==
-          FirebaseAuth.instance.currentUser!.metadata.lastSignInTime) {
+      if (await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value) == 'null') {
         await Get.off<dynamic>(() => const DataEntryScreen());
       } else {
         await Get.off<dynamic>(() => const SplashScreen());
