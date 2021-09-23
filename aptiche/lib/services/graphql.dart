@@ -49,14 +49,46 @@ class GraphQLService {
       document: gql(getUserbyPhone),
       variables: <String, String?>{'phone': phoneNo},
     );
-    final QueryResult result = await _client.query(options);
 
-    if (result.hasException) {
-      return Future<String?>.value('null');
-    } else {
-      final Map<String, dynamic>? user = result.data;
-      final String userId = user!['getUserByPhone']['_id'].toString();
-      return userId;
+    try {
+      final QueryResult result = await _client.query(options);
+
+      if (result.hasException) {
+        return Future<String?>.value('null');
+      } else {
+        final Map<String, dynamic>? user = result.data;
+        final String userId = user!['getUserByPhone']['_id'].toString();
+        return userId;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  ///A  graphql query that fetches the data of the user for profile page
+  Future<Map<String, String?>?> getUserDatabyPhone({String? phoneNo}) async {
+    final QueryOptions options = QueryOptions(
+      document: gql(getUserDatabyPhoneNo),
+      variables: <String, String?>{'phone': phoneNo},
+    );
+
+    try {
+      final QueryResult result = await _client.query(options);
+
+      if (result.hasException) {
+        debugPrint(result.exception.toString());
+      } else {
+        Map<String, String?>? dataMap;
+        final Map<String, dynamic>? user = result.data;
+        dataMap!['name'] = user!['getUserByPhone']['name'].toString();
+        dataMap['phone'] = user['getUserByPhone']['phoneNo'].toString();
+        dataMap['email'] = user['getUserByPhone']['email'].toString();
+        dataMap['rollNo'] = user['getUserByPhone']['rollNo'].toString();
+
+        return dataMap;
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 

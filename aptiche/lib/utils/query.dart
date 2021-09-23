@@ -15,6 +15,18 @@ const String getUsers = r'''
 const String getUserbyPhone = r'''
       query getUserByPhone($phone: String!) {
         getUserByPhone(phoneNo: $phone) {
+          _id 
+          name
+          rollNo
+          email
+          phoneNo  
+        }
+      }
+''';
+
+const String getUserDatabyPhoneNo = r'''
+      query getUserByPhone($phone: String!) {
+        getUserByPhone(phoneNo: $phone) {
           _id   
         }
       }
