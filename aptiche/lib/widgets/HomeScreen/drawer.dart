@@ -1,3 +1,4 @@
+import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/services/third_party_services.dart';
 import 'package:aptiche/utils/theme.dart';
@@ -8,6 +9,7 @@ import 'package:aptiche/views/drawer/dev_info.dart';
 import 'package:aptiche/views/drawer/privacy_policy.dart';
 import 'package:aptiche/views/drawer/profile_page.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -19,6 +21,7 @@ import 'package:get_storage/get_storage.dart';
 class MainDrawer extends StatelessWidget {
   MainDrawer({Key? key}) : super(key: key);
   final AuthService _authService = Get.find();
+  final GraphQLService _graphQLService = Get.find();
   final ThirdPartyServices _thirdPartyServices = Get.find();
 
   final GetStorage localUserStorage = GetStorage('User');
@@ -61,13 +64,19 @@ class MainDrawer extends StatelessWidget {
                         text: 'View Profile',
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Get.to<ProfilePage>(() => const ProfilePage(
-                                  name: '',
-                                  phoneNo: '',
-                                  email: '',
-                                  rollNo: '',
-                                ));
+                          ..onTap = () async {
+                            final Map<String, String?>? user =
+                                await _graphQLService.getUserDatabyPhone(
+                                    phoneNo: FirebaseAuth
+                                        .instance.currentUser?.phoneNumber);
+                            await Get.to<ProfilePage>(
+                              () => ProfilePage(
+                                name: user!['name']!,
+                                phoneNo: user['phone']!,
+                                email: user['email']!,
+                                rollNo: user['rollNo']!,
+                              ),
+                            );
                           }),
                   ],
                 ),

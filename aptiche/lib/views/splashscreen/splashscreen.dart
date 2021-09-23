@@ -2,7 +2,7 @@ import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/services/net/authservice.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/widgets/snackbar.dart';
+import 'package:aptiche/views/result/error404.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,36 +39,27 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              Widget route = await _authService.handleAuth();
+              Widget route;
               final ConnectivityResult connectivityResult =
                   await Connectivity().checkConnectivity();
-
-              if (connectivityResult == ConnectivityResult.none) {
-                CustomLoaders().customSnackBar(
-                  'No Network Available',
-                  'Please connect to a networked connection to ensure the proper usage of the appiciaction',
-                );
-                route = Scaffold(
-                  backgroundColor: kBgColour,
-                  body: Center(
-                    child: Container(
-                        padding: EdgeInsets.all(SizeConfig.safeBlockVertical!),
-                        height: SizeConfig.screenWidth! * 0.7,
-                        child: Image.asset('assets/images/404.png')),
-                  ),
-                );
-              }
-
-              if (status == AnimationStatus.completed) {
+              if (connectivityResult == ConnectivityResult.none &&
+                  status == AnimationStatus.completed) {
+                route = const ErrorPage();
+              } else if (connectivityResult != ConnectivityResult.none &&
+                  status == AnimationStatus.completed) {
                 await GetStorage().initStorage;
+                route = await _authService.handleAuth();
                 if (FirebaseAuth.instance.currentUser != null) {
                   await _graphQLService
                       .initGraphQL(await _authService.getUserToken());
                 }
-                await Get.to<dynamic>(
-                  () => route,
-                );
+              } else {
+                route = const ErrorPage();
               }
+
+              await Get.to<dynamic>(
+                () => route,
+              );
             });
             animationController
               ..duration = composition.duration
