@@ -39,27 +39,26 @@ class _SplashScreenState extends State<SplashScreen>
               onLoaded: (LottieComposition composition) {
             animationController
                 .addStatusListener((AnimationStatus status) async {
-              Widget route;
               final ConnectivityResult connectivityResult =
                   await Connectivity().checkConnectivity();
               if (connectivityResult == ConnectivityResult.none &&
                   status == AnimationStatus.completed) {
-                route = const ErrorPage();
-              } else if (connectivityResult != ConnectivityResult.none &&
+                await Get.to<dynamic>(
+                  () => const ErrorPage(),
+                );
+              }
+              if (connectivityResult != ConnectivityResult.none &&
                   status == AnimationStatus.completed) {
                 await GetStorage().initStorage;
-                route = await _authService.handleAuth();
+                final Widget route = await _authService.handleAuth();
                 if (FirebaseAuth.instance.currentUser != null) {
                   await _graphQLService
                       .initGraphQL(await _authService.getUserToken());
                 }
-              } else {
-                route = const ErrorPage();
+                await Get.to<dynamic>(
+                  () => route,
+                );
               }
-
-              await Get.to<dynamic>(
-                () => route,
-              );
             });
             animationController
               ..duration = composition.duration

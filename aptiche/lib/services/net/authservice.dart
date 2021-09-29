@@ -38,13 +38,20 @@ class AuthService extends GetxController {
         smsCode: smsCode,
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-
-      await Get.to<DataEntryScreen>(() => const DataEntryScreen());
+      await _graphQL.initGraphQL(await getUserToken());
+      print(await _graphQL.checkUserbyPhone(
+          phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber));
+      /*  if (await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value) == 'null') {
+        await Get.off<dynamic>(() => const DataEntryScreen());
+      } else {
+        await Get.off<dynamic>(() => const SplashScreen());
+      } */
     } catch (error) {
-      CustomLoaders().customSnackBar(
+      print(error);
+      /* CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
         'Please enter the correct OTP sent to your mobile number',
-      );
+      ); */
     }
   }
 
