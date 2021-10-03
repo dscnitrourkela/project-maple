@@ -37,12 +37,12 @@ class LoginController extends GetxController {
       //await FirebaseAuth.instance.signInWithCredential(authResult);
       CustomLoaders().customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      print(await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value));
-      /*  if (await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value) == 'null') {
+      // print(await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value));
+      if (await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value) == 'null') {
         await Get.off<dynamic>(() => const DataEntryScreen());
       } else {
         await Get.off<dynamic>(() => const SplashScreen());
-      } */
+      }
     };
 
     final PhoneVerificationFailed verificationFailed =
