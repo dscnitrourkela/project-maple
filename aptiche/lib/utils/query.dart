@@ -19,7 +19,7 @@ const String getUserbyPhone = r'''
           name
           rollNo
           email
-          phoneNo  
+          phoneNo
         }
       }
 ''';

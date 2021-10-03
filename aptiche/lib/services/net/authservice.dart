@@ -4,7 +4,6 @@ import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
-import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,14 +37,16 @@ class AuthService extends GetxController {
         smsCode: smsCode,
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-      await _graphQL.initGraphQL(await getUserToken());
-      print(await _graphQL.checkUserbyPhone(
-          phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber));
-      /*  if (await _graphQL.checkUserbyPhone(phoneNo: phoneNo.value) == 'null') {
+      await _graphQL.initGraphQL(getUserToken().toString());
+      // print(await _graphQL.checkUserbyPhone(
+      //     phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber));
+      if (await _graphQL.checkUserbyPhone(
+              phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber) ==
+          'null') {
         await Get.off<dynamic>(() => const DataEntryScreen());
       } else {
         await Get.off<dynamic>(() => const SplashScreen());
-      } */
+      }
     } catch (error) {
       print(error);
       /* CustomLoaders().customSnackBar(
@@ -55,12 +56,11 @@ class AuthService extends GetxController {
     }
   }
 
-  Future<String?> getUserToken() async {
+  String getUserToken() {
     if (FirebaseAuth.instance.currentUser != null) {
-      // ignore: unnecessary_await_in_return
-      return await FirebaseAuth.instance.currentUser!.getIdToken(true);
+      return FirebaseAuth.instance.currentUser!.getIdToken(true).toString();
     } else {
-      return Future<String>.value('');
+      return '';
     }
   }
 }

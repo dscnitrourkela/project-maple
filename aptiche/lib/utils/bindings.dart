@@ -11,11 +11,11 @@ import 'package:get/instance_manager.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<RemoteConfigService>(RemoteConfigService());
-    Get.put<GraphQLService>(GraphQLService());
-    Get.put<AuthService>(AuthService());
-    Get.put<LoginController>(LoginController());
-    Get.put<ThirdPartyServices>(ThirdPartyServices());
+    Get.lazyPut(() => RemoteConfigService());
+    Get.lazyPut(() => GraphQLService());
+    Get.lazyPut(() => AuthService());
+    Get.lazyPut(() => LoginController());
+    Get.lazyPut(() => ThirdPartyServices());
     Get.lazyPut<DataEntryController>(() => DataEntryController(), fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<QuizController>(() => QuizController(), fenix: true);
