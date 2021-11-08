@@ -21,7 +21,8 @@ class DataEntryController extends GetxController {
   void writeUser(String name, String rollNo, String email, String phone) async {
     debugPrint('write-user start');
     if (FirebaseAuth.instance.currentUser != null) {
-      jwttoken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+      final String jwttoken =
+          await FirebaseAuth.instance.currentUser!.getIdToken(true);
       await _graphQLService.initGraphQL(jwttoken);
     }
 

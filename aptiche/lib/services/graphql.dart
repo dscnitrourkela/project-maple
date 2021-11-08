@@ -13,7 +13,7 @@ class GraphQLService {
   late GraphQLClient _client;
 
   /// Intialises the [GraphQLClient]
-  Future<void> initGraphQL(String? token) async {
+  Future<void> initGraphQL(String token) async {
     /// Initialise Remote Config.
     await _remoteConfigService.setupRemoteConfig();
 
@@ -44,10 +44,10 @@ class GraphQLService {
   }
 
   ///A graphql query that checks whether a user is pre-existing in the database
-  Future<String?> checkUserbyPhone({String? phoneNo}) async {
+  Future<String?> checkUserbyPhone(String phoneNo) async {
     final QueryOptions options = QueryOptions(
       document: gql(getUserbyPhone),
-      variables: <String, String?>{'phone': phoneNo},
+      variables: <String, String>{'phone': phoneNo},
     );
 
     try {

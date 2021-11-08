@@ -1,9 +1,9 @@
 import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/views/dataentry/dataentry.dart';
-import 'package:aptiche/views/home/homescreen.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
+import 'package:aptiche/views/splashscreen/usercheck.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,15 +12,12 @@ import 'package:get_storage/get_storage.dart';
 class AuthService extends GetxController {
   final GraphQLService _graphQL = Get.find();
   Future<Widget> handleAuth() async {
-    if (FirebaseAuth.instance.currentUser == null)
+    if (FirebaseAuth.instance.currentUser != null) {
+      final String token = await getUserToken();
+      await _graphQL.initGraphQL(token);
+      return UserCheck();
+    } else
       return const LoginView();
-    else if (FirebaseAuth.instance.currentUser != null &&
-        await _graphQL.checkUserbyPhone(
-                phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber) ==
-            'null')
-      return const DataEntryScreen();
-    else
-      return const HomeScreen();
   }
 
   void signOut() {
@@ -38,17 +35,14 @@ class AuthService extends GetxController {
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
       await _graphQL.initGraphQL(getUserToken().toString());
-      // print(await _graphQL.checkUserbyPhone(
-      //     phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber));
-      if (await _graphQL.checkUserbyPhone(
-              phoneNo: FirebaseAuth.instance.currentUser!.phoneNumber) ==
+      if (await _graphQL.checkUserbyPhone(getCurrentUserPhone().toString()) ==
           'null') {
         await Get.off<dynamic>(() => const DataEntryScreen());
       } else {
         await Get.off<dynamic>(() => const SplashScreen());
       }
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       /* CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
         'Please enter the correct OTP sent to your mobile number',
@@ -56,9 +50,17 @@ class AuthService extends GetxController {
     }
   }
 
-  String getUserToken() {
+  String? getCurrentUserPhone() {
+    return FirebaseAuth.instance.currentUser != null
+        ? FirebaseAuth.instance.currentUser?.phoneNumber
+        : '';
+  }
+
+  Future<String> getUserToken() async {
     if (FirebaseAuth.instance.currentUser != null) {
-      return FirebaseAuth.instance.currentUser!.getIdToken(true).toString();
+      final String token =
+          await FirebaseAuth.instance.currentUser!.getIdToken();
+      return token;
     } else {
       return '';
     }
