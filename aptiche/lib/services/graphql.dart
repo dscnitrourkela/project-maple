@@ -2,12 +2,14 @@ import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/net/remote_config.dart';
 import 'package:aptiche/utils/mutation.dart';
 import 'package:aptiche/utils/query.dart';
+import 'package:aptiche/views/splashscreen/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLService {
   final RemoteConfigService _remoteConfigService = Get.find();
+  final UserController _userController = Get.find();
 
   /// Stores the [GraphQLClient]
   late GraphQLClient _client;
@@ -58,6 +60,7 @@ class GraphQLService {
       } else {
         final Map<String, dynamic>? user = result.data;
         final String userId = user!['getUserByPhone']['_id'].toString();
+        _userController.name.value = user['getUserByPhone']['name'].toString();
         return userId;
       }
     } catch (e) {
@@ -68,23 +71,26 @@ class GraphQLService {
   ///A  graphql query that fetches the data of the user for profile page
   Future<Map<String, String?>?> getUserDatabyPhone({String? phoneNo}) async {
     final QueryOptions options = QueryOptions(
-      document: gql(getUserDatabyPhoneNo),
+      document: gql(getUserbyPhone),
       variables: <String, String?>{'phone': phoneNo},
     );
 
     try {
       final QueryResult result = await _client.query(options);
-
       if (result.hasException) {
         debugPrint(result.exception.toString());
       } else {
-        Map<String, String?>? dataMap;
+        final Map<String, String?> dataMap = <String, String?>{
+          'name': '',
+          'phone': '',
+          'email': '',
+          'rollNo': '',
+        };
         final Map<String, dynamic>? user = result.data;
-        dataMap!['name'] = user!['getUserByPhone']['name'].toString();
+        dataMap['name'] = user!['getUserByPhone']['name'].toString();
         dataMap['phone'] = user['getUserByPhone']['phoneNo'].toString();
         dataMap['email'] = user['getUserByPhone']['email'].toString();
         dataMap['rollNo'] = user['getUserByPhone']['rollNo'].toString();
-
         return dataMap;
       }
     } catch (e) {
