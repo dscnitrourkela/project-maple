@@ -1,5 +1,4 @@
 import 'package:aptiche/services/graphql.dart';
-import 'package:aptiche/views/dataentry/dataentry.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
@@ -34,13 +33,7 @@ class AuthService extends GetxController {
         smsCode: smsCode,
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-      await _graphQL.initGraphQL(getUserToken().toString());
-      if (await _graphQL.checkUserbyPhone(getCurrentUserPhone().toString()) ==
-          'null') {
-        await Get.off<dynamic>(() => const DataEntryScreen());
-      } else {
-        await Get.off<dynamic>(() => const SplashScreen());
-      }
+      await Get.off<UserCheck>(() => UserCheck());
     } catch (error) {
       debugPrint(error.toString());
       /* CustomLoaders().customSnackBar(

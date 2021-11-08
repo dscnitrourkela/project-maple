@@ -54,13 +54,12 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
                 if (controller.homeState.value == CurrentState.ready)
-                  if (controller.pastQuizzes.isNotEmpty)
+                  if (controller.activeQuizzes.isNotEmpty)
                     SizedBox(
                       height: SizeConfig.screenWidth! * 0.31,
                       width: SizeConfig.screenWidth! * 1,
                       child: HomeActiveTile(
                         quiz: controller.activeQuizzes[0],
-                        // controller.activeQuizzes[0],
                       ),
                     )
                   else
@@ -182,7 +181,7 @@ class HomeScreen extends GetView<HomeController> {
                             ),
                           ),
                           if (controller.homeState.value == CurrentState.ready)
-                            if (controller.desiredList!.isEmpty)
+                            if (controller.desiredList.isEmpty)
                               Padding(
                                 padding: EdgeInsets.all(
                                     SizeConfig.safeBlockHorizontal! * 10),
@@ -200,11 +199,11 @@ class HomeScreen extends GetView<HomeController> {
                                 primary: false,
                                 crossAxisCount: 2,
                                 children: List<Widget>.generate(
-                                  controller.desiredList!.length,
+                                  controller.desiredList.length,
                                   (int index) {
                                     return HomeGridTile(
                                       classifier: controller.upcomingQuiz.value,
-                                      quiz: controller.desiredList![index],
+                                      quiz: controller.desiredList[index],
                                     );
                                   },
                                 ),

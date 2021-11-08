@@ -50,8 +50,8 @@ class HomeGridTile extends StatelessWidget {
             ),
             Image.asset(
               Strings.quizPNG,
-              width: SizeConfig.safeBlockHorizontal! * 20,
-              height: SizeConfig.safeBlockVertical! * 10,
+              width: SizeConfig.safeBlockHorizontal! * 18,
+              height: SizeConfig.safeBlockVertical! * 9,
             ),
             SizedBox(
               height: SizeConfig.safeBlockVertical,

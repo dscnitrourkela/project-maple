@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:aptiche/datamodels/api_models.dart';
 import 'package:aptiche/services/graphql.dart';
 import 'package:aptiche/utils/enums.dart';
@@ -15,20 +17,20 @@ class HomeController extends GetxController {
   Rx<CurrentState> homeState = CurrentState.ready.obs;
 
   /// A list which stores all the active quizzes.
-  late List<Quiz> activeQuizzes;
+  List<Quiz> activeQuizzes = [];
 
   /// A list whioch stores all the upcoming quizzes.
-  late List<Quiz> upcomingQuizzes;
+  List<Quiz> upcomingQuizzes = [];
 
   /// A list which stores all the past quizzes.
-  late List<Quiz> pastQuizzes;
+  List<Quiz> pastQuizzes = [];
 
   /// A list which stores either `activeQuizzes`, `upcomingQuizzes` or
   /// `pastQuizzes` depending on what the user selects.
-  List<Quiz>? desiredList;
+  List<Quiz> desiredList = [];
 
   @override
-  void onReady() {
+  void onInit() {
     getQuizzes();
     super.onInit();
   }
