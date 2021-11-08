@@ -112,12 +112,6 @@ class DevInfo extends StatelessWidget {
                   ContactCard(
                     context: context,
                     thirdPartyServices: _thirdPartyServices,
-                    name: 'Pritish Samal ',
-                    contact: 'https://github.com/CIPHERTron',
-                  ),
-                  ContactCard(
-                    context: context,
-                    thirdPartyServices: _thirdPartyServices,
                     name: 'Ritesh Patil ',
                     contact: 'https://github.com/riteshsp2000',
                   ),

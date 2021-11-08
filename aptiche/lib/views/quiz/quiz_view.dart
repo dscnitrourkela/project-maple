@@ -19,7 +19,6 @@ class QuizView extends GetView<QuizController> {
   final Quiz quiz;
   @override
   Widget build(BuildContext context) {
-    print(controller.questionIndex.value);
     return WillPopScope(
       onWillPop: () {
         showDialog<bool>(
