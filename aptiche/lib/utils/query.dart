@@ -24,14 +24,6 @@ const String getUserbyPhone = r'''
       }
 ''';
 
-const String getUserDatabyPhoneNo = r'''
-      query getUserByPhone($phone: String!) {
-        getUserByPhone(phoneNo: $phone) {
-          _id   
-        }
-      }
-''';
-
 const String getQuiz = r'''
       query getQuizzes($ids: [ObjectId!]!){
         getQuizzes(ids: $ids){

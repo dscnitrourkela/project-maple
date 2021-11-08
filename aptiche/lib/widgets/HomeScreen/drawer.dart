@@ -8,6 +8,7 @@ import 'package:aptiche/views/drawer/aichenitr.dart';
 import 'package:aptiche/views/drawer/dev_info.dart';
 import 'package:aptiche/views/drawer/privacy_policy.dart';
 import 'package:aptiche/views/drawer/profile_page.dart';
+import 'package:aptiche/views/splashscreen/user_controller.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -16,15 +17,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_text_drawable/flutter_text_drawable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class MainDrawer extends StatelessWidget {
   MainDrawer({Key? key}) : super(key: key);
   final AuthService _authService = Get.find();
   final GraphQLService _graphQLService = Get.find();
   final ThirdPartyServices _thirdPartyServices = Get.find();
+  final UserController _userController = Get.find();
 
-  final GetStorage localUserStorage = GetStorage('User');
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -37,7 +37,7 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: SizedBox(
                   child: TextDrawable(
-                text: localUserStorage.read<String?>('name').toString(),
+                text: _userController.name.value,
                 height: SizeConfig.safeBlockHorizontal! * 25,
                 width: SizeConfig.safeBlockHorizontal! * 15,
                 textStyle: const TextStyle(
@@ -51,7 +51,7 @@ class MainDrawer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               )),
               title: Text(
-                localUserStorage.read<String?>('name').toString(),
+                _userController.name.value,
                 textAlign: TextAlign.left,
                 maxLines: 3,
                 softWrap: true,
@@ -62,7 +62,13 @@ class MainDrawer extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                         text: 'View Profile',
-                        style: Theme.of(context).primaryTextTheme.bodyText2,
+                        style: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 12,
+                          fontFamily: kPoppins,
+                          fontWeight: FontWeight.normal,
+                          color: kTextColourBlack,
+                        ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
                             final Map<String, String?>? user =

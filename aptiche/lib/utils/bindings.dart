@@ -6,6 +6,7 @@ import 'package:aptiche/views/dataentry/dataentry_controller.dart';
 import 'package:aptiche/views/home/home_controller.dart';
 import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/quiz/quiz_controller.dart';
+import 'package:aptiche/views/splashscreen/user_controller.dart';
 import 'package:get/get.dart';
 
 class HomeBinding implements Bindings {
@@ -19,5 +20,6 @@ class HomeBinding implements Bindings {
     Get.lazyPut<DataEntryController>(() => DataEntryController(), fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<QuizController>(() => QuizController(), fenix: true);
+    Get.lazyPut<UserController>(() => UserController(), fenix: true);
   }
 }
