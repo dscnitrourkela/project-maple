@@ -1,7 +1,7 @@
 import 'package:aptiche/utils/bindings.dart';
 import 'package:aptiche/utils/theme.dart';
+import 'package:aptiche/views/result/error404.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
-import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,10 +24,7 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           if (snapshot.hasError ||
               snapshot.connectionState == ConnectionState.none) {
-            return CustomLoaders().customSnackBar(
-              snapshot.error.toString(),
-              'Please check your internet connection.',
-            );
+            return const ErrorPage();
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return GetMaterialApp(

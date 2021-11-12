@@ -145,14 +145,14 @@ class QuizController extends GetxController {
   }
 
   ///store the score in the local storage.
-  Future<void> storeScore(String quizId) async {
+  Future<void> storeScore(String quizName) async {
     final Map? result = localQuizStorage.read<Map>('past');
     if (result != null) {
-      result[quizId] = userScore.value.toString();
+      result[quizName] = userScore.value.toString();
       await localQuizStorage.save();
     } else {
       final Map<String, String> map = <String, String>{
-        quizId: userScore.value.toString()
+        quizName: userScore.value.toString()
       };
       await localQuizStorage.write('past', map);
     }

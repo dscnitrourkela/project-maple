@@ -89,7 +89,7 @@ class QuizTopBar extends GetView<QuizController> {
                               onTap: () async {
                                 controller.calculateScore();
                                 await controller.storeScore(
-                                  quiz.quizId.toString(),
+                                  quiz.name.toString(),
                                 );
                                 controller.timer.cancel();
                                 await Get.off<ResultView>(

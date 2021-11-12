@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomLoaders {
-  Widget customSnackBar(String title, String subject, {Duration? duration}) {
-    Get.snackbar<Widget>(
+  void customSnackBar(String title, String subject, {Duration? duration}) {
+    Get.snackbar<void>(
       title,
       subject,
       backgroundColor: kSnackColour.withOpacity(0.5),
@@ -12,6 +12,5 @@ class CustomLoaders {
       duration: duration,
       colorText: Colors.black87,
     );
-    return Container();
   }
 }

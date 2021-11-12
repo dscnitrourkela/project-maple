@@ -125,7 +125,6 @@ class HomeActiveTile extends StatelessWidget {
             horizontal: SizeConfig.screenWidth! * 0.05,
             vertical: SizeConfig.screenWidth! * 0.02,
           ),
-
           decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(SizeConfig.safeBlockHorizontal! * 6.25),
@@ -200,7 +199,6 @@ class HomeActiveTile extends StatelessWidget {
               ],
             ),
           ),
-          //child: Text(quiz.quizId.toString()),
         ));
   }
 }
