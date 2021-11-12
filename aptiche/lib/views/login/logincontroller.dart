@@ -1,5 +1,5 @@
 import 'package:aptiche/services/net/authservice.dart';
-import 'package:aptiche/views/splashscreen/usercheck.dart';
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class LoginController extends GetxController {
       //await FirebaseAuth.instance.signInWithCredential(authResult);
       CustomLoaders().customSnackBar('Authentication Successful',
           'User Verified with mobile number $phoneNo');
-      Get.off<UserCheck>(() => UserCheck());
+      Get.offAll<SplashScreen>(() => const SplashScreen());
     };
 
     final PhoneVerificationFailed verificationFailed =

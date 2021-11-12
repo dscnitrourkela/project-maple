@@ -163,9 +163,6 @@ class QuizController extends GetxController {
   bool checkIfAttempted(String quizId) {
     final Map? result = localQuizStorage.read<Map>('past');
     if (result != null && result[quizId] != null) {
-      // result.forEach((dynamic key, dynamic value) {
-      //   print('$key : $value');
-      // });
       return true;
     } else {
       return false;

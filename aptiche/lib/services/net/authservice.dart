@@ -3,6 +3,7 @@ import 'package:aptiche/views/login/logincontroller.dart';
 import 'package:aptiche/views/login/loginscreen.dart';
 import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/views/splashscreen/usercheck.dart';
+import 'package:aptiche/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class AuthService extends GetxController {
     if (FirebaseAuth.instance.currentUser != null) {
       final String token = await getUserToken();
       await _graphQL.initGraphQL(token);
-      return UserCheck();
+      return UserCheck().checkUserData();
     } else
       return const LoginView();
   }
@@ -33,13 +34,13 @@ class AuthService extends GetxController {
         smsCode: smsCode,
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-      await Get.off<UserCheck>(() => UserCheck());
+      await Get.offAll<SplashScreen>(() => const SplashScreen());
     } catch (error) {
       debugPrint(error.toString());
-      /* CustomLoaders().customSnackBar(
+      CustomLoaders().customSnackBar(
         'Authentication Error - WRONG OTP',
         'Please enter the correct OTP sent to your mobile number',
-      ); */
+      );
     }
   }
 
