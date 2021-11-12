@@ -9,7 +9,8 @@ class LoginController extends GetxController {
   final AuthService _authService = Get.find();
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  TextEditingController phoneEditController = TextEditingController();
+  TextEditingController phoneEditController =
+      TextEditingController(text: '+91');
   final RxBool sent = false.obs;
 
   RxString phoneNo = ''.obs;
