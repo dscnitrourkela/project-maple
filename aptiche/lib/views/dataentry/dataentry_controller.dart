@@ -19,7 +19,6 @@ class DataEntryController extends GetxController {
   String? jwttoken;
 
   void writeUser(String name, String rollNo, String email, String phone) async {
-    debugPrint('write-user start');
     if (FirebaseAuth.instance.currentUser != null) {
       final String jwttoken =
           await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -41,8 +40,6 @@ class DataEntryController extends GetxController {
     await localUserStorage.write('phoneNo', phone);
     await localUserStorage.write('rollNo', rollNo);
     await localUserStorage.write('dbID', docId);
-    debugPrint(localUserStorage.read('rollNo'));
-    debugPrint('docId: $docId');
   }
 
   Future<String?> readUser() async {

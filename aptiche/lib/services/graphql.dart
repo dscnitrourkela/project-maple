@@ -46,7 +46,7 @@ class GraphQLService {
   }
 
   ///A graphql query that checks whether a user is pre-existing in the database
-  Future<String?> checkUserbyPhone(String phoneNo) async {
+  Future<String> checkUserbyPhone(String phoneNo) async {
     final QueryOptions options = QueryOptions(
       document: gql(getUserbyPhone),
       variables: <String, String>{'phone': phoneNo},
@@ -56,7 +56,7 @@ class GraphQLService {
       final QueryResult result = await _client.query(options);
 
       if (result.hasException) {
-        return Future<String?>.value('null');
+        return 'null';
       } else {
         final Map<String, dynamic>? user = result.data;
         final String userId = user!['getUserByPhone']['_id'].toString();
@@ -64,7 +64,8 @@ class GraphQLService {
         return userId;
       }
     } catch (e) {
-      rethrow;
+      debugPrint(e.toString());
+      return 'null';
     }
   }
 
@@ -121,7 +122,6 @@ class GraphQLService {
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
-    debugPrint(result.toString());
     return result.data!['createUser']['_id'].toString();
   }
 

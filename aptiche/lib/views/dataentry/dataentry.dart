@@ -2,9 +2,8 @@ import 'package:aptiche/utils/string.dart';
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/dataentry/dataentry_controller.dart';
-import 'package:aptiche/views/home/homescreen.dart';
+import 'package:aptiche/views/splashscreen/splashscreen.dart';
 import 'package:aptiche/widgets/buttons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -152,7 +151,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                         TextCapitalization.characters,
                                     controller: controller.rollNoController,
                                     validator: (String? value) {
-                                      if (value!.trim() == null ||
+                                      if (value!.trim().length != 9 ||
                                           value.isEmpty ||
                                           !value[3].isAlphabetOnly ||
                                           !value[4].isAlphabetOnly) {
@@ -269,7 +268,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                               verticalPadding:
                                   SizeConfig.safeBlockVertical! * 0.27,
                               text: 'PROCEED',
-                              onTap: () {
+                              onTap: () async {
                                 if (controller.formKey.currentState!
                                     .validate()) {
                                   controller.formKey.currentState!.save();
@@ -279,7 +278,9 @@ class DataEntryScreen extends GetView<DataEntryController> {
                                     controller.emailController.text,
                                     controller.phoneNo.toString(),
                                   );
-                                  Get.offAll<dynamic>(() => const HomeScreen());
+
+                                  await Get.offAll<SplashScreen>(
+                                      () => const SplashScreen());
                                 }
                               }),
                         ),
