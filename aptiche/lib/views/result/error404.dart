@@ -1,6 +1,5 @@
 import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
-import 'package:aptiche/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -14,11 +13,6 @@ class ErrorPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CustomLoaders().customSnackBar(
-              'No Network Available',
-              'Please connect to a networked connection to ensure the proper usage of the appiciaction',
-              duration: const Duration(seconds: 10),
-            ),
             Container(
                 padding: EdgeInsets.all(SizeConfig.safeBlockVertical!),
                 height: SizeConfig.screenWidth! * 0.8,

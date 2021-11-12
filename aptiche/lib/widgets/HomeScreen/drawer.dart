@@ -142,7 +142,6 @@ class MainDrawer extends StatelessWidget {
                     color: kTextColourWhite,
                     fontFamily: kSfpro,
                     fontSize: SizeConfig.safeBlockVertical! * 2.625,
-                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -210,7 +209,7 @@ class MainDrawer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        'GDSC NITR   ',
+                        'GDSC NITR',
                         style: Theme.of(context)
                             .primaryTextTheme
                             .bodyText1!
