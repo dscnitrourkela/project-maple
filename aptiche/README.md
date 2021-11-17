@@ -38,7 +38,7 @@ This project uses the [GetX](https://pub.dev/packages/get) for State Management 
 - Run the app with the following command: `flutter run`
 - If you want to contibute and have an idea, open an issue, and mention the admin for getting the `google-services.json` file.
 
-Congrats 🥳 ! You just ran the _Project Maple_.
+Congrats ! You just ran the _Project Maple_.
 Feel free to use the application in whatever way possible and make sure to send us feedbacks and suggest changes.
 
 ## Libraries & Tools Used
@@ -79,11 +79,18 @@ lib/
 Now, lets dive into the lib folder which has the main code for the application.
 
 ``` markdown
-1- utils - All the application level constants are defined in this directory with-in their respective files. This directory contains the constants for `theme`, `dimentions`, `api endpoints`, `preferences` and `strings`.
+1- utils - All the application level constants are defined in this directory with-in their respective files. 
+          This directory contains the constants for `theme`, `dimentions`, `api endpoints`, `preferences` and `strings`.
+
 2- datamodels - Contains the data layer of your project, includes directories for local, network and shared pref/cache.
-3- services - Contains store(s) for state-management of your application, to connect the reactive data of your application with the UI. 
+
+3- services - Contains store(s) for state-management of your application, to connect the reactive data of your application with the UI.  
+              This directory contains the services for `auth`, `remote config`, `graphql` and `preferences`.
+
 4- view — Contains all the ui of your project, contains sub directory for each screen.
+
 5- widgets — Contains the common widgets for your applications. For example, Button, Snackbar etc.
+
 6- main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 ```
 
