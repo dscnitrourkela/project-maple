@@ -134,7 +134,7 @@ class TestPreviewView extends GetView<QuizController> {
                             onTap: () async {
                               await controller
                                   .getQuestionsByQuiz(<String>[quiz.quizId!]);
-                              if (!controller.checkIfAttempted(quiz.quizId!)) {
+                              if (!controller.checkIfAttempted(quiz.name!)) {
                                 controller.startTimeout(quiz);
                                 await Get.to<QuizView>(
                                     () => QuizView(quiz: quiz));
