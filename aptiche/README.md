@@ -94,4 +94,4 @@ Now, lets dive into the lib folder which has the main code for the application.
 6- main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 ```
 
-Explore the repositiry and contribute to `Project Maple`according to the [Contributing Guidelines](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) for the project.
+Explore the repository and contribute to `Project Maple` according to the [Contributing Guidelines](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) for the project.
