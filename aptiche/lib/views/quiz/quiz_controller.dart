@@ -160,9 +160,9 @@ class QuizController extends GetxController {
 
   ///Function to check whether the quiz is taken already or not.
   // ignore_for_file: always_specify_types
-  bool checkIfAttempted(String quizId) {
+  bool checkIfAttempted(String quizName) {
     final Map? result = localQuizStorage.read<Map>('past');
-    if (result != null && result[quizId] != null) {
+    if (result != null && result[quizName] != null) {
       return true;
     } else {
       return false;
