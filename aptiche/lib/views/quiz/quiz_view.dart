@@ -77,24 +77,24 @@ class QuizView extends GetView<QuizController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  /*  if (controller.questionIndex.value > 0)
+                  if (controller.questionIndex.value > 0)
                     CustomButton(
                       horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
                       verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
                       text: 'Previous',
                       onTap: () {
-                        print(controller.radioGroupValue.value);
-                        //controller.previous();
+                        // print(controller.radioGroupValue.value);
+                        controller.previous();
                       },
-                    ), */
-                  CustomButton(
-                    horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
-                    verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
-                    text: 'Clear Choice',
-                    onTap: () {
-                      controller.clearRadioGroup();
-                    },
-                  ),
+                    ),
+                  // CustomButton(
+                  //   horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
+                  //   verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                  //   text: 'Clear Choice',
+                  //   onTap: () {
+                  //     controller.clearRadioGroup();
+                  //   },
+                  // ),
                   if (controller.questionIndex.value + 1 <
                       controller.questions.length)
                     CustomButton(
