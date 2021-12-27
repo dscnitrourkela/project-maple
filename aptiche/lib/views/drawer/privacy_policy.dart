@@ -12,25 +12,21 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBgColour,
+      // backgroundColor: kBgColour,
       appBar: AppBar(
           elevation: 6,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_rounded),
-            color: kTextColourBlue,
+            // color: kTextColourBlue,
             onPressed: () {
               Get.back<dynamic>();
             },
           ),
           centerTitle: false,
-          backgroundColor: kBgColour,
+          // backgroundColor: kBgColour,
           title: Text(
             'Privacy Policy',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontSize: SizeConfig.safeBlockHorizontal! * 7,
-                  color: kTextColourBlue,
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(context).primaryTextTheme.headline2,
           )),
       body: SingleChildScrollView(
         child: FutureBuilder<String>(
@@ -68,6 +64,8 @@ class MarkDownRender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Markdown(
+      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
+          .copyWith(p: Theme.of(context).primaryTextTheme.bodyText1),
       data: privacypolicy,
       selectable: true,
     );

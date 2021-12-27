@@ -17,11 +17,10 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        backgroundColor: kGreyBgColor,
         elevation: 0,
         leading: Builder(
           builder: (BuildContext context) => IconButton(
-            color: kTextColourBlue,
+            color: Theme.of(context).appBarTheme.iconTheme!.color,
             icon: const Icon(Icons.menu_rounded),
             onPressed: () => Scaffold.of(context).openDrawer(),
             iconSize: 30.0,
@@ -33,7 +32,7 @@ class HomeScreen extends GetView<HomeController> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: kGreyBgColor,
+      // backgroundColor: kGreyBgColor,
       body: Obx(
         () => Stack(
           children: <Widget>[
@@ -46,6 +45,9 @@ class HomeScreen extends GetView<HomeController> {
                   child: SvgPicture.asset(
                     Strings.homeScreenSVG,
                     alignment: Alignment.center,
+                    color: Theme.of(context).backgroundColor == Colors.black
+                        ? Colors.white
+                        : null,
                     placeholderBuilder: (BuildContext context) => Container(
                         padding: const EdgeInsets.all(30.0),
                         alignment: Alignment.center,

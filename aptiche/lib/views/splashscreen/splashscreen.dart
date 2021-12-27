@@ -1,5 +1,4 @@
 import 'package:aptiche/services/net/authservice.dart';
-import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:aptiche/views/result/error404.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -26,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: kBgColour,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

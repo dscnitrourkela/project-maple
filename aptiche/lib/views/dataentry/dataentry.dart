@@ -17,9 +17,9 @@ class DataEntryScreen extends GetView<DataEntryController> {
       future: controller.readUser(),
       builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
         if (snapshot.data == null) {
-          return const Scaffold(
-            backgroundColor: Color(0xfff6f6f6),
-            body: Center(
+          return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: const Center(
               child: CircularProgressIndicator(
                 backgroundColor: kPrimaryColor,
               ),
@@ -27,7 +27,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
           );
         }
         return Scaffold(
-          backgroundColor: const Color(0xfff6f6f6),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SafeArea(
             child: Stack(
               fit: StackFit.loose,
@@ -54,7 +54,7 @@ class DataEntryScreen extends GetView<DataEntryController> {
                       top: SizeConfig.safeBlockVertical! * 4,
                     ),
                     decoration: BoxDecoration(
-                      color: kBgColour,
+                      color: Theme.of(context).backgroundColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(
                           SizeConfig.safeBlockHorizontal! * 10,

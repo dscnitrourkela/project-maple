@@ -14,25 +14,21 @@ class DevInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBgColour,
+      // backgroundColor: kBgColour,
       appBar: AppBar(
           elevation: 6,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_rounded),
-            color: kTextColourBlue,
+            // color: kTextColourBlue,
             onPressed: () {
               Get.back<dynamic>();
             },
           ),
           centerTitle: false,
-          backgroundColor: kBgColour,
+          // backgroundColor: kBgColour,
           title: Text(
             'Developer Info',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontSize: SizeConfig.safeBlockHorizontal! * 7,
-                  color: kTextColourBlue,
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(context).primaryTextTheme.headline2,
           )),
       body: SingleChildScrollView(
         child: Padding(
@@ -46,7 +42,7 @@ class DevInfo extends StatelessWidget {
                 child: Text(
                   'ABOUT',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  style: Theme.of(context).primaryTextTheme.bodyText1!.copyWith(
                         fontSize: SizeConfig.safeBlockHorizontal! * 6,
                         fontWeight: FontWeight.w400,
                       ),
@@ -59,7 +55,7 @@ class DevInfo extends StatelessWidget {
                 child: Text(
                   Strings.aboutText,
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  style: Theme.of(context).primaryTextTheme.bodyText1!.copyWith(
                         fontSize: SizeConfig.safeBlockHorizontal! * 4,
                         fontWeight: FontWeight.w400,
                       ),
@@ -81,10 +77,13 @@ class DevInfo extends StatelessWidget {
                   child: Text(
                     'DEVELOPERS',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: SizeConfig.safeBlockHorizontal! * 5.675,
-                        fontWeight: FontWeight.w500,
-                        color: kTextColourBlue),
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .headline3!
+                        .copyWith(
+                            fontSize: SizeConfig.safeBlockHorizontal! * 5.675,
+                            fontWeight: FontWeight.w500,
+                            color: kTextColourBlue),
                   ),
                 ),
               ),

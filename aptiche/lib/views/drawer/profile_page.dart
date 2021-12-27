@@ -28,20 +28,20 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          color: kTextColourBlue,
+          // color: kTextColourBlue,
           onPressed: () {
             Get.back<dynamic>();
           },
         ),
         centerTitle: false,
-        backgroundColor: kBgColour,
+        // backgroundColor: kBgColour,
         title: Padding(
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal!),
           child: Text(
             'Profile Dashboard',
             style: Theme.of(context)
-                .textTheme
-                .headline3!
+                .primaryTextTheme
+                .headline2!
                 .copyWith(fontSize: SizeConfig.safeBlockVertical! * 3.5),
           ),
         ),
@@ -71,12 +71,12 @@ class ProfilePage extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     name,
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal! * 8,
-                      fontFamily: kSfpro,
-                      fontWeight: FontWeight.w500,
-                      color: kTextColourBlue,
-                    ),
+                    style:
+                        Theme.of(context).primaryTextTheme.headline2!.copyWith(
+                              fontSize: SizeConfig.safeBlockHorizontal! * 8,
+                              fontFamily: kSfpro,
+                              fontWeight: FontWeight.w500,
+                            ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -100,12 +100,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                   Text(
                     'Past Attempted Quizzes',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal! * 6.25,
-                      fontFamily: kSfpro,
-                      fontWeight: FontWeight.w500,
-                      color: kTextColourBlue,
-                    ),
+                    style:
+                        Theme.of(context).primaryTextTheme.headline2!.copyWith(
+                              fontSize: SizeConfig.safeBlockHorizontal! * 6.25,
+                              fontFamily: kSfpro,
+                              fontWeight: FontWeight.w500,
+                            ),
                   ),
                   if (results != null)
                     SingleChildScrollView(
@@ -139,7 +139,7 @@ class ProfilePage extends StatelessWidget {
                       child: Text(
                         'You have not attempted any quiz in the past',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).primaryTextTheme.headline3,
+                        style: Theme.of(context).primaryTextTheme.bodyText1,
                       ),
                     ),
                 ],
@@ -167,12 +167,14 @@ class DetailCard extends StatelessWidget {
         child: ListTile(
           title: Text(
             data,
-            style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
+            style: Theme.of(context)
+                .primaryTextTheme
+                .bodyText1!
+                .copyWith(fontSize: 16),
           ),
           leading: Icon(
             icon,
-            color: kTextColourBlue.withOpacity(0.8),
+            color: Theme.of(context).iconTheme.color,
           ),
         ));
   }
