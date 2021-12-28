@@ -32,7 +32,6 @@ class HomeScreen extends GetView<HomeController> {
         ),
         centerTitle: true,
       ),
-      // backgroundColor: kGreyBgColor,
       body: Obx(
         () => Stack(
           children: <Widget>[

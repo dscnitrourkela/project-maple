@@ -28,13 +28,11 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          // color: kTextColourBlue,
           onPressed: () {
             Get.back<dynamic>();
           },
         ),
         centerTitle: false,
-        // backgroundColor: kBgColour,
         title: Padding(
           padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal!),
           child: Text(

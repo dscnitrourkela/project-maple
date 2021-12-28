@@ -17,7 +17,7 @@ class QuizQuestion extends GetView<QuizController> {
         () => Text(
           controller.questions[controller.questionIndex.value].question
               .toString(),
-          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          style: Theme.of(context).primaryTextTheme.bodyText1!.copyWith(
                 height: SizeConfig.safeBlockHorizontal! * 0.4,
                 fontSize: SizeConfig.safeBlockVertical! * 2.35,
               ),

@@ -13,7 +13,6 @@ import 'package:aptiche/views/splashscreen/user_controller.dart';
 import 'package:aptiche/widgets/HomeScreen/drawer_list_tile.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

@@ -34,7 +34,7 @@ class CustomRadio extends StatelessWidget {
             Radio<ChoicesEnum>(
               activeColor: MaterialStateColor.resolveWith(
                   (Set<MaterialState> states) =>
-                      Theme.of(context).primaryColor),
+                      Theme.of(context).iconTheme.color!),
               groupValue: groupValue,
               value: value,
               toggleable: toggleable,
@@ -45,7 +45,7 @@ class CustomRadio extends StatelessWidget {
             Flexible(
                 child: Text(
               label,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).primaryTextTheme.bodyText1,
             )),
           ],
         ),

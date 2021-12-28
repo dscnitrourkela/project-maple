@@ -14,18 +14,15 @@ class DevInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kBgColour,
       appBar: AppBar(
           elevation: 6,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_rounded),
-            // color: kTextColourBlue,
             onPressed: () {
               Get.back<dynamic>();
             },
           ),
           centerTitle: false,
-          // backgroundColor: kBgColour,
           title: Text(
             'Developer Info',
             style: Theme.of(context).primaryTextTheme.headline2,
