@@ -1,3 +1,4 @@
+import 'package:aptiche/utils/theme.dart';
 import 'package:aptiche/utils/ui_scaling.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: kBgColour,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

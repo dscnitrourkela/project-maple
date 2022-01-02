@@ -12,17 +12,21 @@ class AnswerView extends GetView<QuizController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBgColour,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          // color: kTextColourBlue,
+          color: kTextColourBlue,
           onPressed: () {
             Get.back<dynamic>();
           },
         ),
         title: Text(
           quiz.name.toString(),
-          style: Theme.of(context).primaryTextTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .headline3!
+              .copyWith(fontSize: SizeConfig.safeBlockVertical! * 3.5),
         ),
       ),
       body: FutureBuilder<void>(
