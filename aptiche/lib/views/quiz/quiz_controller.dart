@@ -35,6 +35,8 @@ class QuizController extends GetxController {
   ///Stores the user score of the quiz
   Rx<int> userScore = 0.obs;
 
+  ///[questionIndex] stream subscription
+  StreamSubscription<int>? _questionIndexStream;
   // Functions
 
   /// A void function which controls the behaviour of the timer(`timeout`)
@@ -62,14 +64,27 @@ class QuizController extends GetxController {
   }
 
   @override
+  void onInit() {
+    _questionIndexStream = questionIndex.listen((_) {
+      update();
+    });
+    super.onInit();
+  }
+
+  @override
   void dispose() {
+    _questionIndexStream?.cancel();
     timer.cancel();
     super.dispose();
   }
 
   /// Changes [radioGroupValue] to the selected option.
-  void selectOption(ChoicesEnum newValue) {
-    radioGroupValue.value = newValue;
+  void selectOption(ChoicesEnum? newValue) {
+    if (newValue == null) {
+      radioGroupValue.value = ChoicesEnum.NON;
+    } else
+      radioGroupValue.value = newValue;
+    update();
   }
 
   /// Checks whether the question is answered or not

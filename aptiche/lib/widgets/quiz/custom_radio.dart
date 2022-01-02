@@ -9,8 +9,9 @@ class CustomRadio extends StatelessWidget {
     required this.groupValue,
     required this.value,
     required this.onChanged,
+    this.toggleable = false,
   }) : super(key: key);
-
+  final bool toggleable;
   final String label;
   final EdgeInsets padding;
   final ChoicesEnum groupValue;
@@ -23,7 +24,8 @@ class CustomRadio extends StatelessWidget {
       onTap: () {
         if (value != groupValue) {
           onChanged(value);
-        }
+        } else
+          onChanged(null);
       },
       child: Padding(
         padding: padding,
@@ -35,6 +37,7 @@ class CustomRadio extends StatelessWidget {
                       Theme.of(context).primaryColor),
               groupValue: groupValue,
               value: value,
+              toggleable: toggleable,
               onChanged: (ChoicesEnum? newValue) {
                 onChanged(newValue);
               },
