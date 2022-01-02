@@ -15,6 +15,7 @@ class AnswerView extends GetView<QuizController> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
+          // color: kTextColourBlue,
           onPressed: () {
             Get.back<dynamic>();
           },

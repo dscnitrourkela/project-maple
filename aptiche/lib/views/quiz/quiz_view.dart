@@ -83,9 +83,18 @@ class QuizView extends GetView<QuizController> {
                       verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
                       text: 'Previous',
                       onTap: () {
+                        // print(controller.radioGroupValue.value);
                         controller.previous();
                       },
                     ),
+                  // CustomButton(
+                  //   horizontalPadding: SizeConfig.safeBlockHorizontal! * 1.4,
+                  //   verticalPadding: SizeConfig.safeBlockVertical! * 0.27,
+                  //   text: 'Clear Choice',
+                  //   onTap: () {
+                  //     controller.clearRadioGroup();
+                  //   },
+                  // ),
                   if (controller.questionIndex.value + 1 <
                       controller.questions.length)
                     CustomButton(
@@ -128,6 +137,18 @@ class QuizView extends GetView<QuizController> {
                 SizedBox(
                   height: SizeConfig.safeBlockVertical! * 2,
                 ),
+                // Container(
+                //   alignment: Alignment.centerLeft,
+                //   padding: EdgeInsets.symmetric(
+                //       horizontal: SizeConfig.safeBlockHorizontal! * 2),
+                //   child: Obx(
+                //     () => Text(
+                //       'Question ${controller.questionIndex.value + 1}',
+                //       style: Theme.of(context).textTheme.headline6,
+                //     ),
+                //   ),
+                // ),
+
                 const QuizQuestion(),
                 SizedBox(
                   height: SizeConfig.safeBlockVertical! * 2,
