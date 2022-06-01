@@ -5,9 +5,9 @@
 
 ## APTICHE - [Playstore Link](https://play.google.com/store/apps/details?id=org.dscnitrourkela.aptiche)
 
-AptiChe is an initiative by the **AIChE NITR student chapter in association with Google Developers Students Club, NITR** to provide an opportunity to the students to practice and showcase their aptitude and reasoning skills.
+AptiChe is an initiative by the **AIChE NITR student chapter in association with Google Developer Student Clubs, NITR** to provide an opportunity to the students to practice and showcase their aptitude and reasoning skills.
 
-With aptitude tests being part of every competitive exam, it becomes essential for every aspirant to excel in their aptitude and reasoning skills. Apti-Che is created to increase your competence skills. It's designed to conduct aptitude tests free for students.
+With aptitude tests being part of every competitive exam, it becomes essential for each and every aspirant to excel in their aptitude and reasoning skills. Apti-Che is created to increase your competence skills. It's designed to conduct aptitude tests free for students.
 
 ### Features of Apti-Che that you will love to use
 
@@ -26,7 +26,7 @@ With aptitude tests being part of every competitive exam, it becomes essential f
 - You can view the detailed solutions to the questions after completing the test.
 - You can view all your past test performances and check your progress.
 
-One must be truly fluent and familiar with every aspect to achieve a good score. The aptitude tests in Apti-Che are sure to put your skills to the test and enhance your development.
+One must be truly fluent and familiar with every aspect to achieve a good score. The aptitude tests in Apti-Che are sure to put your skills to the test and enhance your development and skillset.
 
 Project developed and maintained by [GDSC NIT Rourkela](https://dscnitrourkela.org/)
 ![DSC NIT Rourkela Cover Image](./RepoCover.png)
