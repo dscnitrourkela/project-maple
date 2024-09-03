@@ -40,7 +40,7 @@ jobs:
           name: release-apk
           path: aptiche/build/app/outputs/flutter-apk/app-release.apk
       - name: Download APK
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: release-apk
       - name: Display structure of downloaded files
